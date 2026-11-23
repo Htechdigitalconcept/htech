@@ -13,7 +13,7 @@
 :root{--bg:#050716;--ink:#EEF0FF;--dim:#9BA0CC;--blue:#5B6BFF;--mint:#6DFFC8;--glass:rgba(255,255,255,.05);--line:rgba(255,255,255,.12);
 --d:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--b:"Instrument Sans","Segoe UI",system-ui,sans-serif;--pad:clamp(20px,5vw,72px)}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;overflow-x:clip}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:calc(100px + env(safe-area-inset-top,0px))}
 body{background:var(--bg);color:var(--ink);font:400 clamp(16px,1.2vw,18px)/1.6 var(--b);-webkit-font-smoothing:antialiased;overflow-x:clip}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:3px solid var(--mint);outline-offset:3px;border-radius:4px}
@@ -23,7 +23,7 @@ main,nav,footer{position:relative;z-index:2}
 .dot{width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--mint)}
 .ring{width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1.5px solid rgba(238,240,255,.9);transition:width .25s,height .25s,margin .25s,border-color .25s}
 .ring.h{width:56px;height:56px;margin:-28px 0 0 -28px;border-color:var(--mint)}
-@media(pointer:fine){body.cc,body.cc a{cursor:none}.dot,.ring{display:block}}
+@media(pointer:fine){body.cc,body.cc a{cursor:none}body.cc .dot,body.cc .ring{display:block}}
 .bar{position:fixed;top:0;left:0;height:3px;width:100%;background:linear-gradient(90deg,var(--blue),var(--mint));transform-origin:0 50%;transform:scaleX(0);z-index:60}
 nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) var(--pad) 14px;backdrop-filter:blur(16px);background:rgba(5,7,22,.55);border-bottom:1px solid var(--line)}
 .mark{font:700 19px var(--d);letter-spacing:-.02em}.mark i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--mint);margin-left:6px;box-shadow:0 0 12px var(--mint)}
@@ -78,11 +78,12 @@ h2{font:600 clamp(34px,5.6vw,80px)/1 var(--d);letter-spacing:-.035em;max-width:1
 .card h3{font:600 clamp(24px,2.8vw,38px)/1.05 var(--d);letter-spacing:-.025em;margin-bottom:12px;position:relative}.card p{color:var(--dim);position:relative}
 @media(max-width:760px){.svc{grid-template-columns:1fr}}
 
-.hz{padding:0;overflow:hidden}.hz .head{padding:clamp(70px,9vw,120px) var(--pad) 0}.hz h2{margin-bottom:30px}
-.track{display:flex;gap:28px;padding:20px var(--pad) 90px;width:max-content}
-.case{width:min(78vw,860px);flex:none;display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(16px,2.4vw,36px);align-items:center;padding:clamp(16px,2vw,28px);border-radius:28px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--line);backdrop-filter:blur(8px)}
+.hz{padding:0;overflow:visible}.hz .head{padding:clamp(70px,9vw,120px) var(--pad) 0}.hz h2{margin-bottom:30px}
+.track{display:flex;gap:28px;padding:20px var(--pad) 90px;width:auto;flex-direction:column}
+.case{width:100%;flex:none;display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(16px,2.4vw,36px);align-items:center;padding:clamp(16px,2vw,28px);border-radius:28px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--line);backdrop-filter:blur(8px)}
 .case h3{font:600 clamp(26px,3vw,42px)/1.04 var(--d);letter-spacing:-.03em;margin-bottom:10px}.case p{color:var(--dim);margin-bottom:16px}
 .tg{display:flex;gap:8px;flex-wrap:wrap}.tg span{font-size:13px;padding:4px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line)}
+@media(min-width:901px){.hz.is-animated{overflow:hidden}.is-animated .track{width:max-content;flex-direction:row}.is-animated .case{width:min(78vw,860px)}}
 @media(max-width:900px){.hz{overflow:visible}.track{flex-direction:column;width:auto;padding-bottom:40px}.case{width:100%;grid-template-columns:1fr}}
 .shot{position:relative}.shot>img{display:block;width:100%;height:auto;border-radius:16px;box-shadow:0 30px 60px -25px #000}.shot .tab{position:absolute;width:27%;right:-2%;bottom:-9%;border-radius:0;box-shadow:0 24px 50px -10px #000}
 .mk{border-radius:14px;overflow:hidden;background:var(--bg);box-shadow:0 20px 50px -20px #000;aspect-ratio:16/11;display:flex;flex-direction:column}
@@ -102,11 +103,11 @@ h2{font:600 clamp(34px,5.6vw,80px)/1 var(--d);letter-spacing:-.035em;max-width:1
 @media(max-width:900px){.steps{grid-template-columns:1fr 1fr;gap:26px 0}.steps::before{display:none}}@media(max-width:520px){.steps{grid-template-columns:1fr}}
 .contact{text-align:left}.contact h2{max-width:11em}
 footer{padding:24px var(--pad);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:15px;color:var(--dim);border-top:1px solid var(--line)}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
-<canvas id="bg"></canvas><div class="dot" id="dot"></div><div class="ring" id="ring"></div><div class="bar" id="bar"></div>
+<canvas id="bg" aria-hidden="true"></canvas><div class="dot" id="dot"></div><div class="ring" id="ring"></div><div class="bar" id="bar"></div>
 <nav>
   <a class="mark" href="#top" aria-label="Htech Digital Concepts, home"><span class="lg"><img src="images/htech-logo.webp" alt="Htech Digital Concepts"></span><span class="nm">Ademola Habeeb</span></a>
   <div class="links"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a class="btn mag" href="#contact">Start your project</a></div>
@@ -114,7 +115,7 @@ footer{padding:24px var(--pad);display:flex;justify-content:space-between;flex-w
 <main>
 <header class="hero" id="top">
   <div>
-    <h1 aria-label="Websites and online stores that bring you customers."><span class="l" data-t="Websites and"></span><span class="l" data-t="online stores"></span><span class="l" data-t="that bring you"></span><span class="l" data-t="customers."></span></h1>
+    <h1 aria-label="Websites and online stores that bring you customers."><span class="l" data-t="Websites and">Websites and</span><span class="l" data-t="online stores">online stores</span><span class="l" data-t="that bring you">that bring you</span><span class="l" data-t="customers.">customers.</span></h1>
     <p class="lede">One WordPress developer for the whole job: design, build and SEO setup. You get a fast site you can edit yourself, delivered on a clear timeline.</p>
     <div class="cta"><a class="btn mag" href="#contact">Get a project plan</a><a class="btn o mag" href="#work">See recent work</a></div>
     <div class="chips"><span>WordPress</span><span>Elementor Pro</span><span>WooCommerce</span><span>Custom code</span></div>
@@ -133,9 +134,9 @@ footer{padding:24px var(--pad);display:flex;justify-content:space-between;flex-w
 <div class="strip" aria-hidden="true"><div><span>WordPress</span><span>Elementor Pro</span><span>WooCommerce</span><span>HTML &amp; CSS</span><span>JavaScript</span><span>PHP</span><span>Python</span><span>SEO setup</span><span>WordPress</span><span>Elementor Pro</span><span>WooCommerce</span><span>HTML &amp; CSS</span><span>JavaScript</span><span>PHP</span><span>Python</span><span>SEO setup</span></div></div>
 
 <div class="proof">
-  <div><b data-n="6" data-s="+">0</b><span>years building websites</span></div>
-  <div><b data-n="30" data-s="+">0</b><span>websites delivered</span></div>
-  <div><b data-n="3" data-s="">0</b><span>languages: English, French, Chinese</span></div>
+  <div><b data-n="6" data-s="+">6+</b><span>years building websites</span></div>
+  <div><b data-n="30" data-s="+">30+</b><span>websites delivered</span></div>
+  <div><b data-n="3" data-s="">3</b><span>languages: English, French, Chinese</span></div>
 </div>
 
 <section id="services">
@@ -150,7 +151,9 @@ footer{padding:24px var(--pad);display:flex;justify-content:space-between;flex-w
 
 <section class="hz" id="work">
   <div class="head"><h2>Recent projects</h2></div>
-  <div class="track" id="track"></div>
+  <div class="track" id="track">
+<article class="case"><div class="shot"><img src="images/esko-wheels-showcase.webp" alt="ESKO Wheels website on laptop and phone" loading="lazy"><img class="tab" src="images/esko-wheels-tablet.webp" alt="ESKO Wheels website on tablet" loading="lazy"></div><div><h3>ESKO Wheels, automotive e-commerce</h3><p>A bold, modern concept for a custom wheel brand: product-focused visuals, clear navigation, strong quote calls to action and a responsive layout for desktop and mobile.</p><div class="tg"><span>WordPress</span><span>E-commerce UI/UX</span><span>Responsive</span></div></div></article><article class="case"><div class="mk" style="--bg:#EEF2EA;--a:#5F7F63;--c:#E9C9A8"><div class="t"><i></i><i></i><i></i></div><div class="nv"><b></b><s></s><s></s><u></u></div><div class="bd"><div class="hero2"><div class="h"></div><div class="h s"></div></div><div class="g" style="grid-template-columns:repeat(3,1fr)"><div></div><div></div><div></div></div></div></div><div><h3>Lunaya, yoga apparel</h3><p>A WooCommerce store built with Elementor, with SEO plugin setup, GDPR compliance and a sales-funnel structure.</p><div class="tg"><span>WooCommerce</span><span>Elementor Pro</span><span>SEO setup</span></div></div></article><article class="case"><div class="mk" style="--bg:#FFF6E0;--a:#FF6B6B;--c:#4DB6FF"><div class="t"><i></i><i></i><i></i></div><div class="nv"><b></b><s></s><s></s><u></u></div><div class="bd"><div class="hero2"><div class="h"></div><div class="h s"></div></div><div class="g" style="grid-template-columns:repeat(3,1fr)"><div></div><div></div><div></div></div></div></div><div><h3>Ausim Kids, children’s clothing</h3><p>A store for a sensory-friendly brand, with product pages, brand storytelling and a fully responsive layout.</p><div class="tg"><span>WooCommerce</span><span>Storytelling</span><span>Responsive</span></div></div></article><article class="case"><div class="mk" style="--bg:#FBF4F1;--a:#C9A38F;--c:#3A2F2B"><div class="t"><i></i><i></i><i></i></div><div class="nv"><b></b><s></s><s></s><u></u></div><div class="bd"><div class="hero2" style="min-height:84px"><div class="h s"></div></div><div class="g" style="grid-template-columns:2fr 1fr 1fr"><div style="grid-row:span 2"></div><div></div><div></div><div></div><div></div></div></div></div><div><h3>AI-built site to editable WordPress</h3><p>A wedding photography site made by an AI tool, rebuilt in Elementor Pro with galleries, testimonials and contact forms the owner can edit.</p><div class="tg"><span>Elementor Pro</span><span>Galleries</span><span>Forms</span></div></div></article><article class="case"><div class="mk" style="--bg:#EAF3F4;--a:#2F7D86;--c:#F2D8B8"><div class="t"><i></i><i></i><i></i></div><div class="nv"><b></b><s></s><s></s><u></u></div><div class="bd"><div class="split"><div style="display:grid;gap:9px"><div class="h"></div><div class="h s"></div><div class="l"></div><div class="l" style="width:60%"></div><div class="pill"></div></div><div class="ph"></div></div><div class="g" style="grid-template-columns:repeat(3,1fr)"><div style="min-height:44px"></div><div style="min-height:44px"></div><div style="min-height:44px"></div></div></div></div><div><h3>Therapy and legal coaching sites</h3><p>Calm, trustworthy service sites with clear booking calls to action.</p><div class="tg"><span>WordPress</span><span>Booking CTAs</span><span>Service sites</span></div></div></article>
+  </div>
 </section>
 
 <section id="process">
@@ -174,83 +177,84 @@ footer{padding:24px var(--pad);display:flex;justify-content:space-between;flex-w
 </main>
 <footer><span>&copy; <span id="yr">2026</span> Htech Digital Concepts &middot; Ademola Habeeb</span><a href="#top">Back to top</a></footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="vendor/gsap/gsap.min.js"></script>
+<script src="vendor/gsap/ScrollTrigger.min.js"></script>
 <script>
 (function(){
-var rm=matchMedia('(prefers-reduced-motion: reduce)').matches, fine=matchMedia('(pointer:fine)').matches;
-var P=[
- {t:'ESKO Wheels, automotive e-commerce',d:'A bold, modern concept for a custom wheel brand: product-focused visuals, clear navigation, strong quote calls to action and a responsive layout for desktop and mobile.',g:['WordPress','E-commerce UI/UX','Responsive'],img:['images/esko-wheels-showcase.webp','images/esko-wheels-tablet.webp']},
- {t:'Lunaya, yoga apparel',d:'A WooCommerce store built with Elementor, with SEO plugin setup, GDPR compliance and a sales-funnel structure.',g:['WooCommerce','Elementor Pro','SEO setup'],k:'store',bg:'#EEF2EA',a:'#5F7F63',c:'#E9C9A8'},
- {t:'Ausim Kids, children’s clothing',d:'A store for a sensory-friendly brand, with product pages, brand storytelling and a fully responsive layout.',g:['WooCommerce','Storytelling','Responsive'],k:'store',bg:'#FFF6E0',a:'#FF6B6B',c:'#4DB6FF'},
- {t:'AI-built site to editable WordPress',d:'A wedding photography site made by an AI tool, rebuilt in Elementor Pro with galleries, testimonials and contact forms the owner can edit.',g:['Elementor Pro','Galleries','Forms'],k:'gal',bg:'#FBF4F1',a:'#C9A38F',c:'#3A2F2B'},
- {t:'Therapy and legal coaching sites',d:'Calm, trustworthy service sites with clear booking calls to action.',g:['WordPress','Booking CTAs','Service sites'],k:'svc',bg:'#EAF3F4',a:'#2F7D86',c:'#F2D8B8'}];
-function mk(p){if(p.img)return '<div class="shot"><img src="'+p.img[0]+'" alt="ESKO Wheels website on laptop and phone" loading="lazy"><img class="tab" src="'+p.img[1]+'" alt="ESKO Wheels website on tablet" loading="lazy"></div>';var top='<div class="t"><i></i><i></i><i></i></div><div class="nv"><b></b><s></s><s></s><u></u></div>',b;
- if(p.k==='store')b='<div class="hero2"><div class="h"></div><div class="h s"></div></div><div class="g" style="grid-template-columns:repeat(3,1fr)"><div></div><div></div><div></div></div>';
- else if(p.k==='gal')b='<div class="hero2" style="min-height:84px"><div class="h s"></div></div><div class="g" style="grid-template-columns:2fr 1fr 1fr"><div style="grid-row:span 2"></div><div></div><div></div><div></div><div></div></div>';
- else b='<div class="split"><div style="display:grid;gap:9px"><div class="h"></div><div class="h s"></div><div class="l"></div><div class="l" style="width:60%"></div><div class="pill"></div></div><div class="ph"></div></div><div class="g" style="grid-template-columns:repeat(3,1fr)"><div style="min-height:44px"></div><div style="min-height:44px"></div><div style="min-height:44px"></div></div>';
- return '<div class="mk" style="--bg:'+p.bg+';--a:'+p.a+';--c:'+p.c+'">'+top+'<div class="bd">'+b+'</div></div>'}
+var motion=matchMedia('(prefers-reduced-motion: reduce)'), rm=motion.matches, fine=matchMedia('(pointer:fine)').matches;
+var particleFrame;
+motion.addEventListener('change',function(e){rm=e.matches;cancelAnimationFrame(particleFrame);if(cx)draw();});
 var track=document.getElementById('track');
-track.innerHTML=P.map(function(p){return '<article class="case">'+mk(p)+'<div><h3>'+p.t+'</h3><p>'+p.d+'</p><div class="tg">'+p.g.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div></div></article>'}).join('');
 document.getElementById('yr').textContent=new Date().getFullYear();
 
 // headline: decode scramble
 var G='01<>/{}[]#$%&*+=?',lines=[].slice.call(document.querySelectorAll('h1 .l'));
 lines.forEach(function(el,i){var t=el.dataset.t;if(rm){el.textContent=t;return}
  var s=null,dl=300+i*260,du=900;(function f(ts){s=s||ts;var k=(ts-s-dl)/du;
-  if(k<0){requestAnimationFrame(f);return}k=Math.min(k,1);var o='';
+  if(rm){el.textContent=t;return}if(k<0){requestAnimationFrame(f);return}k=Math.min(k,1);var o='';
   for(var j=0;j<t.length;j++)o+=(t[j]===' '||j<t.length*k)?t[j]:G[Math.random()*G.length|0];
   el.textContent=o;if(k<1)requestAnimationFrame(f)})(performance.now())});
 
 // particle network that reacts to the pointer
 var cv=document.getElementById('bg'),cx=cv.getContext('2d'),W,H,N=[],m={x:-999,y:-999};
 function size(){W=cv.width=innerWidth;H=cv.height=innerHeight;N=[];var n=Math.min(90,W*H/16000|0);for(var i=0;i<n;i++)N.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35})}
-size();addEventListener('resize',size);addEventListener('pointermove',function(e){m.x=e.clientX;m.y=e.clientY});
-function draw(){cx.clearRect(0,0,W,H);
+size();addEventListener('resize',function(){size();if(rm)draw();});addEventListener('pointermove',function(e){m.x=e.clientX;m.y=e.clientY});
+function draw(){if(!cx)return;cx.clearRect(0,0,W,H);
  for(var i=0;i<N.length;i++){var a=N[i];if(!rm){a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
   var dx=a.x-m.x,dy=a.y-m.y,d=dx*dx+dy*dy;if(d<22500){var f=(1-d/22500)*.6;a.x+=dx*f*.04;a.y+=dy*f*.04}}
   cx.fillStyle='rgba(155,160,255,.7)';cx.fillRect(a.x,a.y,2,2);
   for(var j=i+1;j<N.length;j++){var b=N[j],x=a.x-b.x,y=a.y-b.y,q=x*x+y*y;if(q<14000){cx.strokeStyle='rgba(109,255,200,'+(.16*(1-q/14000))+')';cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}}
   var mx=a.x-m.x,my=a.y-m.y,mq=mx*mx+my*my;if(mq<26000){cx.strokeStyle='rgba(91,107,255,'+(.5*(1-mq/26000))+')';cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(m.x,m.y);cx.stroke()}}
- if(!rm)requestAnimationFrame(draw)}
+ if(!rm)particleFrame=requestAnimationFrame(draw)}
 draw();
 
 // counters
 function count(el){var n=+el.dataset.n,s=el.dataset.s,t0=null;if(rm){el.textContent=n+s;return}
- (function f(t){t0=t0||t;var k=Math.min((t-t0)/1500,1);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(f)})(performance.now())}
+ (function f(t){t0=t0||t;var k=rm?1:Math.min((t-t0)/1500,1);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(f)})(performance.now())}
+if('IntersectionObserver' in window){
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){count(e.target);io.unobserve(e.target)}})},{threshold:.4});
 document.querySelectorAll('[data-n]').forEach(function(x){io.observe(x)});
+}
 
 var bar=document.getElementById('bar');
 addEventListener('scroll',function(){var h=document.documentElement;bar.style.transform='scaleX('+h.scrollTop/(h.scrollHeight-h.clientHeight||1)+')'},{passive:true});
 
-if(window.gsap&&!rm){
+if(window.gsap&&window.ScrollTrigger){
+ var animations=gsap.matchMedia();
+ animations.add('(prefers-reduced-motion: no-preference)',function(){
+ var events=new AbortController();
+ function listen(target,type,handler){target.addEventListener(type,handler,{signal:events.signal});}
  gsap.registerPlugin(ScrollTrigger);
  gsap.from('.rv',{y:50,opacity:0,duration:.9,ease:'power3.out',stagger:.08,scrollTrigger:{trigger:'#services',start:'top 80%'}});
  gsap.from('.proof div',{y:40,opacity:0,duration:.8,stagger:.12,scrollTrigger:{trigger:'.proof',start:'top 85%'}});
  gsap.from('.steps li',{y:30,opacity:0,stagger:.15,duration:.7,scrollTrigger:{trigger:'#steps',start:'top 80%'}});
  gsap.to('#steps',{'--p':1,ease:'none',scrollTrigger:{trigger:'#steps',start:'top 75%',end:'bottom 60%',scrub:true}});
  gsap.from('.contact h2, .contact .cta',{y:50,opacity:0,duration:.9,stagger:.15,scrollTrigger:{trigger:'#contact',start:'top 75%'}});
- gsap.matchMedia().add('(min-width:901px)',function(){
-  var dist=function(){return track.scrollWidth-innerWidth};
-  gsap.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#work',pin:true,scrub:.7,start:'top top',end:function(){return '+='+dist()},invalidateOnRefresh:true}});
-  gsap.utils.toArray('.case').forEach(function(c){gsap.from(c.querySelector('.mk'),{rotateY:-18,scale:.9,ease:'none',scrollTrigger:{trigger:c,containerAnimation:null,start:'left right',scrub:true}})});
+ gsap.matchMedia().add('(min-width:901px) and (prefers-reduced-motion: no-preference)',function(){
+  var work=document.getElementById('work');
+  work.classList.add('is-animated');
+  var dist=function(){return Math.max(0,track.scrollWidth-innerWidth)};
+  var horizontal=gsap.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#work',pin:true,scrub:.7,start:'top top',end:function(){return '+='+dist()},invalidateOnRefresh:true}});
+  gsap.utils.toArray('.case').forEach(function(c){var preview=c.querySelector('.mk');if(preview)gsap.from(preview,{rotateY:-18,scale:.9,ease:'none',scrollTrigger:{trigger:c,containerAnimation:horizontal,start:'left right',scrub:true}})});
+  return function(){work.classList.remove('is-animated');};
  });
  // magnetic buttons
  if(fine){
   document.querySelectorAll('.mag').forEach(function(b){var xt=gsap.quickTo(b,'x',{duration:.4,ease:'power3'}),yt=gsap.quickTo(b,'y',{duration:.4,ease:'power3'});
-   b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();xt((e.clientX-r.left-r.width/2)*.3);yt((e.clientY-r.top-r.height/2)*.35)});
-   b.addEventListener('pointerleave',function(){xt(0);yt(0)})});
+   listen(b,'pointermove',function(e){var r=b.getBoundingClientRect();xt((e.clientX-r.left-r.width/2)*.3);yt((e.clientY-r.top-r.height/2)*.35)});
+   listen(b,'pointerleave',function(){xt(0);yt(0)})});
   // cursor glow, 3D tilt on hero shop and service cards
   var dt=document.getElementById('dot'),rg=document.getElementById('ring');document.body.classList.add('cc');
   var rx=gsap.quickTo(rg,'x',{duration:.2,ease:'power3'}),ry=gsap.quickTo(rg,'y',{duration:.2,ease:'power3'});
-  addEventListener('pointermove',function(e){gsap.set(dt,{x:e.clientX,y:e.clientY});rx(e.clientX);ry(e.clientY)});
-  document.addEventListener('pointerover',function(e){rg.classList.toggle('h',!!e.target.closest('a,button'))});
+  listen(window,'pointermove',function(e){gsap.set(dt,{x:e.clientX,y:e.clientY});rx(e.clientX);ry(e.clientY)});
+  listen(document,'pointerover',function(e){rg.classList.toggle('h',!!e.target.closest('a,button'))});
   function tilt(el,deg){var rx=gsap.quickTo(el,'rotationX',{duration:.5}),ry=gsap.quickTo(el,'rotationY',{duration:.5});
-   el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;ry(px*deg);rx(-py*deg);el.style.setProperty('--x',(px+.5)*100+'%');el.style.setProperty('--y',(py+.5)*100+'%')});
-   el.addEventListener('pointerleave',function(){rx(0);ry(0)})}
+   listen(el,'pointermove',function(e){var r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;ry(px*deg);rx(-py*deg);el.style.setProperty('--x',(px+.5)*100+'%');el.style.setProperty('--y',(py+.5)*100+'%')});
+   listen(el,'pointerleave',function(){rx(0);ry(0)})}
   tilt(document.getElementById('shop'),14);document.querySelectorAll('.card').forEach(function(c){tilt(c,6)});
  }
+ return function(){events.abort();document.body.classList.remove('cc');};
+ });
 }
 })();
 </script>
