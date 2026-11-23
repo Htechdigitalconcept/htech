@@ -82,6 +82,7 @@ h2{font:600 clamp(34px,5.6vw,80px)/1 var(--d);letter-spacing:-.035em;max-width:1
 .case h3{font:600 clamp(26px,3vw,42px)/1.04 var(--d);letter-spacing:-.03em;margin-bottom:10px}.case p{color:var(--dim);margin-bottom:16px}
 .tg{display:flex;gap:8px;flex-wrap:wrap}.tg span{font-size:13px;padding:4px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line)}
 @media(max-width:900px){.hz{overflow:visible}.track{flex-direction:column;width:auto;padding-bottom:40px}.case{width:100%;grid-template-columns:1fr}}
+.shot{position:relative}.shot>img{display:block;width:100%;height:auto;border-radius:16px;box-shadow:0 30px 60px -25px #000}.shot .tab{position:absolute;width:27%;right:-2%;bottom:-9%;border-radius:0;box-shadow:0 24px 50px -10px #000}
 .mk{border-radius:14px;overflow:hidden;background:var(--bg);box-shadow:0 20px 50px -20px #000;aspect-ratio:16/11;display:flex;flex-direction:column}
 .mk .t{display:flex;gap:6px;padding:9px 12px;background:rgba(255,255,255,.75)}.mk .t i{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,.18)}
 .mk .nv{display:flex;align-items:center;gap:10px;padding:10px 16px}.mk .nv b{width:56px;height:12px;border-radius:6px;background:var(--a)}.mk .nv s{width:30px;height:6px;border-radius:3px;background:rgba(0,0,0,.2)}.mk .nv s:first-of-type{margin-left:auto}.mk .nv u{width:46px;height:18px;border-radius:9px;background:var(--a)}
@@ -177,11 +178,12 @@ footer{padding:24px var(--pad);display:flex;justify-content:space-between;flex-w
 (function(){
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches, fine=matchMedia('(pointer:fine)').matches;
 var P=[
+ {t:'ESKO Wheels, automotive e-commerce',d:'A bold, modern concept for a custom wheel brand: product-focused visuals, clear navigation, strong quote calls to action and a responsive layout for desktop and mobile.',g:['WordPress','E-commerce UI/UX','Responsive'],img:['images/esko-wheels-showcase.webp','images/esko-wheels-tablet.webp']},
  {t:'Lunaya, yoga apparel',d:'A WooCommerce store built with Elementor, with SEO plugin setup, GDPR compliance and a sales-funnel structure.',g:['WooCommerce','Elementor Pro','SEO setup'],k:'store',bg:'#EEF2EA',a:'#5F7F63',c:'#E9C9A8'},
  {t:'Ausim Kids, children’s clothing',d:'A store for a sensory-friendly brand, with product pages, brand storytelling and a fully responsive layout.',g:['WooCommerce','Storytelling','Responsive'],k:'store',bg:'#FFF6E0',a:'#FF6B6B',c:'#4DB6FF'},
  {t:'AI-built site to editable WordPress',d:'A wedding photography site made by an AI tool, rebuilt in Elementor Pro with galleries, testimonials and contact forms the owner can edit.',g:['Elementor Pro','Galleries','Forms'],k:'gal',bg:'#FBF4F1',a:'#C9A38F',c:'#3A2F2B'},
  {t:'Therapy and legal coaching sites',d:'Calm, trustworthy service sites with clear booking calls to action.',g:['WordPress','Booking CTAs','Service sites'],k:'svc',bg:'#EAF3F4',a:'#2F7D86',c:'#F2D8B8'}];
-function mk(p){var top='<div class="t"><i></i><i></i><i></i></div><div class="nv"><b></b><s></s><s></s><u></u></div>',b;
+function mk(p){if(p.img)return '<div class="shot"><img src="'+p.img[0]+'" alt="ESKO Wheels website on laptop and phone" loading="lazy"><img class="tab" src="'+p.img[1]+'" alt="ESKO Wheels website on tablet" loading="lazy"></div>';var top='<div class="t"><i></i><i></i><i></i></div><div class="nv"><b></b><s></s><s></s><u></u></div>',b;
  if(p.k==='store')b='<div class="hero2"><div class="h"></div><div class="h s"></div></div><div class="g" style="grid-template-columns:repeat(3,1fr)"><div></div><div></div><div></div></div>';
  else if(p.k==='gal')b='<div class="hero2" style="min-height:84px"><div class="h s"></div></div><div class="g" style="grid-template-columns:2fr 1fr 1fr"><div style="grid-row:span 2"></div><div></div><div></div><div></div><div></div></div>';
  else b='<div class="split"><div style="display:grid;gap:9px"><div class="h"></div><div class="h s"></div><div class="l"></div><div class="l" style="width:60%"></div><div class="pill"></div></div><div class="ph"></div></div><div class="g" style="grid-template-columns:repeat(3,1fr)"><div style="min-height:44px"></div><div style="min-height:44px"></div><div style="min-height:44px"></div></div>';
