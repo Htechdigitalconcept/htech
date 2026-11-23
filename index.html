@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>WordPress &amp; WooCommerce Developer | Ademola Habeeb</title>
 <meta name="description" content="Websites and online stores built with WordPress, Elementor Pro and WooCommerce that bring you customers.">
+<link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -26,6 +27,7 @@ main,nav,footer{position:relative;z-index:2}
 .bar{position:fixed;top:0;left:0;height:3px;width:100%;background:linear-gradient(90deg,var(--blue),var(--mint));transform-origin:0 50%;transform:scaleX(0);z-index:60}
 nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) var(--pad) 14px;backdrop-filter:blur(16px);background:rgba(5,7,22,.55);border-bottom:1px solid var(--line)}
 .mark{font:700 19px var(--d);letter-spacing:-.02em}.mark i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--mint);margin-left:6px;box-shadow:0 0 12px var(--mint)}
+.mark{display:flex;align-items:center;gap:14px}.lg{background:#fff;border-radius:10px;padding:4px 12px;display:flex;box-shadow:0 0 0 1px rgba(255,255,255,.25)}.lg img{height:30px;width:auto;display:block}.nm{color:var(--dim);font:500 15px var(--b)}@media(max-width:700px){.nm{display:none}}
 .links{display:flex;gap:clamp(14px,3vw,30px);align-items:center;font-weight:500;color:var(--dim)}.links a:hover{color:#fff}
 .btn{display:inline-flex;align-items:center;padding:14px 26px;border-radius:999px;background:linear-gradient(120deg,var(--blue),#8A6BFF);color:#fff;font-weight:600;box-shadow:0 0 0 1px rgba(255,255,255,.2) inset,0 10px 30px -8px var(--blue);will-change:transform;transition:box-shadow .3s}
 .btn:hover{box-shadow:0 0 0 1px rgba(255,255,255,.4) inset,0 14px 40px -6px var(--blue)}
@@ -106,7 +108,7 @@ footer{padding:24px var(--pad);display:flex;justify-content:space-between;flex-w
 <body>
 <canvas id="bg"></canvas><div class="dot" id="dot"></div><div class="ring" id="ring"></div><div class="bar" id="bar"></div>
 <nav>
-  <a class="mark" href="#top">Ademola Habeeb<i></i></a>
+  <a class="mark" href="#top" aria-label="Htech Digital Concepts, home"><span class="lg"><img src="images/htech-logo.webp" alt="Htech Digital Concepts"></span><span class="nm">Ademola Habeeb</span></a>
   <div class="links"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a class="btn mag" href="#contact">Start your project</a></div>
 </nav>
 <main>
@@ -170,7 +172,7 @@ footer{padding:24px var(--pad);display:flex;justify-content:space-between;flex-w
   </div>
 </section>
 </main>
-<footer><span>&copy; <span id="yr">2026</span> Ademola Habeeb</span><a href="#top">Back to top</a></footer>
+<footer><span>&copy; <span id="yr">2026</span> Htech Digital Concepts &middot; Ademola Habeeb</span><a href="#top">Back to top</a></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
