@@ -153,6 +153,8 @@ ol,ul{padding:0;list-style:none}
 .project-row:hover{padding-left:14px;background:linear-gradient(90deg,rgba(23,105,224,.06),transparent)}
 .project-row__num{font:600 12px var(--head);color:var(--blue);letter-spacing:.1em}
 .project-row h3{font:600 clamp(19px,1.7vw,25px)/1.2 var(--head);letter-spacing:-.03em}
+.project-row h3 a{transition:color .25s ease}
+.project-row h3 a:hover{color:var(--blue)}
 .project-row__cat{font-size:13px;color:var(--muted)}
 .project-row__svc{font-size:12px;color:var(--muted);line-height:1.6}
 .work-foot{display:flex;justify-content:flex-end;margin-top:38px}

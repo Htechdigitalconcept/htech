@@ -57,14 +57,14 @@
     reveals.forEach(function (el) { observer.observe(el); });
   }
 
-  var gallery = document.querySelector('[data-gallery]');
-  if (gallery) {
+  var galleries = Array.prototype.slice.call(document.querySelectorAll('[data-gallery]'));
+  galleries.forEach(function (gallery) {
     var thumbs = Array.prototype.slice.call(gallery.querySelectorAll('.gallery-thumb'));
     var stageImage = gallery.querySelector('[data-gallery-image]');
     var stageCaption = gallery.querySelector('[data-gallery-caption]');
     var stageCounter = gallery.querySelector('[data-gallery-counter]');
     var thumbStrip = gallery.querySelector('.gallery-thumbs');
-    var lightbox = document.getElementById('gallery-lightbox');
+    var lightbox = gallery.querySelector('.lightbox');
     var lightboxImage = lightbox.querySelector('[data-lightbox-image]');
     var lightboxCaption = lightbox.querySelector('[data-lightbox-caption]');
     var lightboxCounter = lightbox.querySelector('[data-lightbox-counter]');
@@ -200,7 +200,7 @@
     }, { passive: true });
 
     render(0, false);
-  }
+  });
 
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
