@@ -73,7 +73,7 @@ ol,ul{padding:0;list-style:none}
 .site-header.is-scrolled,.site-header--solid{background:rgba(7,27,51,.96);border-color:var(--dark-line);box-shadow:0 12px 30px -24px rgba(0,0,0,.9)}
 .site-header__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:82px}
 .brand{display:inline-flex;align-items:center;gap:14px;flex:none}
-.brand__logo{display:flex;align-items:center;background:var(--white);padding:7px 11px;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.4)}
+.brand__logo{display:flex;align-items:center;background:transparent;padding:0;border-radius:2px;box-shadow:none}
 .brand__logo img{width:104px;height:auto}
 .brand__name{display:flex;flex-direction:column;color:rgba(255,255,255,.7);font-size:11px;line-height:1.35;letter-spacing:.1em;text-transform:uppercase}
 .brand__name b{color:var(--white);font-weight:600;letter-spacing:.08em}
