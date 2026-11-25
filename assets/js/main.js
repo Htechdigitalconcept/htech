@@ -322,6 +322,26 @@
       }, { threshold: 0.35 });
       proofObserver.observe(proof);
     }
+
+    var proofCursor = proof.querySelector('[data-proof-cursor]');
+    var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (proofCursor && !reduced && finePointer) {
+      proof.addEventListener('pointermove', function (event) {
+        var box = proof.getBoundingClientRect();
+        var x = event.clientX - box.left;
+        var y = event.clientY - box.top;
+        proof.style.setProperty('--mx', x + 'px');
+        proof.style.setProperty('--my', y + 'px');
+        proofCursor.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) translate(-50%,-50%)';
+        proofCursor.classList.add('is-visible');
+      });
+
+      proof.addEventListener('pointerleave', function () {
+        proofCursor.classList.remove('is-visible');
+        proof.style.setProperty('--mx', '50%');
+        proof.style.setProperty('--my', '50%');
+      });
+    }
   }
 
   var year = document.getElementById('year');
