@@ -202,6 +202,82 @@
     render(0, false);
   });
 
+  // Project overview pop-ups. Links remain real page links without JavaScript.
+  var dialog = document.getElementById('project-dialog');
+  if (dialog && typeof dialog.showModal === 'function') {
+    var dialogTitle = dialog.querySelector('[data-dialog-title]');
+    var dialogCategory = dialog.querySelector('[data-dialog-category]');
+    var dialogSummary = dialog.querySelector('[data-dialog-summary]');
+    var dialogServices = dialog.querySelector('[data-dialog-services]');
+    var dialogMedia = dialog.querySelector('[data-dialog-media]');
+    var dialogImage = dialog.querySelector('[data-dialog-image]');
+    var dialogPage = dialog.querySelector('[data-dialog-page]');
+    var lastTrigger = null;
+
+    function closeDialog() {
+      if (dialog.open) dialog.close();
+    }
+
+    document.querySelectorAll('[data-project-open]').forEach(function (trigger) {
+      trigger.setAttribute('aria-haspopup', 'dialog');
+      trigger.addEventListener('click', function (event) {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+        event.preventDefault();
+
+        var title = trigger.getAttribute('data-project-title') || '';
+        var category = trigger.getAttribute('data-project-category') || '';
+        var summary = trigger.getAttribute('data-project-summary') || '';
+        var services = trigger.getAttribute('data-project-services') || '';
+        var image = trigger.getAttribute('data-project-image') || '';
+        var page = trigger.getAttribute('data-project-page') || 'portfolio.html';
+
+        dialogTitle.textContent = title;
+        dialogCategory.textContent = category;
+        dialogSummary.textContent = summary;
+        dialogServices.innerHTML = '';
+        if (services) {
+          var li = document.createElement('li');
+          var left = document.createElement('span');
+          var right = document.createElement('span');
+          left.textContent = 'Delivered';
+          right.textContent = services.split('|').map(function (item) { return item.trim(); }).filter(Boolean).join(', ');
+          li.appendChild(left);
+          li.appendChild(right);
+          dialogServices.appendChild(li);
+        }
+
+        if (image) {
+          dialogMedia.hidden = false;
+          dialogImage.src = image;
+          dialogImage.alt = title + ' website preview';
+        } else {
+          dialogMedia.hidden = true;
+          dialogImage.removeAttribute('src');
+        }
+
+        dialogPage.href = page;
+        dialog.setAttribute('aria-label', 'Quick overview — ' + title);
+        lastTrigger = trigger;
+        dialog.showModal();
+        document.body.classList.add('dialog-open');
+        dialog.querySelector('[data-dialog-close]').focus();
+      });
+    });
+
+    dialog.querySelectorAll('[data-dialog-close]').forEach(function (button) {
+      button.addEventListener('click', closeDialog);
+    });
+
+    dialog.addEventListener('click', function (event) {
+      if (event.target === dialog) closeDialog();
+    });
+
+    dialog.addEventListener('close', function () {
+      document.body.classList.remove('dialog-open');
+      if (lastTrigger) lastTrigger.focus();
+    });
+  }
+
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 })();
