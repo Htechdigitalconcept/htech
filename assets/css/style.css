@@ -246,6 +246,19 @@ ol,ul{padding:0;list-style:none}
 .case-secondary img{width:min(100%,420px);margin-inline:auto;background:var(--white)}
 .case-secondary h3{font:600 clamp(26px,2.6vw,36px)/1.15 var(--head);letter-spacing:-.04em;margin-bottom:16px}
 .case-secondary p{color:var(--muted);max-width:38em}
+.case-gallery{margin-top:clamp(72px,9vw,120px);padding-top:clamp(40px,5vw,64px);border-top:1px solid var(--line)}
+.case-gallery__head{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,70px);align-items:end;margin-bottom:44px}
+.case-gallery__head h2{font:600 clamp(32px,3.6vw,50px)/1.08 var(--head);letter-spacing:-.045em}
+.case-gallery__head h2,.case-gallery__head p{margin-top:16px}
+.gallery-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px}
+.gallery-item{grid-column:span 6;margin:0;background:var(--soft);overflow:hidden}
+.gallery-item--wide{grid-column:span 12}
+.gallery-item--third{grid-column:span 4}
+.gallery-item a{display:block;overflow:hidden}
+.gallery-item img{width:100%;height:auto;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.gallery-item:hover img{transform:scale(1.025)}
+.gallery-item figcaption{display:flex;justify-content:space-between;gap:14px;padding:14px 16px;font-size:11px;line-height:1.5;color:var(--muted);letter-spacing:.02em}
+.gallery-item figcaption span:last-child{color:var(--blue);font-weight:600;white-space:nowrap}
 
 /* Contact page */
 .contact-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
@@ -282,7 +295,8 @@ ol,ul{padding:0;list-style:none}
   .nav{display:none}
   .menu-toggle{display:block}
   .brand__name{display:none}
-  .hero__grid,.page-hero__grid,.approach,.about-preview,.feature,.story,.case-details,.case-hero,.case-secondary{grid-template-columns:1fr}
+  .hero__grid,.page-hero__grid,.approach,.about-preview,.feature,.story,.case-details,.case-hero,.case-secondary,.case-gallery__head{grid-template-columns:1fr}
+  .gallery-item--third{grid-column:span 6}
   .page-hero__grid .portrait-frame{max-width:340px;justify-self:start}
   .showcase{max-width:660px}
   .showcase__mini{right:0}
@@ -312,6 +326,7 @@ ol,ul{padding:0;list-style:none}
   .step::before{display:none}
   .step::after{left:-6px;top:28px;box-shadow:0 0 0 4px var(--soft)}
   .contact-options{grid-template-columns:1fr}
+  .gallery-item,.gallery-item--wide,.gallery-item--third{grid-column:span 12}
   .brief-box ul{grid-template-columns:1fr}
   .footer__grid{grid-template-columns:1fr 1fr;gap:34px 20px}
   .footer__grid>div:first-child{grid-column:1/-1}
