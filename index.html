@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
-<noscript><style>.reveal{opacity:1!important;transform:none!important}.nav{display:flex}.menu-toggle{display:none}.nav-panel{display:none}</style></noscript>
+<noscript><style>.reveal,.proof__item{opacity:1!important;transform:none!important}.proof__item::before,.proof__item::after{transform:scaleX(1)!important}.nav{display:flex}.menu-toggle{display:none}.nav-panel{display:none}</style></noscript>
 <script src="assets/js/main.js" defer></script>
 </head>
 <body>
@@ -75,8 +75,8 @@
 
   <section class="proof" aria-label="Professional experience">
     <div class="wrap proof__grid">
-      <div class="proof__item"><span class="proof__num">6+</span><span class="proof__label">Years of website design experience</span></div>
-      <div class="proof__item"><span class="proof__num">30+</span><span class="proof__label">Websites designed and developed</span></div>
+      <div class="proof__item" data-count="6" data-suffix="+"><span class="proof__num"><span data-stat-value>6+</span></span><span class="proof__label">Years of website design experience</span></div>
+      <div class="proof__item" data-count="30" data-suffix="+"><span class="proof__num"><span data-stat-value>30+</span></span><span class="proof__label">Websites designed and developed</span></div>
       <div class="proof__item"><span class="proof__num proof__num--word">Multiple</span><span class="proof__label">Industries and business types served</span></div>
       <div class="proof__item"><span class="proof__num proof__num--word">Global</span><span class="proof__label">Local and international clients</span></div>
     </div>

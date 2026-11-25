@@ -278,6 +278,52 @@
     });
   }
 
+  // Futuristic proof strip: animate numbers once when it enters view.
+  var proof = document.querySelector('.proof');
+  if (proof) {
+    var counters = Array.prototype.slice.call(proof.querySelectorAll('[data-count]'));
+
+    function animateCounter(item) {
+      var target = parseInt(item.getAttribute('data-count'), 10);
+      var suffix = item.getAttribute('data-suffix') || '';
+      var output = item.querySelector('[data-stat-value]');
+      if (!output || isNaN(target)) return;
+      if (reduced || !window.requestAnimationFrame) {
+        output.textContent = target + suffix;
+        return;
+      }
+      var duration = 1100;
+      var start = null;
+      function frame(now) {
+        if (start === null) start = now;
+        var progress = Math.min((now - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        output.textContent = Math.round(target * eased) + suffix;
+        if (progress < 1) window.requestAnimationFrame(frame);
+        else output.textContent = target + suffix;
+      }
+      window.requestAnimationFrame(frame);
+    }
+
+    function activateProof() {
+      if (proof.classList.contains('is-live')) return;
+      proof.classList.add('is-live');
+      counters.forEach(animateCounter);
+    }
+
+    if (reduced || !('IntersectionObserver' in window)) {
+      activateProof();
+    } else {
+      var proofObserver = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          activateProof();
+          proofObserver.disconnect();
+        }
+      }, { threshold: 0.35 });
+      proofObserver.observe(proof);
+    }
+  }
+
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 })();
