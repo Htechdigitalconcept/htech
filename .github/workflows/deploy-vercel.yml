@@ -1,6 +1,9 @@
 name: Deploy to Vercel
 
 on:
+  push:
+    branches:
+      - arena/3a471d5d-htech
   workflow_dispatch:
 
 jobs:
