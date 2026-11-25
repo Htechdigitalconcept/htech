@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
-<noscript><style>.reveal,.proof__item{opacity:1!important;transform:none!important}.proof__item::before,.proof__item::after{transform:scaleX(1)!important}.nav{display:flex}.menu-toggle{display:none}.nav-panel{display:none}</style></noscript>
+<noscript><style>.reveal,.proof__figure{opacity:1!important;transform:none!important}.proof__figure::before{transform:scaleX(1)!important}.nav{display:flex}.menu-toggle{display:none}.nav-panel{display:none}</style></noscript>
 <script src="assets/js/main.js" defer></script>
 </head>
 <body>
@@ -73,16 +73,28 @@
     <div class="hero__scroll" aria-hidden="true"><i></i> Scroll to explore</div>
   </section>
 
-  <section class="proof" aria-label="Professional experience">
-    <div class="wrap proof__grid">
-      <div class="proof__item" data-count="6" data-suffix="+"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span class="proof__num"><span data-stat-value>6+</span></span><span class="proof__label">Years of website design experience</span></div>
-      <div class="proof__item" data-count="30" data-suffix="+"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"></path><path d="m3 12 9 5 9-5"></path></svg></span><span class="proof__num"><span data-stat-value>30+</span></span><span class="proof__label">Websites designed and developed</span></div>
-      <div class="proof__item"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg></span><span class="proof__num proof__num--word">Multiple</span><span class="proof__label">Industries and business types served</span></div>
-      <div class="proof__item"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.4 4 5.5 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.5-4-9s1.4-6.6 4-9Z"></path></svg></span><span class="proof__num proof__num--word">Global</span><span class="proof__label">Local and international clients</span></div>
+  <section class="proof" aria-label="Experience and approach">
+    <div class="wrap proof__panel">
+      <div class="proof__intro reveal">
+        <span class="eyebrow eyebrow--light">Why work with me</span>
+        <h2>Design and development, handled end to end.</h2>
+        <p>I plan, design and build the website myself — so the layout, the experience and the WordPress build stay aligned from first sketch to launch.</p>
+        <div class="proof__tags"><span>Multiple industries</span><span>Local &amp; international clients</span></div>
+      </div>
+      <div class="proof__figures">
+        <div class="proof__figure" data-count="6" data-suffix="+">
+          <span class="proof__figure-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
+          <span class="proof__figure-num"><span data-stat-value>6+</span></span>
+          <span class="proof__figure-label">Years designing websites</span>
+        </div>
+        <div class="proof__figure" data-count="30" data-suffix="+">
+          <span class="proof__figure-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"></path><path d="m3 12 9 5 9-5"></path></svg></span>
+          <span class="proof__figure-num"><span data-stat-value>30+</span></span>
+          <span class="proof__figure-label">Websites delivered</span>
+        </div>
+      </div>
     </div>
-    <div class="proof__cursor" data-proof-cursor aria-hidden="true">
-      <svg viewBox="0 0 24 24"><path d="M12 3v18"></path><path d="M3 12h18"></path><circle cx="12" cy="12" r="4"></circle></svg>
-    </div>
+    <div class="proof__cursor" data-proof-cursor aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18"></path><path d="M3 12h18"></path><circle cx="12" cy="12" r="4"></circle></svg></div>
   </section>
 
   <section class="section section--white" id="work">
