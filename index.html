@@ -2,257 +2,244 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>WordPress &amp; WooCommerce Developer | Ademola Habeeb</title>
-<meta name="description" content="Websites and online stores built with WordPress, Elementor Pro and WooCommerce that bring you customers.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Htech Digital Concepts | Website Designer &amp; WordPress Developer</title>
+<meta name="description" content="Ademola Habeeb designs conversion-focused business websites, WooCommerce stores and WordPress builds that turn visitors into customers.">
+<meta property="og:title" content="Htech Digital Concepts | Website Designer &amp; WordPress Developer">
+<meta property="og:description" content="Professional website design and WordPress development for businesses that want to be taken seriously online.">
+<meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#050716;--ink:#EEF0FF;--dim:#9BA0CC;--blue:#5B6BFF;--mint:#6DFFC8;--glass:rgba(255,255,255,.05);--line:rgba(255,255,255,.12);
---d:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--b:"Instrument Sans","Segoe UI",system-ui,sans-serif;--pad:clamp(20px,5vw,72px)}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;overflow-x:clip}
-body{background:var(--bg);color:var(--ink);font:400 clamp(16px,1.2vw,18px)/1.6 var(--b);-webkit-font-smoothing:antialiased;overflow-x:clip}
-a{color:inherit;text-decoration:none}
-:focus-visible{outline:3px solid var(--mint);outline-offset:3px;border-radius:4px}
-#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-main,nav,footer{position:relative;z-index:2}
-.dot,.ring{position:fixed;left:0;top:0;pointer-events:none;z-index:100;display:none}
-.dot{width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--mint)}
-.ring{width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1.5px solid rgba(238,240,255,.9);transition:width .25s,height .25s,margin .25s,border-color .25s}
-.ring.h{width:56px;height:56px;margin:-28px 0 0 -28px;border-color:var(--mint)}
-@media(pointer:fine){body.cc,body.cc a{cursor:none}.dot,.ring{display:block}}
-.bar{position:fixed;top:0;left:0;height:3px;width:100%;background:linear-gradient(90deg,var(--blue),var(--mint));transform-origin:0 50%;transform:scaleX(0);z-index:60}
-nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) var(--pad) 14px;backdrop-filter:blur(16px);background:rgba(5,7,22,.55);border-bottom:1px solid var(--line)}
-.mark{font:700 19px var(--d);letter-spacing:-.02em}.mark i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--mint);margin-left:6px;box-shadow:0 0 12px var(--mint)}
-.mark{display:flex;align-items:center;gap:14px}.lg{background:#fff;border-radius:10px;padding:4px 12px;display:flex;box-shadow:0 0 0 1px rgba(255,255,255,.25)}.lg img{height:30px;width:auto;display:block}.nm{color:var(--dim);font:500 15px var(--b)}@media(max-width:700px){.nm{display:none}}
-.links{display:flex;gap:clamp(14px,3vw,30px);align-items:center;font-weight:500;color:var(--dim)}.links a:hover{color:#fff}
-.btn{display:inline-flex;align-items:center;padding:14px 26px;border-radius:999px;background:linear-gradient(120deg,var(--blue),#8A6BFF);color:#fff;font-weight:600;box-shadow:0 0 0 1px rgba(255,255,255,.2) inset,0 10px 30px -8px var(--blue);will-change:transform;transition:box-shadow .3s}
-.btn:hover{box-shadow:0 0 0 1px rgba(255,255,255,.4) inset,0 14px 40px -6px var(--blue)}
-.btn.o{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--ink)}.btn.o:hover{box-shadow:inset 0 0 0 1.5px var(--mint)}
-@media(max-width:700px){.links a:not(.btn){display:none}}
-
-.hero{min-height:100svh;padding:130px var(--pad) 70px;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,64px);align-items:center}
-h1{font:600 clamp(44px,7.2vw,116px)/.95 var(--d);letter-spacing:-.04em;margin-bottom:26px}
-h1 .l{display:block;min-height:1em}
-h1 .l:last-child{background:linear-gradient(100deg,var(--blue),var(--mint),var(--blue));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 5s linear infinite}
-@keyframes sh{to{background-position:-200% 0}}
-.lede{max-width:31em;font-size:clamp(18px,1.5vw,21px);color:var(--dim);margin-bottom:32px}
-.cta{display:flex;flex-wrap:wrap;gap:14px}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}.chips span{font-size:14px;padding:5px 14px;border-radius:999px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--line)}
-@media(max-width:880px){.hero{grid-template-columns:1fr}}
-
-.stage{position:relative;perspective:1100px}
-.shop{background:#FBF7F2;color:#2B2622;border-radius:20px;overflow:hidden;box-shadow:0 50px 100px -20px rgba(91,107,255,.55),0 0 0 1px rgba(255,255,255,.2);transform-style:preserve-3d;will-change:transform}
-.sb{display:flex;align-items:center;gap:12px;padding:13px 16px;background:#fff}.sb b{font:700 15px var(--d)}.sb i{height:7px;width:34px;border-radius:4px;background:#e4ddd5}
-.cart{margin-left:auto;position:relative;width:34px;height:34px;border-radius:50%;background:#2B2622;color:#fff;font:600 13px var(--b)}
-.cart span{position:absolute;inset:0;display:grid;place-items:center}.cart .n1{animation:n1 8s infinite}.cart .n0{animation:n0 8s infinite}
-@keyframes n0{0%,37%{opacity:1}38%,100%{opacity:0}}@keyframes n1{0%,37%{opacity:0}38%,92%{opacity:1;transform:scale(1.3)}42%{transform:scale(1)}93%,100%{opacity:0}}
-.sbn{padding:26px 20px;background:linear-gradient(120deg,#E7D7C3,#F3E6D4)}.sbn p{font:600 26px/1 var(--d);letter-spacing:-.03em;margin-bottom:8px;max-width:9em}.sbn s{display:block;height:8px;width:55%;border-radius:4px;background:rgba(43,38,34,.2)}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px}
-.pr .im{aspect-ratio:1;border-radius:12px;position:relative}.pr .im::after{content:"";position:absolute;inset:18% 22%;border-radius:50% 50% 38% 38%;background:rgba(255,255,255,.55)}
-.pr:nth-child(1) .im{background:linear-gradient(160deg,#9DB39A,#5F7F63)}.pr:nth-child(2) .im{background:linear-gradient(160deg,#E8B7A0,#C9785C)}.pr:nth-child(3) .im{background:linear-gradient(160deg,#B8B2D6,#7A6FB0)}
-.pr i{display:block;height:7px;width:70%;border-radius:4px;background:#d9d1c8;margin:9px 0 6px}.pr em{display:block;font:600 13px var(--b);font-style:normal}
-.pr u{display:block;margin-top:8px;text-align:center;font:600 12px var(--b);text-decoration:none;padding:7px;border-radius:8px;background:#2B2622;color:#fff}
-.pr:nth-child(2) u{animation:pr 8s infinite}@keyframes pr{0%,33%{background:#2B2622}35%,40%{background:#5B6BFF;transform:scale(.94)}42%,100%{background:#2B2622;transform:none}}
-.cur{position:absolute;width:26px;height:26px;z-index:3;filter:drop-shadow(0 4px 6px rgba(0,0,0,.4));animation:cur 8s ease-in-out infinite}
-@keyframes cur{0%{left:92%;top:108%}30%,40%{left:56%;top:79%}60%,100%{left:92%;top:108%}}
-.toast{position:absolute;right:-12px;top:20px;z-index:4;background:rgba(10,14,40,.92);color:#fff;padding:12px 18px;border-radius:14px;font:600 14px var(--b);box-shadow:0 0 0 1px var(--mint),0 18px 40px rgba(0,0,0,.5);display:flex;gap:10px;align-items:center;opacity:0;animation:ts 8s infinite}
-.toast::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
-@keyframes ts{0%,40%{opacity:0;transform:translateX(30px)}46%,82%{opacity:1;transform:none}90%,100%{opacity:0;transform:translateX(30px)}}
-
-.strip{overflow:hidden;white-space:nowrap;border-block:1px solid var(--line);padding:18px 0;background:rgba(255,255,255,.02)}
-.strip div{display:inline-flex;gap:48px;padding-right:48px;animation:mq 30s linear infinite;font:500 clamp(20px,2.4vw,30px) var(--d);color:var(--dim)}.strip span:nth-child(3n){color:var(--mint)}
-@keyframes mq{to{transform:translateX(-50%)}}
-.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:clamp(40px,6vw,80px) var(--pad)}
-.proof b{display:block;font:700 clamp(48px,8vw,120px)/1 var(--d);letter-spacing:-.045em;background:linear-gradient(180deg,#fff,var(--dim));-webkit-background-clip:text;background-clip:text;color:transparent}.proof span{color:var(--dim)}
-@media(max-width:600px){.proof{grid-template-columns:1fr}}
-
-section{padding:clamp(70px,10vw,140px) var(--pad)}
-h2{font:600 clamp(34px,5.6vw,80px)/1 var(--d);letter-spacing:-.035em;max-width:13em;margin-bottom:clamp(34px,5vw,64px)}
-.svc{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.card{position:relative;padding:clamp(24px,3vw,40px);border-radius:24px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;transform-style:preserve-3d;will-change:transform}
-.card::before{content:"";position:absolute;inset:0;background:radial-gradient(360px circle at var(--x,50%) var(--y,0%),rgba(109,255,200,.18),transparent 60%);opacity:0;transition:opacity .3s}.card:hover::before{opacity:1}
-.card h3{font:600 clamp(24px,2.8vw,38px)/1.05 var(--d);letter-spacing:-.025em;margin-bottom:12px;position:relative}.card p{color:var(--dim);position:relative}
-@media(max-width:760px){.svc{grid-template-columns:1fr}}
-
-.hz{padding:0;overflow:hidden}.hz .head{padding:clamp(70px,9vw,120px) var(--pad) 0}.hz h2{margin-bottom:30px}
-.track{display:flex;gap:28px;padding:20px var(--pad) 90px;width:max-content}
-.case{width:min(78vw,860px);flex:none;display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(16px,2.4vw,36px);align-items:center;padding:clamp(16px,2vw,28px);border-radius:28px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--line);backdrop-filter:blur(8px)}
-.case h3{font:600 clamp(26px,3vw,42px)/1.04 var(--d);letter-spacing:-.03em;margin-bottom:10px}.case p{color:var(--dim);margin-bottom:16px}
-.tg{display:flex;gap:8px;flex-wrap:wrap}.tg span{font-size:13px;padding:4px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line)}
-@media(max-width:900px){.hz{overflow:visible}.track{flex-direction:column;width:auto;padding-bottom:40px}.case{width:100%;grid-template-columns:1fr}}
-.shot{position:relative}.shot>img{display:block;width:100%;height:auto;border-radius:16px;box-shadow:0 30px 60px -25px #000}.shot .tab{position:absolute;width:27%;right:-2%;bottom:-9%;border-radius:0;box-shadow:0 24px 50px -10px #000}
-.mk{border-radius:14px;overflow:hidden;background:var(--bg);box-shadow:0 20px 50px -20px #000;aspect-ratio:16/11;display:flex;flex-direction:column}
-.mk .t{display:flex;gap:6px;padding:9px 12px;background:rgba(255,255,255,.75)}.mk .t i{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,.18)}
-.mk .nv{display:flex;align-items:center;gap:10px;padding:10px 16px}.mk .nv b{width:56px;height:12px;border-radius:6px;background:var(--a)}.mk .nv s{width:30px;height:6px;border-radius:3px;background:rgba(0,0,0,.2)}.mk .nv s:first-of-type{margin-left:auto}.mk .nv u{width:46px;height:18px;border-radius:9px;background:var(--a)}
-.mk .bd{flex:1;padding:6px 16px 16px;display:grid;gap:10px;align-content:start}
-.mk .h{height:16px;width:62%;border-radius:8px;background:#222}.mk .h.s{width:40%}.mk .l{height:7px;width:80%;border-radius:4px;background:rgba(0,0,0,.2)}.mk .pill{height:22px;width:78px;border-radius:11px;background:var(--a)}
-.mk .g{display:grid;gap:8px}.mk .g div{border-radius:8px;background:linear-gradient(150deg,var(--c),var(--a));min-height:60px}.mk .g div:nth-child(2n){background:linear-gradient(150deg,var(--a),var(--c))}
-.mk .hero2{border-radius:10px;min-height:96px;background:linear-gradient(120deg,var(--a),var(--c));display:grid;align-content:end;padding:12px;gap:6px}.mk .hero2 .h{background:#fff}
-.mk .split{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;align-items:center}.mk .ph{aspect-ratio:1;border-radius:50% 50% 14px 14px;background:linear-gradient(160deg,var(--c),var(--a))}
-
-.steps{counter-reset:s;display:grid;grid-template-columns:repeat(5,1fr);position:relative}
-.steps::before{content:"";position:absolute;left:0;right:0;top:19px;height:2px;background:linear-gradient(90deg,var(--blue),var(--mint));transform-origin:0 50%;transform:scaleX(var(--p,0))}
-.steps li{list-style:none;padding-right:18px;position:relative}
-.steps li::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--bg);box-shadow:0 0 0 2px var(--mint),0 0 18px rgba(109,255,200,.4);font:600 16px var(--d);margin-bottom:16px;position:relative}
-.steps h3{font:600 22px var(--d);margin-bottom:6px}.steps p{font-size:15px;color:var(--dim)}
-@media(max-width:900px){.steps{grid-template-columns:1fr 1fr;gap:26px 0}.steps::before{display:none}}@media(max-width:520px){.steps{grid-template-columns:1fr}}
-.contact{text-align:left}.contact h2{max-width:11em}
-footer{padding:24px var(--pad);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:15px;color:var(--dim);border-top:1px solid var(--line)}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}.nav{display:flex}.menu-toggle{display:none}.nav-panel{display:none}</style></noscript>
+<script src="assets/js/main.js" defer></script>
 </head>
 <body>
-<canvas id="bg"></canvas><div class="dot" id="dot"></div><div class="ring" id="ring"></div><div class="bar" id="bar"></div>
-<nav>
-  <a class="mark" href="#top" aria-label="Htech Digital Concepts, home"><span class="lg"><img src="images/htech-logo.webp" alt="Htech Digital Concepts"></span><span class="nm">Ademola Habeeb</span></a>
-  <div class="links"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a class="btn mag" href="#contact">Start your project</a></div>
-</nav>
-<main>
-<header class="hero" id="top">
-  <div>
-    <h1 aria-label="Websites and online stores that bring you customers."><span class="l" data-t="Websites and"></span><span class="l" data-t="online stores"></span><span class="l" data-t="that bring you"></span><span class="l" data-t="customers."></span></h1>
-    <p class="lede">One WordPress developer for the whole job: design, build and SEO setup. You get a fast site you can edit yourself, delivered on a clear timeline.</p>
-    <div class="cta"><a class="btn mag" href="#contact">Get a project plan</a><a class="btn o mag" href="#work">See recent work</a></div>
-    <div class="chips"><span>WordPress</span><span>Elementor Pro</span><span>WooCommerce</span><span>Custom code</span></div>
-  </div>
-  <div class="stage" aria-hidden="true">
-    <div class="shop" id="shop">
-      <div class="sb"><b>Your store</b><i></i><i></i><i></i><div class="cart"><span class="n0">0</span><span class="n1">1</span></div></div>
-      <div class="sbn"><p>New season, ready to ship</p><s></s></div>
-      <div class="grid3"><div class="pr"><div class="im"></div><i></i><em>$48</em><u>Add to cart</u></div><div class="pr"><div class="im"></div><i></i><em>$62</em><u>Add to cart</u></div><div class="pr"><div class="im"></div><i></i><em>$54</em><u>Add to cart</u></div></div>
-    </div>
-    <svg class="cur" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="#fff" stroke="#050716" stroke-width="1.5" stroke-linejoin="round"/></svg>
-    <div class="toast">New order received</div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html" aria-label="Htech Digital Concepts — home">
+      <span class="brand__logo"><img src="images/htech-logo-transparent.webp" alt="Htech Digital Concepts" width="104" height="38"></span>
+      <span class="brand__name"><b>Ademola Habeeb</b>Website Designer &amp; WordPress Developer</span>
+    </a>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="nav__link is-active" href="index.html" aria-current="page">Home</a>
+      <a class="nav__link" href="portfolio.html">Portfolio</a>
+      <a class="nav__link" href="#services">Services</a>
+      <a class="nav__link" href="about.html">About</a>
+      <a class="nav__link" href="contact.html">Contact</a>
+      <a class="btn btn--yellow nav__cta" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+<nav class="nav-panel" id="nav-panel" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="#services">Services</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a class="btn btn--yellow" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a>
+</nav>
 
-<div class="strip" aria-hidden="true"><div><span>WordPress</span><span>Elementor Pro</span><span>WooCommerce</span><span>HTML &amp; CSS</span><span>JavaScript</span><span>PHP</span><span>Python</span><span>SEO setup</span><span>WordPress</span><span>Elementor Pro</span><span>WooCommerce</span><span>HTML &amp; CSS</span><span>JavaScript</span><span>PHP</span><span>Python</span><span>SEO setup</span></div></div>
+<main id="main">
 
-<div class="proof">
-  <div><b data-n="6" data-s="+">0</b><span>years building websites</span></div>
-  <div><b data-n="30" data-s="+">0</b><span>websites delivered</span></div>
-  <div><b data-n="3" data-s="">0</b><span>languages: English, French, Chinese</span></div>
-</div>
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div>
+        <span class="eyebrow eyebrow--light reveal">Website design &middot; WordPress development</span>
+        <h1 class="display reveal d-90">Websites that turn visitors into <em>customers.</em></h1>
+        <p class="hero__lede reveal d-180">I design and build professional websites for businesses that want to look credible, work beautifully on every screen and guide visitors toward the next step. Over 6 years, 30+ websites, one clear process.</p>
+        <div class="hero__actions reveal d-260">
+          <a class="btn btn--yellow" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--outline-light" href="#work">View my work</a>
+        </div>
+        <p class="hero__note reveal d-340">Design, development and WordPress build &mdash; handled by one specialist.</p>
+      </div>
+      <div class="showcase reveal d-200">
+        <div class="showcase__main">
+          <img src="images/esko-wheels-showcase.webp" alt="ESKO Wheels website shown on a laptop and phone, designed and developed by Htech Digital Concepts" width="1500" height="1000" fetchpriority="high">
+        </div>
+        <div class="showcase__mini">
+          <img src="images/esko-wheels-tablet.webp" alt="ESKO Wheels website shown on a tablet" width="640" height="888" loading="lazy">
+        </div>
+        <p class="showcase__caption"><b>Selected work</b> &nbsp;/&nbsp; ESKO Wheels</p>
+      </div>
+    </div>
+    <div class="hero__scroll" aria-hidden="true"><i></i> Scroll to explore</div>
+  </section>
 
-<section id="services">
-  <h2 class="rv">What you get when we work together</h2>
-  <div class="svc">
-    <article class="card rv"><h3>An online store that sells</h3><p>WooCommerce stores with products, cart, checkout, payments, shipping and print-on-demand connected, so you can take orders from day one.</p></article>
-    <article class="card rv"><h3>A website you can edit yourself</h3><p>Built in Elementor Pro, so you can change text, images and pages after launch without calling a developer.</p></article>
-    <article class="card rv"><h3>A redesign for a slow or dated site</h3><p>Cleaner layout, faster loading and a design that works on every phone. Also Figma-to-WordPress and AI-built sites rebuilt as editable WordPress sites.</p></article>
-    <article class="card rv"><h3>Custom features and automation</h3><p>Forms, booking, API connections and automations in HTML, CSS, JavaScript, PHP and Python when a plugin isn’t enough.</p></article>
-  </div>
-</section>
+  <section class="proof" aria-label="Professional experience">
+    <div class="wrap proof__grid">
+      <div class="proof__item"><span class="proof__num">6+</span><span class="proof__label">Years of website design experience</span></div>
+      <div class="proof__item"><span class="proof__num">30+</span><span class="proof__label">Websites designed and developed</span></div>
+      <div class="proof__item"><span class="proof__num proof__num--word">Multiple</span><span class="proof__label">Industries and business types served</span></div>
+      <div class="proof__item"><span class="proof__num proof__num--word">Global</span><span class="proof__label">Local and international clients</span></div>
+    </div>
+  </section>
 
-<section class="hz" id="work">
-  <div class="head"><h2>Recent projects</h2></div>
-  <div class="track" id="track"></div>
-</section>
+  <section class="section section--white" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="eyebrow">01 / Selected work</span>
+          <h2 class="section-title">The work speaks before you do.</h2>
+        </div>
+        <p class="lede reveal d-100">A look at websites designed to communicate clearly, load quickly and make the next step obvious.</p>
+      </div>
 
-<section id="process">
-  <h2 class="rv">How a project runs</h2>
-  <ol class="steps" id="steps">
-    <li><h3>Discovery</h3><p>We agree goals, pages, content and timeline before I start.</p></li>
-    <li><h3>Build</h3><p>You see progress at clear milestones and give feedback early.</p></li>
-    <li><h3>Review</h3><p>We refine the details together until it’s right.</p></li>
-    <li><h3>Launch</h3><p>I test on desktop and mobile, then walk you through the site.</p></li>
-    <li><h3>Support</h3><p>I stay available for questions and small fixes after launch.</p></li>
-  </ol>
-</section>
+      <article class="feature">
+        <div class="feature__visual reveal">
+          <img src="images/esko-wheels-tablet.webp" alt="ESKO Wheels website shown on a tablet, with product stories and quote calls to action" width="640" height="888" loading="lazy">
+        </div>
+        <div class="feature__body reveal d-120">
+          <span class="feature__tag">Featured project</span>
+          <h3>ESKO Wheels</h3>
+          <p>A bold, modern website for a custom wheel brand, built around product-focused visuals, clear navigation and strong quote calls to action. The experience holds together across desktop, laptop and mobile.</p>
+          <ul class="meta-list">
+            <li><span>Industry</span><span>Automotive / e-commerce</span></li>
+            <li><span>Website type</span><span>E-commerce website</span></li>
+            <li><span>Role</span><span>Website design &amp; build</span></li>
+            <li><span>Delivered</span><span>WordPress, e-commerce UI/UX, responsive design</span></li>
+          </ul>
+          <a class="text-link" href="portfolio.html#esko-wheels">View project details <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
 
-<section class="contact" id="contact">
-  <h2 class="rv">Tell me about your project. I’ll reply with a plan.</h2>
-  <div class="cta">
-    <a class="btn mag" href="https://www.upwork.com/freelancers/~01b7d7e1d5bc855117" target="_blank" rel="noopener">Hire me on Upwork</a>
-    <a class="btn o mag" href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener">Message me on LinkedIn</a>
-  </div>
-</section>
+      <div class="project-list reveal">
+        <div class="project-row">
+          <span class="project-row__num">02</span>
+          <h3>Lunaya</h3>
+          <span class="project-row__cat">Yoga apparel &middot; E-commerce</span>
+          <span class="project-row__svc">WooCommerce, Elementor Pro, SEO setup, sales-funnel structure</span>
+        </div>
+        <div class="project-row">
+          <span class="project-row__num">03</span>
+          <h3>Ausim Kids</h3>
+          <span class="project-row__cat">Children&rsquo;s clothing &middot; E-commerce</span>
+          <span class="project-row__svc">WooCommerce, product pages, brand storytelling, responsive design</span>
+        </div>
+        <div class="project-row">
+          <span class="project-row__num">04</span>
+          <h3>Wedding photography rebuild</h3>
+          <span class="project-row__cat">Photography &middot; Website redesign</span>
+          <span class="project-row__svc">Elementor Pro, galleries, testimonials, editable contact forms</span>
+        </div>
+        <div class="project-row">
+          <span class="project-row__num">05</span>
+          <h3>Therapy &amp; legal coaching sites</h3>
+          <span class="project-row__cat">Professional services &middot; Business websites</span>
+          <span class="project-row__svc">WordPress, service-page structure, clear booking calls to action</span>
+        </div>
+      </div>
+      <div class="work-foot reveal"><a class="text-link" href="portfolio.html">Explore all projects <span aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+
+  <section class="section section--dark" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="eyebrow eyebrow--light">02 / Services</span>
+          <h2 class="section-title">One specialist for the whole website.</h2>
+        </div>
+        <p class="lede text-light reveal d-100">From the first layout decision to the final WordPress build, every part of the site is handled with the same attention to detail.</p>
+      </div>
+      <div class="services-grid">
+        <article class="service reveal"><span class="service__num">01</span><div><h3>WordPress Website Design</h3><p>Business and corporate websites designed around your brand, your audience and the action you want visitors to take.</p></div></article>
+        <article class="service reveal d-60"><span class="service__num">02</span><div><h3>Elementor Website Development</h3><p>Custom page design and development in Elementor and Elementor Pro, so your site stays easy to edit after launch.</p></div></article>
+        <article class="service reveal"><span class="service__num">03</span><div><h3>Landing Pages &amp; Sales Funnels</h3><p>Focused pages built around one offer and one clear next step, with structure and content that support conversion.</p></div></article>
+        <article class="service reveal d-60"><span class="service__num">04</span><div><h3>WooCommerce Website Development</h3><p>Online stores with well-structured product pages, clear shopping journeys and the essential store functionality you need.</p></div></article>
+        <article class="service reveal"><span class="service__num">05</span><div><h3>Website Redesign</h3><p>Outdated or inconsistent sites rebuilt as modern, responsive experiences with clearer structure and stronger visual hierarchy.</p></div></article>
+        <article class="service reveal d-60"><span class="service__num">06</span><div><h3>Website Optimisation</h3><p>Improvements to layout, navigation, responsiveness, performance and user experience across an existing WordPress site.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white" id="approach">
+    <div class="wrap approach">
+      <div class="reveal">
+        <span class="eyebrow">03 / Approach</span>
+        <h2 class="approach__statement mt-20">Design decisions made for your business.<span></span>A website should do more than look good. It should make your offer easy to understand and easy to act on.</h2>
+        <p class="approach__note">The details below are the ones that make the difference between a site that simply exists and one that supports the business behind it.</p>
+      </div>
+      <div class="reveal d-120">
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Business objectives first</h3><p>Every layout, headline and call to action is chosen with your goal in mind: enquiries, sales or bookings.</p></div></div>
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Clear visual hierarchy</h3><p>Visitors see what matters first, then move naturally through the page instead of guessing where to look.</p></div></div>
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Mobile-first responsiveness</h3><p>Layouts are designed for small screens first, then refined for tablet and desktop so nothing feels squeezed in.</p></div></div>
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Clean WordPress development</h3><p>Built with maintainable structure and the right tools, so updates do not become a developer dependency.</p></div></div>
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Attention to performance</h3><p>Optimised images, sensible sections and lightweight interactions keep the site fast and easy to use.</p></div></div>
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Communication throughout</h3><p>You see progress at clear milestones and know what happens next at every stage of the project.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft" id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="eyebrow">04 / Process</span>
+          <h2 class="section-title">A clear path from first conversation to launch.</h2>
+        </div>
+        <p class="lede reveal d-100">A simple, transparent workflow so you always know what is happening and what comes next.</p>
+      </div>
+      <ol class="steps">
+        <li class="step reveal"><span class="step__num">01 / DISCOVERY</span><h3>Discovery</h3><p>We clarify the business, audience, goals and pages required.</p></li>
+        <li class="step reveal d-60"><span class="step__num">02 / PLANNING</span><h3>Planning</h3><p>I define the structure, content needs and the journey visitors will follow.</p></li>
+        <li class="step reveal d-120"><span class="step__num">03 / DESIGN</span><h3>Design</h3><p>Visual direction and page layouts are developed for your review.</p></li>
+        <li class="step reveal d-180"><span class="step__num">04 / DEVELOPMENT</span><h3>Development</h3><p>The approved design is built in WordPress using the right tools for the site.</p></li>
+        <li class="step reveal d-240"><span class="step__num">05 / TESTING</span><h3>Testing</h3><p>Responsiveness, functionality and usability are checked before launch.</p></li>
+        <li class="step reveal d-300"><span class="step__num">06 / LAUNCH</span><h3>Launch</h3><p>Final review, handover and a walkthrough of your new site.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--white" id="about">
+    <div class="wrap about-preview">
+      <div class="reveal">
+        <span class="eyebrow">05 / About</span>
+        <h2 class="mt-20">Meet the designer behind the work.</h2>
+        <p>I&rsquo;m Ademola Habeeb, a website designer and WordPress developer with over 6 years of experience and more than 30 websites delivered. I work with businesses of different sizes and industries, both locally and internationally, on websites that are clear, reliable and built to support growth.</p>
+        <a class="text-link" href="about.html">More about me <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="portrait-frame reveal d-120">
+        <span class="portrait-frame__mono" aria-hidden="true">AH</span>
+        <span class="portrait-frame__label"><b>Ademola Habeeb</b><span>Website designer</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--blue final-cta">
+    <div class="wrap">
+      <span class="eyebrow eyebrow--light reveal">Ready when you are</span>
+      <h2 class="reveal d-80">Have a website project in mind?</h2>
+      <p class="reveal d-140">Tell me what you&rsquo;re building and where your current website is falling short. Share your brief and I&rsquo;ll respond with a relevant next step.</p>
+      <div class="reveal d-200"><a class="btn btn--yellow" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+
 </main>
-<footer><span>&copy; <span id="yr">2026</span> Htech Digital Concepts &middot; Ademola Habeeb</span><a href="#top">Back to top</a></footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script>
-(function(){
-var rm=matchMedia('(prefers-reduced-motion: reduce)').matches, fine=matchMedia('(pointer:fine)').matches;
-var P=[
- {t:'ESKO Wheels, automotive e-commerce',d:'A bold, modern concept for a custom wheel brand: product-focused visuals, clear navigation, strong quote calls to action and a responsive layout for desktop and mobile.',g:['WordPress','E-commerce UI/UX','Responsive'],img:['images/esko-wheels-showcase.webp','images/esko-wheels-tablet.webp']},
- {t:'Lunaya, yoga apparel',d:'A WooCommerce store built with Elementor, with SEO plugin setup, GDPR compliance and a sales-funnel structure.',g:['WooCommerce','Elementor Pro','SEO setup'],k:'store',bg:'#EEF2EA',a:'#5F7F63',c:'#E9C9A8'},
- {t:'Ausim Kids, children’s clothing',d:'A store for a sensory-friendly brand, with product pages, brand storytelling and a fully responsive layout.',g:['WooCommerce','Storytelling','Responsive'],k:'store',bg:'#FFF6E0',a:'#FF6B6B',c:'#4DB6FF'},
- {t:'AI-built site to editable WordPress',d:'A wedding photography site made by an AI tool, rebuilt in Elementor Pro with galleries, testimonials and contact forms the owner can edit.',g:['Elementor Pro','Galleries','Forms'],k:'gal',bg:'#FBF4F1',a:'#C9A38F',c:'#3A2F2B'},
- {t:'Therapy and legal coaching sites',d:'Calm, trustworthy service sites with clear booking calls to action.',g:['WordPress','Booking CTAs','Service sites'],k:'svc',bg:'#EAF3F4',a:'#2F7D86',c:'#F2D8B8'}];
-function mk(p){if(p.img)return '<div class="shot"><img src="'+p.img[0]+'" alt="ESKO Wheels website on laptop and phone" loading="lazy"><img class="tab" src="'+p.img[1]+'" alt="ESKO Wheels website on tablet" loading="lazy"></div>';var top='<div class="t"><i></i><i></i><i></i></div><div class="nv"><b></b><s></s><s></s><u></u></div>',b;
- if(p.k==='store')b='<div class="hero2"><div class="h"></div><div class="h s"></div></div><div class="g" style="grid-template-columns:repeat(3,1fr)"><div></div><div></div><div></div></div>';
- else if(p.k==='gal')b='<div class="hero2" style="min-height:84px"><div class="h s"></div></div><div class="g" style="grid-template-columns:2fr 1fr 1fr"><div style="grid-row:span 2"></div><div></div><div></div><div></div><div></div></div>';
- else b='<div class="split"><div style="display:grid;gap:9px"><div class="h"></div><div class="h s"></div><div class="l"></div><div class="l" style="width:60%"></div><div class="pill"></div></div><div class="ph"></div></div><div class="g" style="grid-template-columns:repeat(3,1fr)"><div style="min-height:44px"></div><div style="min-height:44px"></div><div style="min-height:44px"></div></div>';
- return '<div class="mk" style="--bg:'+p.bg+';--a:'+p.a+';--c:'+p.c+'">'+top+'<div class="bd">'+b+'</div></div>'}
-var track=document.getElementById('track');
-track.innerHTML=P.map(function(p){return '<article class="case">'+mk(p)+'<div><h3>'+p.t+'</h3><p>'+p.d+'</p><div class="tg">'+p.g.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div></div></article>'}).join('');
-document.getElementById('yr').textContent=new Date().getFullYear();
-
-// headline: decode scramble
-var G='01<>/{}[]#$%&*+=?',lines=[].slice.call(document.querySelectorAll('h1 .l'));
-lines.forEach(function(el,i){var t=el.dataset.t;if(rm){el.textContent=t;return}
- var s=null,dl=300+i*260,du=900;(function f(ts){s=s||ts;var k=(ts-s-dl)/du;
-  if(k<0){requestAnimationFrame(f);return}k=Math.min(k,1);var o='';
-  for(var j=0;j<t.length;j++)o+=(t[j]===' '||j<t.length*k)?t[j]:G[Math.random()*G.length|0];
-  el.textContent=o;if(k<1)requestAnimationFrame(f)})(performance.now())});
-
-// particle network that reacts to the pointer
-var cv=document.getElementById('bg'),cx=cv.getContext('2d'),W,H,N=[],m={x:-999,y:-999};
-function size(){W=cv.width=innerWidth;H=cv.height=innerHeight;N=[];var n=Math.min(90,W*H/16000|0);for(var i=0;i<n;i++)N.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35})}
-size();addEventListener('resize',size);addEventListener('pointermove',function(e){m.x=e.clientX;m.y=e.clientY});
-function draw(){cx.clearRect(0,0,W,H);
- for(var i=0;i<N.length;i++){var a=N[i];if(!rm){a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
-  var dx=a.x-m.x,dy=a.y-m.y,d=dx*dx+dy*dy;if(d<22500){var f=(1-d/22500)*.6;a.x+=dx*f*.04;a.y+=dy*f*.04}}
-  cx.fillStyle='rgba(155,160,255,.7)';cx.fillRect(a.x,a.y,2,2);
-  for(var j=i+1;j<N.length;j++){var b=N[j],x=a.x-b.x,y=a.y-b.y,q=x*x+y*y;if(q<14000){cx.strokeStyle='rgba(109,255,200,'+(.16*(1-q/14000))+')';cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}}
-  var mx=a.x-m.x,my=a.y-m.y,mq=mx*mx+my*my;if(mq<26000){cx.strokeStyle='rgba(91,107,255,'+(.5*(1-mq/26000))+')';cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(m.x,m.y);cx.stroke()}}
- if(!rm)requestAnimationFrame(draw)}
-draw();
-
-// counters
-function count(el){var n=+el.dataset.n,s=el.dataset.s,t0=null;if(rm){el.textContent=n+s;return}
- (function f(t){t0=t0||t;var k=Math.min((t-t0)/1500,1);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(f)})(performance.now())}
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){count(e.target);io.unobserve(e.target)}})},{threshold:.4});
-document.querySelectorAll('[data-n]').forEach(function(x){io.observe(x)});
-
-var bar=document.getElementById('bar');
-addEventListener('scroll',function(){var h=document.documentElement;bar.style.transform='scaleX('+h.scrollTop/(h.scrollHeight-h.clientHeight||1)+')'},{passive:true});
-
-if(window.gsap&&!rm){
- gsap.registerPlugin(ScrollTrigger);
- gsap.from('.rv',{y:50,opacity:0,duration:.9,ease:'power3.out',stagger:.08,scrollTrigger:{trigger:'#services',start:'top 80%'}});
- gsap.from('.proof div',{y:40,opacity:0,duration:.8,stagger:.12,scrollTrigger:{trigger:'.proof',start:'top 85%'}});
- gsap.from('.steps li',{y:30,opacity:0,stagger:.15,duration:.7,scrollTrigger:{trigger:'#steps',start:'top 80%'}});
- gsap.to('#steps',{'--p':1,ease:'none',scrollTrigger:{trigger:'#steps',start:'top 75%',end:'bottom 60%',scrub:true}});
- gsap.from('.contact h2, .contact .cta',{y:50,opacity:0,duration:.9,stagger:.15,scrollTrigger:{trigger:'#contact',start:'top 75%'}});
- gsap.matchMedia().add('(min-width:901px)',function(){
-  var dist=function(){return track.scrollWidth-innerWidth};
-  gsap.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:'#work',pin:true,scrub:.7,start:'top top',end:function(){return '+='+dist()},invalidateOnRefresh:true}});
-  gsap.utils.toArray('.case').forEach(function(c){gsap.from(c.querySelector('.mk'),{rotateY:-18,scale:.9,ease:'none',scrollTrigger:{trigger:c,containerAnimation:null,start:'left right',scrub:true}})});
- });
- // magnetic buttons
- if(fine){
-  document.querySelectorAll('.mag').forEach(function(b){var xt=gsap.quickTo(b,'x',{duration:.4,ease:'power3'}),yt=gsap.quickTo(b,'y',{duration:.4,ease:'power3'});
-   b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();xt((e.clientX-r.left-r.width/2)*.3);yt((e.clientY-r.top-r.height/2)*.35)});
-   b.addEventListener('pointerleave',function(){xt(0);yt(0)})});
-  // cursor glow, 3D tilt on hero shop and service cards
-  var dt=document.getElementById('dot'),rg=document.getElementById('ring');document.body.classList.add('cc');
-  var rx=gsap.quickTo(rg,'x',{duration:.2,ease:'power3'}),ry=gsap.quickTo(rg,'y',{duration:.2,ease:'power3'});
-  addEventListener('pointermove',function(e){gsap.set(dt,{x:e.clientX,y:e.clientY});rx(e.clientX);ry(e.clientY)});
-  document.addEventListener('pointerover',function(e){rg.classList.toggle('h',!!e.target.closest('a,button'))});
-  function tilt(el,deg){var rx=gsap.quickTo(el,'rotationX',{duration:.5}),ry=gsap.quickTo(el,'rotationY',{duration:.5});
-   el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;ry(px*deg);rx(-py*deg);el.style.setProperty('--x',(px+.5)*100+'%');el.style.setProperty('--y',(py+.5)*100+'%')});
-   el.addEventListener('pointerleave',function(){rx(0);ry(0)})}
-  tilt(document.getElementById('shop'),14);document.querySelectorAll('.card').forEach(function(c){tilt(c,6)});
- }
-}
-})();
-</script>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <a class="brand" href="index.html" aria-label="Htech Digital Concepts — home">
+          <span class="brand__logo"><img src="images/htech-logo-transparent.webp" alt="Htech Digital Concepts" width="104" height="38" loading="lazy"></span>
+        </a>
+        <p class="footer__about">Website design and WordPress development for businesses that want a professional site built around clear goals, strong usability and a better path to enquiry.</p>
+      </div>
+      <div><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Services</h4><ul><li><a href="index.html#services">WordPress design</a></li><li><a href="index.html#services">Elementor development</a></li><li><a href="index.html#services">WooCommerce stores</a></li><li><a href="index.html#services">Website redesign</a></li></ul></div>
+      <div><h4>Work with me</h4><ul><li><a href="https://www.upwork.com/freelancers/~01b7d7e1d5bc855117" target="_blank" rel="noopener noreferrer">Upwork profile &nearr;</a></li><li><a href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener noreferrer">LinkedIn &nearr;</a></li><li><a href="contact.html">Project enquiries</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>&copy; <span id="year">2026</span> Htech Digital Concepts. All rights reserved.</span><span>Website Designer &amp; WordPress Developer</span></div>
+  </div>
+</footer>
 </body>
 </html>
