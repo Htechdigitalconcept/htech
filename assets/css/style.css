@@ -444,5 +444,5 @@ body.gallery-open{overflow:hidden}
 /* Google Business Profile reviews widget */
 #reviews{scroll-margin-top:100px}
 .reviews__intro .text-link{margin-top:10px}
-.reviews__widget{min-height:150px;padding:clamp(16px,3vw,30px);border:1px solid var(--line);border-radius:10px;background:#fff;box-shadow:0 12px 32px rgba(20,36,64,.05)}
-.reviews__widget .ti-widget{min-height:90px}
+.reviews__widget{width:100%;max-width:100%;min-width:0;margin-inline:auto;overflow:visible}
+.reviews__widget .ti-widget{width:100%;max-width:100%;min-height:0}
