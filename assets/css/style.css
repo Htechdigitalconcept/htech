@@ -91,22 +91,33 @@ ol,ul{padding:0;list-style:none}
 .nav-panel .btn{margin-top:30px;align-self:flex-start}
 
 /* Home hero */
-.hero{position:relative;overflow:hidden;background:var(--navy);color:var(--white);padding:clamp(150px,16vw,200px) 0 clamp(70px,8vw,110px)}
-.hero::after{content:"";position:absolute;width:520px;height:520px;right:-170px;top:-220px;border-radius:50%;background:radial-gradient(circle,rgba(23,105,224,.34),transparent 68%);pointer-events:none}
-.hero__grid{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(46px,6vw,96px);align-items:center}
+.hero{--hero-x:50%;--hero-y:34%;position:relative;overflow:hidden;background:var(--navy);color:var(--white);padding:clamp(150px,16vw,200px) 0 clamp(70px,8vw,110px)}
+.hero::before{content:"";position:absolute;z-index:0;inset:0;background:radial-gradient(520px circle at var(--hero-x) var(--hero-y),rgba(23,105,224,.25),transparent 72%);opacity:.85;pointer-events:none;transition:opacity .3s}
+.hero::after{content:"";position:absolute;z-index:0;width:520px;height:520px;right:-170px;top:-220px;border-radius:50%;background:radial-gradient(circle,rgba(23,105,224,.34),transparent 68%);pointer-events:none}
+.hero__grid{position:relative;z-index:1;display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(46px,6vw,96px);align-items:center}
 .hero h1{font:600 clamp(48px,6vw,88px)/.97 var(--head);letter-spacing:-.06em;margin:26px 0 28px;max-width:11em}
 .hero h1 em{font-style:normal;color:var(--yellow)}
 .hero__lede{max-width:36em;font-size:clamp(16px,1.25vw,19px);line-height:1.75;color:rgba(255,255,255,.74)}
 .hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
 .hero__note{display:flex;align-items:center;gap:12px;margin-top:36px;font-size:12px;letter-spacing:.05em;color:rgba(255,255,255,.54)}
-.showcase{position:relative;padding:0 0 34px}
-.showcase__main{position:relative;background:#EDF0F5;padding:12px;box-shadow:0 45px 80px -35px rgba(0,0,0,.85)}
+.showcase{position:relative;padding:0 0 34px;transform-style:preserve-3d}
+.showcase__tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.showcase__tab{display:inline-flex;align-items:center;gap:10px;min-height:38px;padding:9px 14px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.055);color:rgba(255,255,255,.76);font:600 10px/1 var(--body);letter-spacing:.04em;cursor:pointer;transition:background .22s,border-color .22s,color .22s,transform .22s}
+.showcase__tab span{color:var(--yellow);font-size:13px;transition:transform .22s}
+.showcase__tab:hover{transform:translateY(-2px);border-color:rgba(255,212,59,.62);color:#fff}
+.showcase__tab:hover span{transform:translate(2px,-2px)}
+.showcase__tab.is-active{border-color:var(--yellow);background:var(--yellow);color:var(--navy)}
+.showcase__tab.is-active span{color:var(--navy)}
+.showcase__main{position:relative;background:#EDF0F5;padding:12px;box-shadow:0 45px 80px -35px rgba(0,0,0,.85);transform:translateZ(18px)}
 .showcase__main img{width:100%;height:auto}
-.showcase__mini{position:absolute;right:-4%;bottom:0;width:32%;background:var(--white);padding:8px;box-shadow:0 26px 50px -18px rgba(0,0,0,.75);transform:rotate(2.5deg)}
+.showcase__mini{position:absolute;z-index:2;right:-4%;bottom:0;width:32%;background:var(--white);padding:8px;box-shadow:0 26px 50px -18px rgba(0,0,0,.75);transform:translateZ(34px) rotate(2.5deg)}
 .showcase__mini img{width:100%;height:auto}
 .showcase__caption{position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65)}
 .showcase__caption b{color:var(--yellow)}
-.hero__scroll{position:absolute;left:var(--pad);bottom:26px;display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.showcase.reveal.is-visible.is-tilting{transform:perspective(1100px) rotateX(var(--tilt-y,0deg)) rotateY(var(--tilt-x,0deg)) translateY(-2px);transition:transform .14s ease-out;will-change:transform}
+.showcase__main img{transition:opacity .24s ease,transform .3s ease}
+.showcase__main img.is-changing{opacity:.35;transform:scale(.985)}
+.hero__scroll{position:absolute;z-index:1;left:var(--pad);bottom:26px;display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
 .hero__scroll i{width:1px;height:34px;background:linear-gradient(var(--yellow),transparent)}
 
 /* Proof strip */
