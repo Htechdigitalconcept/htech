@@ -385,18 +385,41 @@
     emailDialog.addEventListener('close', function () {
       if (emailOpener) emailOpener.focus();
     });
+    function getEmailDraft() {
+      var values = new FormData(emailForm);
+      var name = String(values.get('name') || '').trim();
+      var replyEmail = String(values.get('replyEmail') || '').trim();
+      var subject = String(values.get('subject') || 'Website project enquiry').trim();
+      var message = String(values.get('message') || '').trim();
+      var body = 'Name: ' + name + '\nReply email: ' + replyEmail + '\n\n' + message;
+      return { subject: subject, body: body };
+    }
+    function closeEmailDialog() {
+      if (typeof emailDialog.close === 'function') emailDialog.close();
+      else emailDialog.removeAttribute('open');
+    }
+    var emailStatus = emailDialog.querySelector('[data-email-status]');
     if (emailForm) {
       emailForm.addEventListener('submit', function (event) {
         event.preventDefault();
-        var values = new FormData(emailForm);
-        var name = String(values.get('name') || '').trim();
-        var replyEmail = String(values.get('replyEmail') || '').trim();
-        var subject = String(values.get('subject') || 'Website project enquiry').trim();
-        var message = String(values.get('message') || '').trim();
-        var body = 'Name: ' + name + '\nReply email: ' + replyEmail + '\n\n' + message;
-        window.location.href = 'mailto:htechdigitalconcept@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-        if (typeof emailDialog.close === 'function') emailDialog.close();
-        else emailDialog.removeAttribute('open');
+        var draft = getEmailDraft();
+        var gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent('htechdigitalconcept@gmail.com') + '&su=' + encodeURIComponent(draft.subject) + '&body=' + encodeURIComponent(draft.body);
+        var composeWindow = window.open(gmailUrl, '_blank');
+        if (composeWindow) {
+          composeWindow.opener = null;
+          closeEmailDialog();
+        } else if (emailStatus) {
+          emailStatus.textContent = 'Your browser blocked the Gmail tab. Choose “Use device mail app” below, or email htechdigitalconcept@gmail.com directly.';
+        }
+      });
+    }
+    var nativeMailButton = emailDialog.querySelector('[data-email-native]');
+    if (nativeMailButton && emailForm) {
+      nativeMailButton.addEventListener('click', function () {
+        var draft = getEmailDraft();
+        var mailtoUrl = 'mailto:htechdigitalconcept@gmail.com?subject=' + encodeURIComponent(draft.subject) + '&body=' + encodeURIComponent(draft.body);
+        window.location.href = mailtoUrl;
+        closeEmailDialog();
       });
     }
   }
