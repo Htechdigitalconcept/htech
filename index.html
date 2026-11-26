@@ -2,50 +2,72 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Htech Digital Concepts | Website Designer &amp; WordPress Developer</title>
 <meta name="description" content="Ademola Habeeb designs conversion-focused business websites, WooCommerce stores and WordPress builds that turn visitors into customers.">
 <meta property="og:title" content="Htech Digital Concepts | Website Designer &amp; WordPress Developer">
 <meta property="og:description" content="Professional website design and WordPress development for businesses that want to be taken seriously online.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#101b33">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<noscript><style>.reveal,.proof__item{opacity:1!important;transform:none!important}.proof__item::before,.proof__item::after{transform:scaleX(1)!important}.nav{display:flex}.menu-toggle{display:none}.nav-panel{display:none}</style></noscript>
 <script src="assets/js/main.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+
 <header class="site-header" id="site-header">
   <div class="wrap site-header__inner">
-    <a class="brand" href="#top" aria-label="Htech Digital Concepts — home"><span class="brand__logo"><img src="images/htech-logo.webp" alt="Htech Digital Concepts" width="2048" height="682"></span></a>
+    <a class="brand" href="index.html" aria-label="Htech Digital Concepts — home">
+      <span class="brand__logo"><img src="images/htech-logo.webp" alt="Htech Digital Concepts" width="2048" height="682"></span>
+    </a>
     <nav class="nav" aria-label="Main navigation">
-      <a class="nav__link is-active" href="#top">Home</a><a class="nav__link" href="#work">Portfolio</a><a class="nav__link" href="#services">Services</a><a class="nav__link" href="#about">About</a><a class="nav__link" href="#contact">Contact</a>
-      <a class="btn btn--yellow nav__cta" href="#contact">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a>
+      <a class="nav__link is-active" href="index.html" aria-current="page">Home</a>
+      <a class="nav__link" href="portfolio.html">Portfolio</a>
+      <a class="nav__link" href="#services">Services</a>
+      <a class="nav__link" href="about.html">About</a>
+      <a class="nav__link" href="contact.html">Contact</a>
+      <a class="btn btn--yellow nav__cta" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a>
     </nav>
-    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel"><span></span><span></span><span></span></button>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
-<nav class="nav-panel" id="nav-panel" aria-label="Mobile navigation" hidden>
-  <a href="#top">Home</a><a href="#work">Portfolio</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a>
-  <a class="btn btn--yellow" href="#contact">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a>
+<nav class="nav-panel" id="nav-panel" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="#services">Services</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a class="btn btn--yellow" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a>
 </nav>
+
 <main id="main">
-  <section class="hero" id="top">
+
+  <section class="hero">
     <div class="wrap hero__grid">
-      <div class="hero__copy">
-        <span class="eyebrow eyebrow--light reveal">Website design <i>·</i> WordPress development</span>
+      <div>
+        <span class="eyebrow eyebrow--light reveal">Website design &middot; WordPress development</span>
         <h1 class="display reveal d-90">Websites that turn visitors into <em>customers.</em></h1>
         <p class="hero__lede reveal d-180">I design and build professional websites for businesses that want to look credible, work beautifully on every screen and guide visitors toward the next step. Over 6 years, 30+ websites, one clear process.</p>
-        <div class="hero__actions reveal d-260"><a class="btn btn--yellow" href="#contact">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a><a class="btn btn--outline-light" href="#work">View my work</a></div>
-        <p class="hero__note reveal d-340">Design, development and WordPress build — handled by one specialist.</p>
+        <div class="hero__actions reveal d-260">
+          <a class="btn btn--yellow" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--outline-light" href="#work">View my work</a>
+        </div>
+        <p class="hero__note reveal d-340">Design, development and WordPress build &mdash; handled by one specialist.</p>
       </div>
       <div class="showcase reveal d-200">
-        <div class="showcase__main"><img src="images/esko-wheels-showcase.webp" alt="ESKO Wheels website shown on a laptop and phone, designed and developed by Htech Digital Concepts" width="1500" height="1000" fetchpriority="high"></div>
-        <div class="showcase__mini"><img src="images/esko-wheels-tablet.webp" alt="ESKO Wheels website shown on a tablet" width="640" height="888" loading="lazy"></div>
-        <p class="showcase__caption"><b>Selected work</b><span aria-hidden="true">/</span> ESKO Wheels</p>
+        <div class="showcase__main">
+          <img src="images/esko-wheels-showcase.webp" alt="ESKO Wheels website shown on a laptop and phone, designed and developed by Htech Digital Concepts" width="1500" height="1000" fetchpriority="high">
+        </div>
+        <div class="showcase__mini">
+          <img src="images/esko-wheels-tablet.webp" alt="ESKO Wheels website shown on a tablet" width="640" height="888" loading="lazy">
+        </div>
+        <p class="showcase__caption"><b>Selected work</b> &nbsp;/&nbsp; ESKO Wheels</p>
       </div>
     </div>
     <div class="hero__scroll" aria-hidden="true"><i></i> Scroll to explore</div>
@@ -53,52 +75,205 @@
 
   <section class="proof" aria-label="Professional experience">
     <div class="wrap proof__grid">
-      <div class="proof__item" data-count="6" data-suffix="+"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span class="proof__num"><span data-stat-value>6+</span></span><span class="proof__label">Years of website design experience</span></div>
-      <div class="proof__item" data-count="30" data-suffix="+"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5Z"></path><path d="m3 12 9 5 9-5"></path></svg></span><span class="proof__num"><span data-stat-value>30+</span></span><span class="proof__label">Websites designed and developed</span></div>
-      <div class="proof__item"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg></span><span class="proof__num proof__num--word">Multiple</span><span class="proof__label">Industries and business types served</span></div>
-      <div class="proof__item"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.4 4 5.5 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.5-4-9s1.4-6.6 4-9Z"></path></svg></span><span class="proof__num proof__num--word">Global</span><span class="proof__label">Local and international clients</span></div>
+      <div class="proof__item" data-count="6" data-suffix="+"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span class="proof__num"><span data-stat-value>6+</span></span><span class="proof__label">Years of website design experience</span></div>
+      <div class="proof__item" data-count="30" data-suffix="+"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"></path><path d="m3 12 9 5 9-5"></path></svg></span><span class="proof__num"><span data-stat-value>30+</span></span><span class="proof__label">Websites designed and developed</span></div>
+      <div class="proof__item"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg></span><span class="proof__num proof__num--word">Multiple</span><span class="proof__label">Industries and business types served</span></div>
+      <div class="proof__item"><span class="proof__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.4 4 5.5 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.5-4-9s1.4-6.6 4-9Z"></path></svg></span><span class="proof__num proof__num--word">Global</span><span class="proof__label">Local and international clients</span></div>
+    </div>
+    <div class="proof__cursor" data-proof-cursor aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 3v18"></path><path d="M3 12h18"></path><circle cx="12" cy="12" r="4"></circle></svg>
     </div>
   </section>
 
   <section class="section section--white" id="work">
     <div class="wrap">
-      <div class="sec-head"><div class="reveal"><span class="eyebrow">Selected work</span><h2 class="section-title">The work speaks before you do.</h2></div><p class="lede reveal d-100">A look at websites designed to communicate clearly, load quickly and make the next step obvious.</p></div>
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="eyebrow">Selected work</span>
+          <h2 class="section-title">The work speaks before you do.</h2>
+        </div>
+        <p class="lede reveal d-100">A look at websites designed to communicate clearly, load quickly and make the next step obvious.</p>
+      </div>
+
       <div class="portfolio-grid">
-        <article class="portfolio-card reveal d-80"><button class="portfolio-card__link" type="button" data-project-open data-project-title="ESKO Wheels" data-project-category="Automotive · E-commerce website" data-project-summary="A product-led website for a custom wheel brand, designed to make the range easy to explore and the quote request impossible to miss." data-project-services="WordPress|E-commerce UI/UX|Responsive design" data-project-image="images/esko-wheels-showcase.webp"><span class="portfolio-card__media"><img class="portfolio-card__img portfolio-card__img--first" src="images/esko-wheels-showcase.webp" alt="ESKO Wheels responsive e-commerce concept" width="1500" height="1000" loading="lazy" decoding="async"><img class="portfolio-card__img portfolio-card__img--second" src="images/esko-wheels-tablet.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><span class="portfolio-card__hint" aria-hidden="true">Another screen</span></span><span class="portfolio-card__body"><span class="portfolio-card__cat">Automotive · E-commerce website</span><span class="portfolio-card__title">ESKO Wheels</span><span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span></span></button></article>
-        <article class="portfolio-card reveal d-160"><button class="portfolio-card__link" type="button" data-project-open data-project-title="Perfect Moment" data-project-category="Wedding photography · WordPress website" data-project-summary="A refined wedding photography and film website recreated in WordPress and Elementor, with an editorial home page, studio approach, wedding gallery and clear enquiry paths on desktop and mobile." data-project-services="WordPress|Elementor Pro|Responsive design|Photography portfolio" data-project-image="images/perfect-moment-home.webp"><span class="portfolio-card__media portfolio-card__media--wedding"><img class="portfolio-card__img portfolio-card__img--first" src="images/perfect-moment-home.webp" alt="Perfect Moment wedding photography website on laptop" loading="lazy" decoding="async"><img class="portfolio-card__img portfolio-card__img--second" src="images/perfect-moment-mobile.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><span class="portfolio-card__hint" aria-hidden="true">Desktop + mobile</span></span><span class="portfolio-card__body"><span class="portfolio-card__cat">Wedding photography · WordPress website</span><span class="portfolio-card__title">Perfect Moment</span><span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span></span></button></article>
-        <article class="portfolio-card reveal d-240"><button class="portfolio-card__link" type="button" data-project-open data-project-title="The Lawyer Reset" data-project-category="Legal coaching · WordPress website" data-project-summary="An elegant legal coaching and consulting website concept, with structured service sections, consultation calls to action and a responsive layout." data-project-services="WordPress|Website design|Consultation calls to action|Responsive design"><span class="portfolio-card__media portfolio-card__media--placeholder placeholder--legal"><span class="placeholder__mark">LR</span><span class="placeholder__label">Legal coaching<br>Website concept</span><span class="portfolio-card__hint">Project preview</span></span><span class="portfolio-card__body"><span class="portfolio-card__cat">Legal coaching · WordPress website</span><span class="portfolio-card__title">The Lawyer Reset</span><span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span></span></button></article>
-        <article class="portfolio-card reveal d-300"><button class="portfolio-card__link" type="button" data-project-open data-project-title="DAPHNE.LAB" data-project-category="Fashion · WooCommerce store" data-project-summary="A fashion-focused e-commerce concept showcasing footwear, apparel, accessories and curated collections through editorial imagery and clean product grids." data-project-services="WooCommerce|WordPress e-commerce|Store management|Responsive design"><span class="portfolio-card__media portfolio-card__media--placeholder placeholder--fashion"><span class="placeholder__mark">D.</span><span class="placeholder__label">DAPHNE.LAB<br>Fashion store concept</span><span class="portfolio-card__hint">Project preview</span></span><span class="portfolio-card__body"><span class="portfolio-card__cat">Fashion · WooCommerce store</span><span class="portfolio-card__title">DAPHNE.LAB</span><span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span></span></button></article>
-        <article class="portfolio-card reveal d-360"><button class="portfolio-card__link" type="button" data-project-open data-project-title="Jonathan Storr Psychotherapy" data-project-category="Therapy & counseling · WordPress website" data-project-summary="A calm, professional website concept for a therapy and counseling practice, with clear service sections and consultation calls to action." data-project-services="WordPress|Website design|Responsive development"><span class="portfolio-card__media portfolio-card__media--placeholder placeholder--therapy"><span class="placeholder__mark">JS</span><span class="placeholder__label">Therapy &amp; counseling<br>Website concept</span><span class="portfolio-card__hint">Project preview</span></span><span class="portfolio-card__body"><span class="portfolio-card__cat">Therapy &amp; counseling · WordPress website</span><span class="portfolio-card__title">Jonathan Storr Psychotherapy</span><span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span></span></button></article>
+        <article class="portfolio-card reveal d-80">
+          <a class="portfolio-card__link" href="projects/esko-wheels.html" aria-label="Open overview: ESKO Wheels" data-project-open data-project-title="ESKO Wheels" data-project-category="Automotive · E-commerce website" data-project-summary="A product-led website for a custom wheel brand, designed to make the range easy to explore and the quote request impossible to miss." data-project-services="WordPress|e-commerce UI/UX|responsive design" data-project-image="images/esko-wheels-showcase.webp" data-project-page="projects/esko-wheels.html">
+            <div class="portfolio-card__media">
+              <img class="portfolio-card__img portfolio-card__img--first" src="images/esko-wheels-showcase.webp" alt="ESKO Wheels website shown on a laptop and phone" width="1500" height="1000" loading="lazy" decoding="async">
+              <img class="portfolio-card__img portfolio-card__img--second" src="images/esko/esko-built-by-the-cult.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <span class="portfolio-card__hint" aria-hidden="true">Another screen</span>
+            </div>
+            <div class="portfolio-card__body">
+              <span class="portfolio-card__cat">Automotive &middot; E-commerce website</span>
+              <h2>ESKO Wheels</h2>
+              <span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </article>
+        <article class="portfolio-card reveal d-160">
+          <a class="portfolio-card__link" href="projects/therapy-legal.html" aria-label="Open overview: The Lawyer Reset" data-project-open data-project-title="The Lawyer Reset" data-project-category="Legal coaching · WordPress website" data-project-summary="WordPress website design for The Lawyer Reset, a legal coaching and consulting brand, with elegant typography, structured service sections, consultation calls to action and responsive layouts." data-project-services="WordPress|WordPress Development|WordPress Consultation|Website &amp; CMS Bug Fix|SEO Audit" data-project-image="images/legal/legal-hero-cta.webp" data-project-page="projects/therapy-legal.html">
+            <div class="portfolio-card__media">
+              <img class="portfolio-card__img portfolio-card__img--first" src="images/legal/legal-hero-cta.webp" alt="The Lawyer Reset legal coaching website with a clear Book a Lawyer Reset call to action" width="1500" height="1000" loading="lazy" decoding="async">
+              <img class="portfolio-card__img portfolio-card__img--second" src="images/legal/legal-before-after.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <span class="portfolio-card__hint" aria-hidden="true">Another screen</span>
+            </div>
+            <div class="portfolio-card__body">
+              <span class="portfolio-card__cat">Legal coaching &middot; WordPress website</span>
+              <h2>The Lawyer Reset</h2>
+              <span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </article>
+        <article class="portfolio-card reveal d-240">
+          <a class="portfolio-card__link" href="projects/daphne-lab.html" aria-label="Open overview: DAPHNE.LAB" data-project-open data-project-title="DAPHNE.LAB" data-project-category="Fashion · WooCommerce store" data-project-summary="A fashion-focused eCommerce website showcasing footwear, apparel, accessories and curated collections through editorial imagery and clean product grids." data-project-services="WooCommerce|WordPress e-Commerce|store management|responsive design" data-project-image="images/daphne/daphne-showcase.webp" data-project-page="projects/daphne-lab.html">
+            <div class="portfolio-card__media">
+              <img class="portfolio-card__img portfolio-card__img--first" src="images/daphne/daphne-showcase.webp" alt="DAPHNE.LAB fashion store shown across desktop, tablet and mobile" width="1500" height="1000" loading="lazy" decoding="async">
+              <img class="portfolio-card__img portfolio-card__img--second" src="images/daphne/daphne-bags-category.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <span class="portfolio-card__hint" aria-hidden="true">Another screen</span>
+            </div>
+            <div class="portfolio-card__body">
+              <span class="portfolio-card__cat">Fashion &middot; WooCommerce store</span>
+              <h2>DAPHNE.LAB</h2>
+              <span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </article>
+        <article class="portfolio-card reveal d-300">
+          <a class="portfolio-card__link" href="projects/therapy-practice.html" aria-label="Open overview: Jonathan Storr Psychotherapy" data-project-open data-project-title="Jonathan Storr Psychotherapy" data-project-category="Therapy &amp; counseling · WordPress website" data-project-summary="Designed and developed a modern, professional WordPress website for a therapy and counseling practice, with calm responsive design, clear service sections and consultation calls to action." data-project-services="WordPress|Website Copy|WordPress Development|WordPress Consultation" data-project-image="images/therapy/therapy-hero.webp" data-project-page="projects/therapy-practice.html">
+            <div class="portfolio-card__media">
+              <img class="portfolio-card__img portfolio-card__img--first" src="images/therapy/therapy-hero.webp" alt="Jonathan Storr Psychotherapy homepage hero with the Real Talk. Real Change. headline and a booking action" width="1600" height="919" loading="lazy" decoding="async">
+              <img class="portfolio-card__img portfolio-card__img--second" src="images/therapy/therapy-work-with.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <span class="portfolio-card__hint" aria-hidden="true">Another screen</span>
+            </div>
+            <div class="portfolio-card__body">
+              <span class="portfolio-card__cat">Therapy &amp; counseling &middot; WordPress website</span>
+              <h2>Jonathan Storr Psychotherapy</h2>
+              <span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </article>
+      </div>
+
+      <div class="work-foot reveal"><a class="text-link" href="portfolio.html">Explore all projects <span aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+
+  <section class="section section--dark" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="eyebrow eyebrow--light">Services</span>
+          <h2 class="section-title">One specialist for the whole website.</h2>
+        </div>
+        <p class="lede text-light reveal d-100">From the first layout decision to the final WordPress build, every part of the site is handled with the same attention to detail.</p>
+      </div>
+      <div class="services-grid">
+        <article class="service reveal"><span class="service__num">01</span><div><h3>WordPress Website Design</h3><p>Business and corporate websites designed around your brand, your audience and the action you want visitors to take.</p></div></article>
+        <article class="service reveal d-60"><span class="service__num">02</span><div><h3>Elementor Website Development</h3><p>Custom page design and development in Elementor and Elementor Pro, so your site stays easy to edit after launch.</p></div></article>
+        <article class="service reveal"><span class="service__num">03</span><div><h3>Landing Pages &amp; Sales Funnels</h3><p>Focused pages built around one offer and one clear next step, with structure and content that support conversion.</p></div></article>
+        <article class="service reveal d-60"><span class="service__num">04</span><div><h3>WooCommerce Website Development</h3><p>Online stores with well-structured product pages, clear shopping journeys and the essential store functionality you need.</p></div></article>
+        <article class="service reveal"><span class="service__num">05</span><div><h3>Website Redesign</h3><p>Outdated or inconsistent sites rebuilt as modern, responsive experiences with clearer structure and stronger visual hierarchy.</p></div></article>
+        <article class="service reveal d-60"><span class="service__num">06</span><div><h3>Website Optimisation</h3><p>Improvements to layout, navigation, responsiveness, performance and user experience across an existing WordPress site.</p></div></article>
       </div>
     </div>
   </section>
 
-  <section class="section section--dark" id="services"><div class="wrap"><div class="sec-head"><div class="reveal"><span class="eyebrow eyebrow--light">Services</span><h2 class="section-title">One specialist for the whole website.</h2></div><p class="lede text-light reveal d-100">From the first layout decision to the final WordPress build, every part of the site is handled with the same attention to detail.</p></div>
-    <div class="services-grid">
-      <article class="service reveal"><span class="service__num">01</span><div><h3>WordPress Website Design</h3><p>Business and corporate websites designed around your brand, your audience and the action you want visitors to take.</p></div></article>
-      <article class="service reveal d-60"><span class="service__num">02</span><div><h3>Elementor Website Development</h3><p>Custom page design and development in Elementor and Elementor Pro, so your site stays easy to edit after launch.</p></div></article>
-      <article class="service reveal"><span class="service__num">03</span><div><h3>Landing Pages &amp; Sales Funnels</h3><p>Focused pages built around one offer and one clear next step, with structure and content that support conversion.</p></div></article>
-      <article class="service reveal d-60"><span class="service__num">04</span><div><h3>WooCommerce Website Development</h3><p>Online stores with well-structured product pages, clear shopping journeys and the essential store functionality you need.</p></div></article>
-      <article class="service reveal"><span class="service__num">05</span><div><h3>Website Redesign</h3><p>Outdated or inconsistent sites rebuilt as modern, responsive experiences with clearer structure and stronger visual hierarchy.</p></div></article>
-      <article class="service reveal d-60"><span class="service__num">06</span><div><h3>Website Optimisation</h3><p>Improvements to layout, navigation, responsiveness, performance and user experience across an existing WordPress site.</p></div></article>
+  <section class="section section--white" id="approach">
+    <div class="wrap approach">
+      <div class="reveal">
+        <span class="eyebrow">Approach</span>
+        <h2 class="approach__statement mt-20">Design decisions made for your business.<span></span>A website should do more than look good. It should make your offer easy to understand and easy to act on.</h2>
+        <p class="approach__note">The details below are the ones that make the difference between a site that simply exists and one that supports the business behind it.</p>
+      </div>
+      <div class="reveal d-120">
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Business objectives first</h3><p>Every layout, headline and call to action is chosen with your goal in mind: enquiries, sales or bookings.</p></div></div>
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Clear visual hierarchy</h3><p>Visitors see what matters first, then move naturally through the page instead of guessing where to look.</p></div></div>
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Mobile-first responsiveness</h3><p>Layouts are designed for small screens first, then refined for tablet and desktop so nothing feels squeezed in.</p></div></div>
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Clean WordPress development</h3><p>Built with maintainable structure and the right tools, so updates do not become a developer dependency.</p></div></div>
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Attention to performance</h3><p>Optimised images, sensible sections and lightweight interactions keep the site fast and easy to use.</p></div></div>
+        <div class="principle"><i aria-hidden="true"></i><div><h3>Communication throughout</h3><p>You see progress at clear milestones and know what happens next at every stage of the project.</p></div></div>
+      </div>
     </div>
-  </div></section>
+  </section>
 
-  <section class="section section--white" id="approach"><div class="wrap approach"><div class="reveal"><span class="eyebrow">Approach</span><h2 class="approach__statement">Design decisions made for your business.<span></span>A website should do more than look good. It should make your offer easy to understand and easy to act on.</h2><p class="approach__note">The details below are the ones that make the difference between a site that simply exists and one that supports the business behind it.</p></div>
-    <div class="principles reveal d-120"><article class="principle"><i aria-hidden="true"></i><div><h3>Business objectives first</h3><p>Every layout, headline and call to action is chosen with your goal in mind: enquiries, sales or bookings.</p></div></article><article class="principle"><i aria-hidden="true"></i><div><h3>Clear visual hierarchy</h3><p>Visitors see what matters first, then move naturally through the page instead of guessing where to look.</p></div></article><article class="principle"><i aria-hidden="true"></i><div><h3>Mobile-first responsiveness</h3><p>Layouts are designed for small screens first, then refined for tablet and desktop so nothing feels squeezed in.</p></div></article><article class="principle"><i aria-hidden="true"></i><div><h3>Clean WordPress development</h3><p>Built with maintainable structure and the right tools, so updates do not become a developer dependency.</p></div></article><article class="principle"><i aria-hidden="true"></i><div><h3>Attention to performance</h3><p>Optimised images, sensible sections and lightweight interactions keep the site fast and easy to use.</p></div></article><article class="principle"><i aria-hidden="true"></i><div><h3>Communication throughout</h3><p>You see progress at clear milestones and know what happens next at every stage of the project.</p></div></article></div>
-  </div></section>
+  <section class="section section--soft" id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="eyebrow">Process</span>
+          <h2 class="section-title">A clear path from first conversation to launch.</h2>
+        </div>
+        <p class="lede reveal d-100">A simple, transparent workflow so you always know what is happening and what comes next.</p>
+      </div>
+      <ol class="steps">
+        <li class="step reveal"><span class="step__num">01 / DISCOVERY</span><h3>Discovery</h3><p>We clarify the business, audience, goals and pages required.</p></li>
+        <li class="step reveal d-60"><span class="step__num">02 / PLANNING</span><h3>Planning</h3><p>I define the structure, content needs and the journey visitors will follow.</p></li>
+        <li class="step reveal d-120"><span class="step__num">03 / DESIGN</span><h3>Design</h3><p>Visual direction and page layouts are developed for your review.</p></li>
+        <li class="step reveal d-180"><span class="step__num">04 / DEVELOPMENT</span><h3>Development</h3><p>The approved design is built in WordPress using the right tools for the site.</p></li>
+        <li class="step reveal d-240"><span class="step__num">05 / TESTING</span><h3>Testing</h3><p>Responsiveness, functionality and usability are checked before launch.</p></li>
+        <li class="step reveal d-300"><span class="step__num">06 / LAUNCH</span><h3>Launch</h3><p>Final review, handover and a walkthrough of your new site.</p></li>
+      </ol>
+    </div>
+  </section>
 
-  <section class="section section--soft" id="process"><div class="wrap"><div class="sec-head"><div class="reveal"><span class="eyebrow">Process</span><h2 class="section-title">A clear path from first conversation to launch.</h2></div><p class="lede reveal d-100">A simple, transparent workflow so you always know what is happening and what comes next.</p></div>
-    <ol class="steps"><li class="step reveal"><span class="step__num">01 / DISCOVERY</span><h3>Discovery</h3><p>We clarify the business, audience, goals and pages required.</p></li><li class="step reveal d-60"><span class="step__num">02 / PLANNING</span><h3>Planning</h3><p>I define the structure, content needs and the journey visitors will follow.</p></li><li class="step reveal d-120"><span class="step__num">03 / DESIGN</span><h3>Design</h3><p>Visual direction and page layouts are developed for your review.</p></li><li class="step reveal d-180"><span class="step__num">04 / DEVELOPMENT</span><h3>Development</h3><p>The approved design is built in WordPress using the right tools for the site.</p></li><li class="step reveal d-240"><span class="step__num">05 / TESTING</span><h3>Testing</h3><p>Responsiveness, functionality and usability are checked before launch.</p></li><li class="step reveal d-300"><span class="step__num">06 / LAUNCH</span><h3>Launch</h3><p>Final review, handover and a walkthrough of your new site.</p></li></ol>
-  </div></section>
+  <section class="section section--white" id="about">
+    <div class="wrap about-preview">
+      <div class="reveal">
+        <span class="eyebrow">About</span>
+        <h2 class="mt-20">Meet the designer behind the work.</h2>
+        <p>I&rsquo;m Ademola Habeeb, a website designer and WordPress developer with over 6 years of experience and more than 30 websites delivered. I work with businesses of different sizes and industries, both locally and internationally, on websites that are clear, reliable and built to support growth.</p>
+        <a class="text-link" href="about.html">More about me <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="portrait-frame reveal d-120">
+        <img src="images/ademola-habeeb.webp" alt="Ademola Habeeb, website designer and WordPress developer" width="1024" height="1536" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </section>
 
-  <section class="section section--white" id="about"><div class="wrap about-preview"><div class="reveal"><span class="eyebrow">About</span><h2 class="mt-20">Meet the designer behind the work.</h2><p>I&rsquo;m Ademola Habeeb, a website designer and WordPress developer with over 6 years of experience and more than 30 websites delivered. I work with businesses of different sizes and industries, both locally and internationally, on websites that are clear, reliable and built to support growth.</p><a class="text-link" href="#contact">Let&rsquo;s talk about your project <span aria-hidden="true">→</span></a></div><div class="portrait-card reveal d-120" aria-label="About Ademola Habeeb"><span class="portrait-card__initials">AH</span><span class="portrait-card__name">Ademola Habeeb</span><span class="portrait-card__role">Website Designer<br>&amp; WordPress Developer</span><span class="portrait-card__orb" aria-hidden="true"></span></div></div></section>
+  <section class="section section--blue final-cta">
+    <div class="wrap">
+      <span class="eyebrow eyebrow--light reveal">Ready when you are</span>
+      <h2 class="reveal d-80">Have a website project in mind?</h2>
+      <p class="reveal d-140">Tell me what you&rsquo;re building and where your current website is falling short. Share your brief and I&rsquo;ll respond with a relevant next step.</p>
+      <div class="reveal d-200"><a class="btn btn--yellow" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
 
-  <section class="section section--blue final-cta" id="contact"><div class="wrap"><span class="eyebrow eyebrow--light reveal">Ready when you are</span><h2 class="reveal d-80">Have a website project in mind?</h2><p class="reveal d-140">Tell me what you&rsquo;re building and where your current website is falling short. Share your brief and I&rsquo;ll respond with a relevant next step.</p><div class="cta-actions reveal d-200"><a class="btn btn--yellow" href="https://www.upwork.com/freelancers/~01b7d7e1d5bc855117" target="_blank" rel="noopener noreferrer">Hire me on Upwork <span class="btn__arrow" aria-hidden="true">→</span></a><a class="btn btn--outline-light" href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener noreferrer">Message me on LinkedIn</a></div></div></section>
 </main>
 
-<dialog class="project-dialog" id="project-dialog" aria-labelledby="project-dialog-title"><div class="project-dialog__inner"><button class="project-dialog__close" type="button" data-dialog-close aria-label="Close project overview">×</button><div class="project-dialog__media" data-dialog-media><img src="images/esko-wheels-showcase.webp" alt="" data-dialog-image></div><div class="project-dialog__body"><span class="project-dialog__cat" data-dialog-category></span><h2 id="project-dialog-title" data-dialog-title>Project overview</h2><p class="project-dialog__summary" data-dialog-summary></p><ul class="meta-list" data-dialog-services></ul><div class="project-dialog__actions"><button class="btn btn--blue" type="button" data-dialog-close>Close overview</button><a class="text-link" href="#contact" data-dialog-contact>Start a similar project <span class="btn__arrow" aria-hidden="true">→</span></a></div></div></div></dialog>
+<dialog class="project-dialog" id="project-dialog" aria-labelledby="project-dialog-title">
+  <div class="project-dialog__inner">
+    <button class="project-dialog__close" type="button" data-dialog-close aria-label="Close project overview">&times;</button>
+    <div class="project-dialog__media" data-dialog-media><img src="images/esko-wheels-showcase.webp" alt="" data-dialog-image></div>
+    <div class="project-dialog__body">
+      <span class="project-dialog__cat" data-dialog-category></span>
+      <h2 id="project-dialog-title" data-dialog-title>Project overview</h2>
+      <p class="project-dialog__summary" data-dialog-summary></p>
+      <ul class="meta-list" data-dialog-services></ul>
+      <div class="project-dialog__actions">
+        <a class="btn btn--blue" href="portfolio.html" data-dialog-page>View full project page <span class="btn__arrow" aria-hidden="true">→</span></a>
+        <a class="text-link" href="contact.html">Start a similar project <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</dialog>
 
-<footer class="footer"><div class="wrap"><div class="footer__grid"><div><a class="brand" href="#top" aria-label="Htech Digital Concepts — home"><span class="brand__logo"><img src="images/htech-logo.webp" alt="Htech Digital Concepts" width="2048" height="682" loading="lazy"></span></a><p class="footer__about">Website design and WordPress development for businesses that want a professional site built around clear goals, strong usability and a better path to enquiry.</p></div><div><h4>Explore</h4><ul><li><a href="#top">Home</a></li><li><a href="#about">About</a></li><li><a href="#work">Portfolio</a></li><li><a href="#contact">Contact</a></li></ul></div><div><h4>Services</h4><ul><li><a href="#services">WordPress design</a></li><li><a href="#services">Elementor development</a></li><li><a href="#services">WooCommerce stores</a></li><li><a href="#services">Website redesign</a></li></ul></div><div><h4>Work with me</h4><ul><li><a href="https://www.upwork.com/freelancers/~01b7d7e1d5bc855117" target="_blank" rel="noopener noreferrer">Upwork profile ↗</a></li><li><a href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li><li><a href="#contact">Project enquiries</a></li></ul></div></div><div class="footer__bottom"><span>© <span id="year">2026</span> Htech Digital Concepts. All rights reserved.</span><span>Website Designer &amp; WordPress Developer</span></div></div></footer>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <a class="brand" href="index.html" aria-label="Htech Digital Concepts — home">
+          <span class="brand__logo"><img src="images/htech-logo.webp" alt="Htech Digital Concepts" width="2048" height="682" loading="lazy"></span>
+        </a>
+        <p class="footer__about">Website design and WordPress development for businesses that want a professional site built around clear goals, strong usability and a better path to enquiry.</p>
+      </div>
+      <div><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Services</h4><ul><li><a href="index.html#services">WordPress design</a></li><li><a href="index.html#services">Elementor development</a></li><li><a href="index.html#services">WooCommerce stores</a></li><li><a href="index.html#services">Website redesign</a></li></ul></div>
+      <div><h4>Work with me</h4><ul><li><a href="https://www.upwork.com/freelancers/~01b7d7e1d5bc855117" target="_blank" rel="noopener noreferrer">Upwork profile &nearr;</a></li><li><a href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener noreferrer">LinkedIn &nearr;</a></li><li><a href="contact.html">Project enquiries</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>&copy; <span id="year">2026</span> Htech Digital Concepts. All rights reserved.</span><span>Website Designer &amp; WordPress Developer</span></div>
+  </div>
+</footer>
 </body>
 </html>
