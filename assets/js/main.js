@@ -14,6 +14,65 @@
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
 
+  var hero = document.querySelector('.hero');
+  var heroShowcase = document.querySelector('[data-hero-showcase]');
+  if (heroShowcase) {
+    var projectButtons = Array.prototype.slice.call(heroShowcase.querySelectorAll('[data-hero-project]'));
+    var heroMainImage = heroShowcase.querySelector('[data-hero-main]');
+    var heroMiniImage = heroShowcase.querySelector('[data-hero-mini]');
+    var heroCaption = heroShowcase.querySelector('[data-hero-caption]');
+    projectButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        projectButtons.forEach(function (item) {
+          var active = item === button;
+          item.classList.toggle('is-active', active);
+          item.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        heroMainImage.classList.add('is-changing');
+        heroMiniImage.classList.add('is-changing');
+        heroMainImage.src = button.dataset.mainSrc;
+        heroMainImage.alt = button.dataset.mainAlt;
+        heroMainImage.width = Number(button.dataset.mainWidth) || 1500;
+        heroMainImage.height = Number(button.dataset.mainHeight) || 1000;
+        heroMiniImage.src = button.dataset.miniSrc;
+        heroMiniImage.alt = button.dataset.miniAlt;
+        heroMiniImage.width = Number(button.dataset.miniWidth) || 640;
+        heroMiniImage.height = Number(button.dataset.miniHeight) || 888;
+        heroCaption.textContent = button.dataset.title;
+        window.setTimeout(function () {
+          heroMainImage.classList.remove('is-changing');
+          heroMiniImage.classList.remove('is-changing');
+        }, 280);
+      });
+    });
+  }
+
+  var heroFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (hero && heroShowcase && heroFinePointer && !reduced) {
+    hero.addEventListener('pointermove', function (event) {
+      var rect = hero.getBoundingClientRect();
+      hero.style.setProperty('--hero-x', (event.clientX - rect.left) + 'px');
+      hero.style.setProperty('--hero-y', (event.clientY - rect.top) + 'px');
+    });
+    hero.addEventListener('pointerleave', function () {
+      hero.style.setProperty('--hero-x', '50%');
+      hero.style.setProperty('--hero-y', '34%');
+    });
+    heroShowcase.addEventListener('pointermove', function (event) {
+      var rect = heroShowcase.getBoundingClientRect();
+      var x = (event.clientX - rect.left) / rect.width - .5;
+      var y = (event.clientY - rect.top) / rect.height - .5;
+      heroShowcase.style.setProperty('--tilt-x', (x * 5) + 'deg');
+      heroShowcase.style.setProperty('--tilt-y', (-y * 5) + 'deg');
+      heroShowcase.classList.add('is-tilting');
+    });
+    heroShowcase.addEventListener('pointerleave', function () {
+      heroShowcase.style.setProperty('--tilt-x', '0deg');
+      heroShowcase.style.setProperty('--tilt-y', '0deg');
+      heroShowcase.classList.remove('is-tilting');
+    });
+  }
+
   function setMenu(open) {
     if (!toggle || !panel) return;
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
