@@ -360,6 +360,47 @@
     });
   }
 
+  var emailDialog = document.getElementById('email-dialog');
+  if (emailDialog) {
+    var emailForm = document.getElementById('email-compose-form');
+    var emailOpener = null;
+    document.querySelectorAll('[data-email-dialog-open]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        emailOpener = button;
+        if (typeof emailDialog.showModal === 'function') emailDialog.showModal();
+        else emailDialog.setAttribute('open', '');
+        var firstInput = emailDialog.querySelector('input');
+        if (firstInput) firstInput.focus();
+      });
+    });
+    emailDialog.querySelectorAll('[data-email-dialog-close]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        if (typeof emailDialog.close === 'function') emailDialog.close();
+        else emailDialog.removeAttribute('open');
+      });
+    });
+    emailDialog.addEventListener('click', function (event) {
+      if (event.target === emailDialog && typeof emailDialog.close === 'function') emailDialog.close();
+    });
+    emailDialog.addEventListener('close', function () {
+      if (emailOpener) emailOpener.focus();
+    });
+    if (emailForm) {
+      emailForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var values = new FormData(emailForm);
+        var name = String(values.get('name') || '').trim();
+        var replyEmail = String(values.get('replyEmail') || '').trim();
+        var subject = String(values.get('subject') || 'Website project enquiry').trim();
+        var message = String(values.get('message') || '').trim();
+        var body = 'Name: ' + name + '\nReply email: ' + replyEmail + '\n\n' + message;
+        window.location.href = 'mailto:htechdigitalconcept@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        if (typeof emailDialog.close === 'function') emailDialog.close();
+        else emailDialog.removeAttribute('open');
+      });
+    }
+  }
+
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 })();

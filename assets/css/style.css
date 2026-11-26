@@ -365,6 +365,9 @@ body.gallery-open{overflow:hidden}
 .contact-social p{min-height:48px;color:var(--muted);font-size:12px;line-height:1.7}
 .contact-social__link{display:inline-flex;align-items:center;gap:7px;margin-top:17px;color:var(--blue);font:600 11px var(--head);overflow-wrap:anywhere}
 .contact-social__link span{font-size:15px}
+.contact-social--button{width:100%;text-align:left;color:inherit;font:inherit;cursor:pointer;appearance:none}
+.contact-social__heading{display:block;margin:14px 0 7px;font:600 22px/1.2 var(--head);letter-spacing:-.03em}
+.contact-social__description{display:block;min-height:48px;color:var(--muted);font-size:12px;line-height:1.7}
 .contact-option,.contact-social{isolation:isolate;--pointer-x:50%;--pointer-y:50%}
 .contact-option{border-radius:10px;overflow:hidden}
 .contact-social{position:relative;overflow:hidden;border-radius:8px}
@@ -393,6 +396,19 @@ body.gallery-open{overflow:hidden}
 .faq-item[open] summary::after{content:"−";background:var(--blue);border-color:var(--blue);color:#fff}
 .faq-item__answer{padding:0 48px 22px 2px;color:var(--muted);font-size:14px;line-height:1.85}
 .faq-item__answer p{max-width:760px}
+.email-dialog{width:min(560px,calc(100% - 28px));max-height:calc(100vh - 28px);max-height:calc(100dvh - 28px);padding:0;border:0;border-radius:12px;background:var(--white);color:var(--ink);box-shadow:0 28px 90px rgba(7,27,51,.32)}
+.email-dialog::backdrop{background:rgba(7,20,40,.7);backdrop-filter:blur(4px)}
+.email-dialog__form{position:relative;display:grid;gap:14px;padding:clamp(24px,5vw,38px);overflow-y:auto}
+.email-dialog__form h2{max-width:440px;padding-right:30px;font:600 clamp(28px,5vw,38px)/1.12 var(--head);letter-spacing:-.045em}
+.email-dialog__intro{margin-top:-5px;color:var(--muted);font-size:13px;line-height:1.65}
+.email-dialog__close{position:absolute;top:16px;right:16px;display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--ink);font-size:23px;cursor:pointer}
+.email-field{display:grid;gap:6px;color:var(--ink);font:600 11px var(--head);letter-spacing:.03em}
+.email-field input,.email-field textarea{width:100%;min-height:46px;padding:11px 13px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--ink);font:400 13px/1.55 var(--body);letter-spacing:normal;resize:vertical}
+.email-field input:focus,.email-field textarea:focus{outline:2px solid rgba(23,105,224,.35);border-color:var(--blue)}
+.email-dialog__actions{display:flex;align-items:center;gap:18px;margin-top:4px}
+.email-dialog__actions .text-link{margin-top:0;padding:10px;border:0;background:transparent;cursor:pointer}
+.email-dialog__fallback{color:var(--muted);font-size:11px;line-height:1.7}
+.email-dialog__fallback a{color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 
 /* Reveal animation */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1);transition-delay:var(--delay,0ms)}
