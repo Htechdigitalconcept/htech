@@ -155,13 +155,13 @@
     <button class="email-dialog__close" type="button" data-email-dialog-close aria-label="Close email form">&times;</button>
     <span class="eyebrow">Email enquiry</span>
     <h2 id="email-dialog-title">Tell me about your project.</h2>
-    <p class="email-dialog__intro">Fill in a few details and your email app will open with a message ready to send.</p>
+    <p class="email-dialog__intro">Choose Gmail in your browser or your device&rsquo;s mail app. Your message will be prefilled either way.</p>
     <label class="email-field">Your name<input name="name" autocomplete="name" required></label>
     <label class="email-field">Your email<input name="replyEmail" type="email" autocomplete="email" required></label>
     <label class="email-field">Subject<input name="subject" value="Website project enquiry" required></label>
     <label class="email-field">Message<textarea name="message" rows="4" required></textarea></label>
-    <div class="email-dialog__actions"><button class="btn btn--blue" type="submit">Open email app <span class="btn__arrow" aria-hidden="true">↗</span></button><button class="text-link" type="button" data-email-dialog-close>Cancel</button></div>
-    <p class="email-dialog__fallback">If no email app opens, write to <a href="mailto:htechdigitalconcept@gmail.com">htechdigitalconcept@gmail.com</a>.</p>
+    <div class="email-dialog__actions"><button class="btn btn--blue" type="submit">Compose in Gmail <span class="btn__arrow" aria-hidden="true">↗</span></button><button class="btn btn--outline" type="button" data-email-native>Use device mail app</button><button class="text-link" type="button" data-email-dialog-close>Cancel</button></div>
+    <p class="email-dialog__fallback" role="status" aria-live="polite"><span data-email-status>Gmail opens in a new tab. If a pop-up is blocked, use your device&rsquo;s mail app.</span> For a direct address, email <a href="mailto:htechdigitalconcept@gmail.com">htechdigitalconcept@gmail.com</a>.</p>
   </form>
 </dialog>
 
