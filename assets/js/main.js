@@ -50,20 +50,33 @@
   var heroFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (heroFinePointer && !reduced) {
     heroSurfaces.forEach(function (surface) {
+      var activeTarget = null;
       surface.addEventListener('pointermove', function (event) {
         var rect = surface.getBoundingClientRect();
         var x = (event.clientX - rect.left) / rect.width;
         var y = (event.clientY - rect.top) / rect.height;
         surface.style.setProperty('--hero-x', (event.clientX - rect.left) + 'px');
         surface.style.setProperty('--hero-y', (event.clientY - rect.top) + 'px');
-        surface.style.setProperty('--hero-grid-x', ((.5 - x) * 14) + 'px');
-        surface.style.setProperty('--hero-grid-y', ((.5 - y) * 14) + 'px');
+        surface.style.setProperty('--hero-grid-x', ((.5 - x) * 10) + 'px');
+        surface.style.setProperty('--hero-grid-y', ((.5 - y) * 10) + 'px');
+
+        var target = event.target.closest('h1,p,a,button,img,.feature__tag,.meta-list');
+        if (target && surface.contains(target)) {
+          if (activeTarget && activeTarget !== target) activeTarget.classList.remove('is-pointer-target');
+          activeTarget = target;
+          activeTarget.classList.add('is-pointer-target');
+        } else if (activeTarget) {
+          activeTarget.classList.remove('is-pointer-target');
+          activeTarget = null;
+        }
       });
       surface.addEventListener('pointerleave', function () {
         surface.style.setProperty('--hero-x', '50%');
         surface.style.setProperty('--hero-y', '36%');
         surface.style.setProperty('--hero-grid-x', '0px');
         surface.style.setProperty('--hero-grid-y', '0px');
+        if (activeTarget) activeTarget.classList.remove('is-pointer-target');
+        activeTarget = null;
       });
     });
   }
