@@ -344,6 +344,22 @@
     }
   }
 
+  var trackingCards = document.querySelectorAll('.contact-option, .contact-social');
+  var canTrackPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (canTrackPointer && !reduced) {
+    trackingCards.forEach(function (card) {
+      card.addEventListener('pointermove', function (event) {
+        var rect = card.getBoundingClientRect();
+        card.style.setProperty('--pointer-x', (event.clientX - rect.left) + 'px');
+        card.style.setProperty('--pointer-y', (event.clientY - rect.top) + 'px');
+      });
+      card.addEventListener('pointerleave', function () {
+        card.style.setProperty('--pointer-x', '50%');
+        card.style.setProperty('--pointer-y', '50%');
+      });
+    });
+  }
+
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 })();
