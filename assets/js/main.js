@@ -14,7 +14,7 @@
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
 
-  var hero = document.querySelector('.hero');
+  var heroSurfaces = Array.prototype.slice.call(document.querySelectorAll('.hero,.page-hero'));
   var heroShowcase = document.querySelector('[data-hero-showcase]');
   if (heroShowcase) {
     var projectButtons = Array.prototype.slice.call(heroShowcase.querySelectorAll('[data-hero-project]'));
@@ -48,16 +48,26 @@
   }
 
   var heroFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (hero && heroShowcase && heroFinePointer && !reduced) {
-    hero.addEventListener('pointermove', function (event) {
-      var rect = hero.getBoundingClientRect();
-      hero.style.setProperty('--hero-x', (event.clientX - rect.left) + 'px');
-      hero.style.setProperty('--hero-y', (event.clientY - rect.top) + 'px');
+  if (heroFinePointer && !reduced) {
+    heroSurfaces.forEach(function (surface) {
+      surface.addEventListener('pointermove', function (event) {
+        var rect = surface.getBoundingClientRect();
+        var x = (event.clientX - rect.left) / rect.width;
+        var y = (event.clientY - rect.top) / rect.height;
+        surface.style.setProperty('--hero-x', (event.clientX - rect.left) + 'px');
+        surface.style.setProperty('--hero-y', (event.clientY - rect.top) + 'px');
+        surface.style.setProperty('--hero-grid-x', ((.5 - x) * 14) + 'px');
+        surface.style.setProperty('--hero-grid-y', ((.5 - y) * 14) + 'px');
+      });
+      surface.addEventListener('pointerleave', function () {
+        surface.style.setProperty('--hero-x', '50%');
+        surface.style.setProperty('--hero-y', '36%');
+        surface.style.setProperty('--hero-grid-x', '0px');
+        surface.style.setProperty('--hero-grid-y', '0px');
+      });
     });
-    hero.addEventListener('pointerleave', function () {
-      hero.style.setProperty('--hero-x', '50%');
-      hero.style.setProperty('--hero-y', '34%');
-    });
+  }
+  if (heroShowcase && heroFinePointer && !reduced) {
     heroShowcase.addEventListener('pointermove', function (event) {
       var rect = heroShowcase.getBoundingClientRect();
       var x = (event.clientX - rect.left) / rect.width - .5;
