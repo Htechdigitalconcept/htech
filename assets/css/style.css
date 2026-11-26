@@ -365,6 +365,19 @@ body.gallery-open{overflow:hidden}
 .contact-social p{min-height:48px;color:var(--muted);font-size:12px;line-height:1.7}
 .contact-social__link{display:inline-flex;align-items:center;gap:7px;margin-top:17px;color:var(--blue);font:600 11px var(--head);overflow-wrap:anywhere}
 .contact-social__link span{font-size:15px}
+.contact-option,.contact-social{isolation:isolate;--pointer-x:50%;--pointer-y:50%}
+.contact-option{border-radius:10px;overflow:hidden}
+.contact-social{position:relative;overflow:hidden;border-radius:8px}
+.contact-option::before,.contact-social::before{content:"";position:absolute;z-index:0;inset:0;pointer-events:none;opacity:0;background:radial-gradient(340px circle at var(--pointer-x) var(--pointer-y),rgba(23,105,224,.14),transparent 72%);transition:opacity .25s}
+.contact-option>* ,.contact-social>*{position:relative;z-index:1}
+.contact-option__icon,.contact-social__icon{display:grid;place-items:center;flex:none;width:52px;height:52px;margin-bottom:18px;border:1px solid rgba(23,105,224,.15);border-radius:14px;background:rgba(23,105,224,.08);color:var(--blue);transition:transform .25s,background .25s,color .25s}
+.contact-option__icon svg,.contact-social__icon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.contact-social__icon{width:44px;height:44px;margin-bottom:16px;border-radius:12px;background:rgba(255,212,59,.18);border-color:rgba(255,212,59,.45);color:var(--navy)}
+.contact-social__icon--facebook svg{fill:currentColor;stroke:none}
+@media(hover:hover) and (pointer:fine){
+  .contact-option:hover::before,.contact-option:focus-within::before,.contact-social:hover::before,.contact-social:focus-visible::before{opacity:1}
+  .contact-option:hover .contact-option__icon,.contact-social:hover .contact-social__icon{transform:translateY(-3px) scale(1.04);background:var(--blue);color:#fff}
+}
 .brief-box{background:var(--navy);color:var(--white);padding:clamp(32px,5vw,64px)}
 .brief-box h2{font:600 clamp(32px,3.6vw,48px)/1.1 var(--head);letter-spacing:-.045em;margin-bottom:30px}
 .brief-box ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 50px}
