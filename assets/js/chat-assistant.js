@@ -103,22 +103,16 @@
     var feed = null;
     var context = '';
     var transcript = [];
+    var firstUserMessage = '';
     var notificationSent = Object.create(null);
 
     function notifyOwner(eventName, firstMessage) {
       if (typeof root.fetch !== 'function') return;
-      var storageKey = 'htech-chat-notified-' + eventName;
-      var stored = false;
+      var storageKey = 'htech-chat-notified-v2-' + eventName;
       try {
-        if (root.sessionStorage) {
-          if (root.sessionStorage.getItem(storageKey) === '1') return;
-          root.sessionStorage.setItem(storageKey, '1');
-          stored = true;
-        }
-      } catch (_storageError) {
-        stored = false;
-      }
-      if (!stored && notificationSent[eventName]) return;
+        if (root.sessionStorage && root.sessionStorage.getItem(storageKey) === '1') return;
+      } catch (_storageError) {}
+      if (notificationSent[eventName]) return;
       notificationSent[eventName] = true;
       var payload = {
         event: eventName,
@@ -131,8 +125,21 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
           keepalive: true
-        }).catch(function () {});
+        }).then(function (response) {
+          if (!response.ok) {
+            notificationSent[eventName] = false;
+            if (root.console && root.console.warn) root.console.warn('Telegram chat notification was not delivered (HTTP ' + response.status + ').');
+            return;
+          }
+          try {
+            if (root.sessionStorage) root.sessionStorage.setItem(storageKey, '1');
+          } catch (_storageError) {}
+        }).catch(function () {
+          notificationSent[eventName] = false;
+          if (root.console && root.console.warn) root.console.warn('Telegram chat notification could not reach the notification endpoint.');
+        });
       } catch (_requestError) {
+        notificationSent[eventName] = false;
         // Notification delivery should never interrupt a visitor's chat.
       }
     }
@@ -167,7 +174,8 @@
     function submitMessage(rawText) {
       var text = String(rawText || '').trim().slice(0, 600);
       if (!text) return;
-      if (!transcript.some(function (entry) { return entry.who === 'user'; })) notifyOwner('first_message', text);
+      if (!firstUserMessage) firstUserMessage = text;
+      if (!notificationSent.first_message) notifyOwner('first_message', firstUserMessage);
       addMessage(text, 'user');
       transcript.push({ who: 'user', text: text });
       context = (context + ' ' + text).trim().slice(-1800);

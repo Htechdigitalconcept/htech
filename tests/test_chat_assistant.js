@@ -26,7 +26,7 @@ assert.match(widgetSource, /aria-label="WhatsApp Ademola"/);
 assert.match(widgetSource, /aria-label="Message Ademola on LinkedIn"/);
 assert.doesNotMatch(widgetSource, /\+234 813 767 7307/);
 assert.match(widgetSource, /notifyOwner\('open'\)/);
-assert.match(widgetSource, /notifyOwner\('first_message', text\)/);
+assert.match(widgetSource, /notifyOwner\('first_message', firstUserMessage\)/);
 assert.match(widgetSource, /\/api\/chat-notify/);
 assert.match(widgetSource, /your first message is sent to him via Telegram/i);
 assert.doesNotMatch(widgetSource, /TELEGRAM_BOT_TOKEN|TELEGRAM_CHAT_ID/);

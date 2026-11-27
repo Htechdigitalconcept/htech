@@ -68,11 +68,16 @@ class ChatNotificationTests(unittest.TestCase):
 
     def test_missing_secrets_never_attempt_network_request(self):
         with patch.dict(os.environ, {}, clear=True):
-            self.assertFalse(chat_notify._send_telegram("test"))
+            self.assertEqual(chat_notify._send_telegram("test"), "missing_configuration")
+
+    def test_alternate_secret_names_are_supported(self):
+        with patch.dict(os.environ, {"chat_bot_token": "fake-token", "chat_id": "fake-chat"}, clear=True):
+            self.assertEqual(chat_notify._environment_value("TELEGRAM_BOT_TOKEN", "CHAT_BOT_TOKEN", "chat_bot_token"), "fake-token")
+            self.assertEqual(chat_notify._environment_value("TELEGRAM_CHAT_ID", "CHAT_ID", "chat_id"), "fake-chat")
 
     def test_handler_sends_valid_first_message_without_returning_message(self):
         payload = {"event": "first_message", "page": "/contact.html", "message": "I need a website"}
-        with patch.object(chat_notify, "_send_telegram", return_value=True) as send:
+        with patch.object(chat_notify, "_send_telegram", return_value=None) as send:
             status, response = self.post(payload)
         self.assertEqual(status, 200)
         self.assertEqual(response, {"ok": True})

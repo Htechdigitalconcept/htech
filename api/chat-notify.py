@@ -11,7 +11,7 @@ import re
 import time
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler
-from urllib.error import URLError
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
@@ -69,11 +69,19 @@ def _same_origin(origin: str | None, request_host: str) -> bool:
     return parsed.scheme in ("http", "https") and bool(origin_host) and origin_host == host
 
 
-def _send_telegram(message: str) -> bool:
-    token = (os.environ.get("TELEGRAM_BOT_TOKEN") or os.environ.get("CHAT_BOT_TOKEN") or "").strip()
-    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+def _environment_value(*names: str) -> str:
+    for name in names:
+        value = os.environ.get(name, "").strip()
+        if value:
+            return value
+    return ""
+
+
+def _send_telegram(message: str) -> str | None:
+    token = _environment_value("TELEGRAM_BOT_TOKEN", "CHAT_BOT_TOKEN", "chat_bot_token", "telegram_bot_token")
+    chat_id = _environment_value("TELEGRAM_CHAT_ID", "CHAT_ID", "chat_id", "telegram_chat_id")
     if not token or not chat_id:
-        return False
+        return "missing_configuration"
     endpoint = "https://api.telegram.org/bot" + token + "/sendMessage"
     request = Request(
         endpoint,
@@ -84,9 +92,11 @@ def _send_telegram(message: str) -> bool:
     try:
         with urlopen(request, timeout=4) as response:
             result = json.loads(response.read(4096).decode("utf-8"))
-            return response.status == 200 and bool(result.get("ok"))
+            return None if response.status == 200 and bool(result.get("ok")) else "telegram_rejected"
+    except HTTPError:
+        return "telegram_rejected"
     except (OSError, TimeoutError, URLError, ValueError):
-        return False
+        return "telegram_unreachable"
 
 
 class handler(BaseHTTPRequestHandler):
@@ -141,8 +151,14 @@ class handler(BaseHTTPRequestHandler):
         if _rate_limited(client_key):
             self._respond(429, {"error": "Too many chat notifications. Please try again later."})
             return
-        if not _send_telegram(notification):
-            self._respond(503, {"error": "The chat notification could not be sent."})
+        failure = _send_telegram(notification)
+        if failure:
+            if failure == "missing_configuration":
+                self._respond(503, {"error": "Telegram notification credentials are missing."})
+            elif failure == "telegram_rejected":
+                self._respond(502, {"error": "Telegram rejected this notification. Confirm the bot was started and the chat ID is correct."})
+            else:
+                self._respond(502, {"error": "Telegram could not be reached to send the notification."})
             return
         self._respond(200, {"ok": True})
 
