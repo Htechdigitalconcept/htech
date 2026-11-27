@@ -13,6 +13,10 @@ const personalized = assistant.buildReply('I want a website', 'I want to sell pr
 assert.match(personalized, /online store/i);
 assert.match(personalized, /checkout, shipping/i);
 assert.match(assistant.buildReply('Is Htech open on Sunday?', '', feed), /could not find a reliable answer/i);
+for (const greeting of ['hello', 'Hey!', "What's up?", 'Good morning']) {
+  assert.match(assistant.buildReply(greeting, '', feed), /Welcome to Htech Digital Concepts/i);
+  assert.doesNotMatch(assistant.buildReply(greeting, '', feed), /could not find a reliable answer/i);
+}
 assert.ok(feed.answers.length >= 8);
 assert.ok(feed.answers.every((item) => item.id && item.keywords?.length && item.answer));
 const waUrl = assistant.buildWhatsAppUrl([{ who: 'user', text: 'I need an online store' }, { who: 'assistant', text: 'How can I help?' }]);
