@@ -88,7 +88,7 @@
         '<a class="htech-chat__icon-link htech-chat__email" href="mailto:htechdigitalconcept@gmail.com?subject=Website%20project%20question" aria-label="Email Ademola" title="Email Ademola"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg><span class="htech-chat__sr-only">Email Ademola</span></a>' +
         '<a class="htech-chat__icon-link htech-chat__icon-link--whatsapp htech-chat__whatsapp" href="https://wa.me/2348137677307" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Ademola" title="WhatsApp Ademola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.2A8.5 8.5 0 1 1 20 11.5Z"></path><path d="M9 8.5c.4 2.1 2 3.7 4 4.5l1.2-1 2 1c-.2 1.3-1.1 2-2.3 2-3.1-.2-6.3-3.3-6.5-6.3 0-1.2.7-2.1 2-2.3l1 2z"></path></svg><span class="htech-chat__sr-only">WhatsApp Ademola</span></a>' +
         '<a class="htech-chat__icon-link htech-chat__icon-link--linkedin" href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener noreferrer" aria-label="Message Ademola on LinkedIn" title="Message Ademola on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h3v10H5z"></path><circle cx="6.5" cy="5.8" r="1.6"></circle><path d="M11 9h3v1.4c.7-1 1.7-1.7 3.2-1.7 2.6 0 3.8 1.6 3.8 4.7V19h-3v-5c0-1.6-.5-2.5-1.9-2.5-1.5 0-2.1 1-2.1 2.5v5h-3z"></path></svg><span class="htech-chat__sr-only">Message Ademola on LinkedIn</span></a></div>' +
-        '<p class="htech-chat__disclaimer">Answers are based on Htech’s published information. No chat messages are stored.</p>' +
+        '<p class="htech-chat__disclaimer">Answers use Htech’s published information. Opening this chat alerts Ademola, and your first message is sent to him via Telegram. The website does not store chat messages.</p>' +
       '</section>';
     root.document.body.appendChild(host);
 
@@ -103,6 +103,39 @@
     var feed = null;
     var context = '';
     var transcript = [];
+    var notificationSent = Object.create(null);
+
+    function notifyOwner(eventName, firstMessage) {
+      if (typeof root.fetch !== 'function') return;
+      var storageKey = 'htech-chat-notified-' + eventName;
+      var stored = false;
+      try {
+        if (root.sessionStorage) {
+          if (root.sessionStorage.getItem(storageKey) === '1') return;
+          root.sessionStorage.setItem(storageKey, '1');
+          stored = true;
+        }
+      } catch (_storageError) {
+        stored = false;
+      }
+      if (!stored && notificationSent[eventName]) return;
+      notificationSent[eventName] = true;
+      var payload = {
+        event: eventName,
+        page: root.location && root.location.pathname ? root.location.pathname : '/'
+      };
+      if (eventName === 'first_message') payload.message = String(firstMessage || '').trim().slice(0, 600);
+      try {
+        root.fetch('/api/chat-notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        }).catch(function () {});
+      } catch (_requestError) {
+        // Notification delivery should never interrupt a visitor's chat.
+      }
+    }
 
     function addMessage(text, who) {
       var bubble = root.document.createElement('div');
@@ -117,8 +150,10 @@
       launcher.setAttribute('aria-label', open ? 'Close Htech assistant' : 'Open Htech assistant');
       launcher.querySelector('.htech-chat__launcher-label').textContent = open ? 'Close chat' : 'Ask Htech';
       panel.hidden = !open;
-      if (open) input.focus();
-      else launcher.focus();
+      if (open) {
+        notifyOwner('open');
+        input.focus();
+      } else launcher.focus();
     }
 
     function updateContactLinks() {
@@ -130,8 +165,9 @@
     }
 
     function submitMessage(rawText) {
-      var text = String(rawText || '').trim();
+      var text = String(rawText || '').trim().slice(0, 600);
       if (!text) return;
+      if (!transcript.some(function (entry) { return entry.who === 'user'; })) notifyOwner('first_message', text);
       addMessage(text, 'user');
       transcript.push({ who: 'user', text: text });
       context = (context + ' ' + text).trim().slice(-1800);

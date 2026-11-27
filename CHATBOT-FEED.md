@@ -1,6 +1,6 @@
 # Htech floating assistant: updating its information feed
 
-The assistant is a small, feed-backed site widget. It matches visitor questions against published Htech facts and FAQs, then adds practical guidance based on whether the visitor mentions a store, service business, new site or existing site. It does not send chat messages to an AI provider or store them; email contact links can include the visitor's chat so they can choose to share it with Ademola.
+The assistant is a small, feed-backed site widget. It matches visitor questions against published Htech facts and FAQs, then adds practical guidance based on whether the visitor mentions a store, service business, new site or existing site. It does not send chat messages to an AI provider or save them on the website. When a visitor opens the chat, the site sends Ademola a Telegram alert; when they send their first message, that message is also sent to him through Telegram. Email contact links can include the visitor's chat so they can choose to share it with Ademola.
 
 ## Update the bundled feed
 
@@ -22,6 +22,17 @@ Each `answers` item has:
 3. Keep the URL publicly readable and ensure the feed host allows this site's origin. If it cannot be fetched, the assistant will say the feed is unavailable rather than invent an answer.
 
 The bundled file is served publicly with the website, so editing it and redeploying is the simplest option. The feed is not a generative AI model: answers come from the verified entries, with simple keyword matching and context-specific guidance. A generative AI integration would need a secure server-side API and credentials; those must not be placed in browser JavaScript.
+
+## Telegram chat notifications
+
+The widget sends at most one chat-open alert and one first-message alert per browser tab session. The first message text and the current page path are sent to the Telegram bot; the site does not save a transcript. The notification endpoint is `POST /api/chat-notify` and keeps bot credentials server-side.
+
+Set these environment variables in the Vercel project settings for the deployment environment:
+
+- `TELEGRAM_BOT_TOKEN` (or `CHAT_BOT_TOKEN`): the private token created with Telegram's BotFather.
+- `TELEGRAM_CHAT_ID`: the private chat or group ID where alerts should arrive. Start a conversation with the bot (or add it to the target group) before testing, otherwise Telegram will not let it send a message.
+
+Never put either value in browser JavaScript or commit them to the repository. After changing environment variables, redeploy the Vercel project so the serverless function can read them.
 
 ## Direct contact
 
