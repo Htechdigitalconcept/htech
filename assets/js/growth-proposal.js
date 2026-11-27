@@ -4,9 +4,7 @@
   var CONTACTS = {
     email: 'htechdigitalconcept@gmail.com',
     emailUrl: 'mailto:htechdigitalconcept@gmail.com',
-    upwork: 'upwork.com/freelancers/~01b7d7e1d5bc855117',
     upworkUrl: 'https://www.upwork.com/freelancers/~01b7d7e1d5bc855117',
-    linkedin: 'linkedin.com/in/ademolahabeeb',
     linkedinUrl: 'https://www.linkedin.com/in/ademolahabeeb/'
   };
   var COLORS = {
@@ -143,7 +141,7 @@
         }
       };
       image.onerror = function () { resolve(null); };
-      image.src = new URL('images/htech-logo-transparent.webp', window.location.href).href;
+      image.src = new URL('images/htech-logo.webp', window.location.href).href;
     });
   }
 
@@ -300,14 +298,12 @@
       function drawCover() {
         doc.setFillColor.apply(doc, COLORS.navy);
         doc.rect(0, 0, pageWidth, 77, 'F');
-        doc.setFillColor(255, 255, 255);
-        doc.roundedRect(margin, 11, 49, 19, 2, 2, 'F');
-        if (logo) doc.addImage(logo, 'PNG', margin + 2, 12.2, 45, 16.5);
+        if (logo) doc.addImage(logo, 'PNG', margin, 12, 49, 16.3);
         else {
           doc.setFont('helvetica', 'bold');
           doc.setFontSize(15);
-          doc.setTextColor.apply(doc, COLORS.navy);
-          doc.text('Htech', margin + 5, 23);
+          doc.setTextColor(255, 255, 255);
+          doc.text('Htech', margin + 3, 23);
         }
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(9);
@@ -372,8 +368,8 @@
           doc.setTextColor.apply(doc, COLORS.muted);
           var columns = [
             { x: margin, text: CONTACTS.email, url: CONTACTS.emailUrl, width: 57 },
-            { x: margin + 61, text: CONTACTS.upwork, url: CONTACTS.upworkUrl, width: 62 },
-            { x: margin + 127, text: CONTACTS.linkedin, url: CONTACTS.linkedinUrl, width: 50 }
+            { x: margin + 61, text: 'Message me on Upwork', url: CONTACTS.upworkUrl, width: 62 },
+            { x: margin + 127, text: 'Message me on LinkedIn', url: CONTACTS.linkedinUrl, width: 50 }
           ];
           columns.forEach(function (item) {
             doc.setTextColor.apply(doc, COLORS.blue);
@@ -383,7 +379,7 @@
           doc.setFont('helvetica', 'normal');
           doc.setFontSize(6.5);
           doc.setTextColor.apply(doc, COLORS.muted);
-          doc.text('Htech Digital Concepts  |  Share this PDF with Ademola to discuss your project.', margin, footerTop + 11);
+          doc.text('Htech Digital Concepts  |  Website Design and WordPress Development', margin, footerTop + 11);
           doc.text('Page ' + page + ' of ' + pageCount, pageWidth - margin, footerTop + 11, { align: 'right' });
         }
       }
