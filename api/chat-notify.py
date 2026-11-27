@@ -160,6 +160,7 @@ class handler(BaseHTTPRequestHandler):
             return
 
         reply_ready = True
+        reply_routing_error = None
         try:
             ensure_webhook(token)
             redis_command("SET", "htech:chat-session:" + session_id,
@@ -168,11 +169,13 @@ class handler(BaseHTTPRequestHandler):
             save_telegram_message(telegram_message["message_id"], session_id, owner_chat_id)
         except ChatBackendError as exc:
             reply_ready = False
+            reply_routing_error = exc.code
             print("Htech chat reply routing setup failed: " + exc.code)
         except Exception:
             reply_ready = False
+            reply_routing_error = "unexpected_error"
             print("Htech chat reply routing setup failed: unexpected error")
-        self._respond(200, {"ok": True, "alert_sent": True, "reply_ready": reply_ready})
+        self._respond(200, {"ok": True, "alert_sent": True, "reply_ready": reply_ready, "reply_routing_error": reply_routing_error})
 
     def log_message(self, _format: str, *_args) -> None:
         # Avoid logging visitor message content or identifiers.

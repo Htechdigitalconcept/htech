@@ -1,6 +1,8 @@
+import io
 import json
 import os
 import unittest
+from urllib.error import HTTPError
 from unittest.mock import patch
 
 from lib import chat_backend
@@ -37,6 +39,17 @@ class ChatBackendTests(unittest.TestCase):
                 chat_backend.redis_command("PING")
         self.assertEqual(error.exception.code, "missing_redis_config")
         send.assert_not_called()
+
+    def test_upstash_http_errors_keep_their_status_for_diagnosis(self):
+        error = HTTPError("https://redis.example/pipeline", 401, "Unauthorized", {}, io.BytesIO(b""))
+        with patch.dict(os.environ, {
+            "UPSTASH_REDIS_REST_URL": "https://redis.example",
+            "UPSTASH_REDIS_REST_TOKEN": "fake-token",
+        }, clear=True), patch.object(chat_backend, "urlopen", side_effect=error):
+            with self.assertRaises(chat_backend.ChatBackendError) as caught:
+                chat_backend.redis_command("PING")
+        self.assertEqual(caught.exception.code, "redis_http_401")
+        self.assertIn("REST token", chat_backend.public_error(caught.exception.code)[1])
 
     def test_webhook_secret_is_stable_and_non_plaintext(self):
         secret = chat_backend.webhook_secret("bot-token")

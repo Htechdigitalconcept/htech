@@ -57,6 +57,8 @@ def redis_command(*command: str) -> object:
         return result.get("result")
     except ChatBackendError:
         raise
+    except HTTPError as exc:
+        raise ChatBackendError("redis_http_" + str(exc.code)) from exc
     except (OSError, TimeoutError, URLError, ValueError) as exc:
         raise ChatBackendError("redis_unavailable") from exc
 
@@ -115,11 +117,25 @@ def save_owner_reply(session_id: str, reply_id: str, text: str) -> None:
 
 
 def public_error(code: str) -> tuple[int, str]:
+    if code.startswith("redis_http_"):
+        try:
+            upstream_status = int(code.rsplit("_", 1)[1])
+        except ValueError:
+            upstream_status = 0
+        if upstream_status == 401:
+            return 502, "Upstash rejected its REST token (HTTP 401). Check that it belongs to this database."
+        if upstream_status == 404:
+            return 502, "Upstash could not find this REST endpoint (HTTP 404). Check the REST URL."
+        if upstream_status == 429:
+            return 502, "Upstash rate-limited the live chat request (HTTP 429). Check the database quota."
+        if upstream_status == 400:
+            return 502, "Upstash rejected the Redis command (HTTP 400)."
+        return 502, "Upstash returned HTTP " + str(upstream_status) + " for the live chat request."
     errors = {
         "missing_telegram_config": (503, "Telegram bot credentials are missing."),
         "missing_redis_config": (503, "The live chat store is not configured."),
-        "redis_command_failed": (502, "The live chat store rejected the request."),
-        "redis_unavailable": (502, "The live chat store could not be reached."),
+        "redis_command_failed": (502, "The live chat store rejected the Redis command."),
+        "redis_unavailable": (502, "The live chat store could not be reached. Check the Upstash REST URL and network availability."),
         "telegram_rejected": (502, "Telegram rejected the request. Check the bot and chat configuration."),
         "telegram_unreachable": (502, "Telegram could not be reached."),
     }
