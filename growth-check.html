@@ -55,21 +55,21 @@
       <div class="growth-hero__copy">
         <span class="eyebrow eyebrow--light reveal">A complimentary website growth check</span>
         <h1 class="display reveal d-80">Know what to improve. <em>Know what to build.</em></h1>
-        <p class="lede reveal d-160">Already have a website? We’ll scan its public pages for real signals across search, mobile, trust, content and conversion. Starting from scratch? Get a tailored website blueprint for your business and goal.</p>
+        <p class="lede reveal d-160">Start with your current situation. This free, interactive check adapts its questions and practical next steps to your business.</p>
         <div class="growth-hero__actions reveal d-200">
           <a class="btn btn--yellow" href="#growth-tool">Choose your path <span class="btn__arrow" aria-hidden="true">↓</span></a>
           <span>Free · No account · No email required</span>
         </div>
       </div>
-      <div class="growth-hero__visual reveal d-160" role="img" aria-label="Live scan preview checking connection, page structure, mobile setup, calls to action and search signals.">
+      <div class="growth-hero__visual reveal d-160" role="img" aria-label="Interactive growth guide that starts with your situation and adapts recommendations to your business.">
         <div class="growth-orbit growth-orbit--outer" aria-hidden="true"></div>
         <div class="growth-orbit growth-orbit--inner" aria-hidden="true"></div>
         <div class="growth-preview">
-          <div class="growth-preview__head"><span>WEBSITE GROWTH CHECK</span><span class="growth-preview__live"><i></i> LIVE ANALYSIS</span></div>
-          <div class="growth-preview__score"><div class="growth-preview__ring"><span>✓</span></div><div><b>Public pages.<br>Practical findings.</b><small>Structure · Search · Mobile<br>Trust · Conversion · Access</small></div></div>
-          <div class="growth-preview__line"><span>What works</span><i><b></b></i><strong>01</strong></div>
-          <div class="growth-preview__line"><span>What to improve</span><i><b></b></i><strong>02</strong></div>
-          <div class="growth-preview__footer"><span>Focused recommendations</span><span>HTECH / SCAN</span></div>
+          <div class="growth-preview__head"><span>WEBSITE GROWTH GUIDE</span><span class="growth-preview__live"><i></i> PERSONALIZED</span></div>
+          <div class="growth-preview__score"><div class="growth-preview__ring"><span>✳</span></div><div><b>A clear start.<br>A useful next step.</b><small>Your situation · Your business<br>Relevant goals · Practical plan</small></div></div>
+          <div class="growth-preview__line"><span>Start with you</span><i><b></b></i><strong>01</strong></div>
+          <div class="growth-preview__line"><span>Recommendations adapt</span><i><b></b></i><strong>02</strong></div>
+          <div class="growth-preview__footer"><span>A path built around you</span><span>HTECH / GUIDE</span></div>
         </div>
         <span class="growth-hero__stamp">USEFUL INSIGHT.<br>NO SALES GATE.</span>
       </div>
@@ -79,36 +79,43 @@
   <section class="growth-assessment section section--soft" id="growth-tool">
     <div class="wrap">
       <div class="growth-assessment__heading">
-        <div><span class="eyebrow">Start with where you are</span><h2 class="section-title">One tool. Two useful paths.</h2></div>
-        <p class="lede">Choose the option that matches your business. The scan reviews a few public pages; the starter blueprint turns your business goal into a practical first-site plan.</p>
+        <div><span class="eyebrow">Start with your situation</span><h2 class="section-title">A useful next step starts with you.</h2></div>
+        <p class="lede">Answer one question to begin. What you see next changes according to your situation and, when you’re planning a site, the kind of business you run.</p>
       </div>
       <noscript><p class="growth-noscript">This interactive tool needs JavaScript. You can still <a href="contact.html">contact me for a website review or a new-site plan</a>.</p></noscript>
       <div class="growth-tool" data-growth-app>
-        <div class="growth-tool__eyebrow"><span class="growth-live-dot"></span> PRIVATE BY DESIGN <i>·</i> RESULTS IN THIS SESSION ONLY</div>
-        <fieldset class="growth-mode" aria-label="Choose your website situation">
-          <label class="growth-mode__option is-selected"><input type="radio" name="growth-mode" value="scan" checked><span class="growth-mode__icon" aria-hidden="true">↗</span><span class="growth-mode__copy"><b>I have a website</b><small>Run a live scan of its public pages and get prioritized findings.</small></span><span class="growth-mode__check" aria-hidden="true">✓</span></label>
-          <label class="growth-mode__option"><input type="radio" name="growth-mode" value="blueprint"><span class="growth-mode__icon" aria-hidden="true">✳</span><span class="growth-mode__copy"><b>I don’t have a website yet</b><small>Get a tailored starter plan based on your business and goal.</small></span><span class="growth-mode__check" aria-hidden="true">✓</span></label>
-        </fieldset>
+        <div class="growth-tool__eyebrow"><span class="growth-live-dot"></span> PRIVATE BY DESIGN <i>·</i> YOUR NEXT STEP ADAPTS TO YOU</div>
+        <section class="growth-entry" data-growth-entry aria-labelledby="growth-entry-title">
+          <span class="growth-index">STEP 01 / STARTING POINT</span>
+          <h3 id="growth-entry-title">First, where are you with your website?</h3>
+          <p>Choose the answer that fits today. We’ll only show the next step for your situation.</p>
+          <div class="growth-entry__choices">
+            <button class="growth-entry-card" type="button" data-growth-path-choice="scan">
+              <span class="growth-entry-card__icon" aria-hidden="true">↗</span><span class="growth-entry-card__copy"><b>I already have a website</b><small>Inspect my public site and show me what is working and what to improve.</small></span><span class="growth-entry-card__arrow" aria-hidden="true">→</span>
+            </button>
+            <button class="growth-entry-card" type="button" data-growth-path-choice="blueprint">
+              <span class="growth-entry-card__icon" aria-hidden="true">✳</span><span class="growth-entry-card__copy"><b>I don’t have a website yet</b><small>Help me shape a first website around my type of business and goals.</small></span><span class="growth-entry-card__arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </section>
+        <div class="growth-path-nav" data-growth-path-nav hidden>
+          <button class="growth-path-nav__back" type="button" data-growth-change-path><span aria-hidden="true">←</span> Change my answer</button>
+          <span data-growth-path-label></span>
+        </div>
 
-        <form class="growth-scan-form" data-growth-scan-form novalidate>
-          <div class="growth-path-heading"><span>PATH 01 / LIVE WEBSITE SCAN</span><h3>Let’s look at what is actually there.</h3><p>Enter a public URL. The scanner checks the homepage and up to two high-priority links on the same domain.</p></div>
+        <form class="growth-scan-form" data-growth-scan-form novalidate hidden>
+          <div class="growth-path-heading"><span>PATH / LIVE WEBSITE SCAN</span><h3 tabindex="-1">Let’s look at what is actually there.</h3><p>Enter a public URL. The scanner checks the homepage and up to two high-priority links on the same domain.</p></div>
           <label class="growth-field" for="growth-scan-url"><span>Website address</span><div class="growth-url-input"><i aria-hidden="true">https://</i><input id="growth-scan-url" name="url" type="text" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" required data-growth-scan-url></div><small class="growth-field__hint">Public websites only. You can enter the address with or without “https://”. Private pages and login-only areas are not scanned.</small></label>
           <button class="btn btn--yellow growth-scan-submit" type="submit" data-growth-scan-submit>Scan my website <span class="btn__arrow" aria-hidden="true">→</span></button>
         </form>
 
         <form class="growth-blueprint-form" data-growth-blueprint-form hidden>
-          <div class="growth-path-heading"><span>PATH 02 / FIRST-WEBSITE BLUEPRINT</span><h3>Start with the outcome you want.</h3><p>Choose your business type and the most important result. We’ll map the pages and functionality to consider first.</p></div>
+          <div class="growth-path-heading"><span>PATH / FIRST-WEBSITE BLUEPRINT</span><h3 tabindex="-1">Let’s shape the right website for your business.</h3><p>Your business type will shape the goals and recommendations you see next.</p></div>
           <div class="growth-context-grid">
             <label class="growth-field" for="blueprint-industry"><span>Your kind of business</span><select id="blueprint-industry" name="industry" required><option value="" selected disabled>Choose a business type</option><option value="professional-service">Professional or service business</option><option value="consultant">Consultant, coach or specialist</option><option value="health-practice">Health, wellness or appointment-based practice</option><option value="retail">Retail or product business</option><option value="hospitality">Hospitality, food or accommodation</option><option value="creative">Creative studio or personal brand</option><option value="local-business">Local business or trades</option><option value="other">Another type of business</option></select></label>
-            <fieldset class="growth-goal-field"><legend>What should your website help you achieve?</legend><div class="growth-goal-grid">
-              <label><input type="radio" name="goal" value="enquiries" required><span><b>More enquiries</b><small>Attract and qualify potential clients</small></span></label>
-              <label><input type="radio" name="goal" value="bookings"><span><b>More bookings</b><small>Let customers choose a time or service</small></span></label>
-              <label><input type="radio" name="goal" value="sales"><span><b>Sell online</b><small>Show products and accept orders</small></span></label>
-              <label><input type="radio" name="goal" value="trust"><span><b>Build credibility</b><small>Explain your value and earn trust</small></span></label>
-              <label><input type="radio" name="goal" value="local"><span><b>Grow locally</b><small>Help nearby customers find and reach you</small></span></label>
-            </div></fieldset>
+            <fieldset class="growth-goal-field" data-growth-goal-fieldset hidden><legend>What should your website help you achieve?</legend><p class="growth-goal-field__hint" data-growth-goal-hint></p><div class="growth-goal-grid" data-growth-goals aria-live="polite"></div></fieldset>
           </div>
-          <button class="btn btn--yellow growth-scan-submit" type="submit">Build my starter blueprint <span class="btn__arrow" aria-hidden="true">→</span></button>
+          <button class="btn btn--yellow growth-scan-submit" type="submit" data-growth-blueprint-submit disabled>Build my starter blueprint <span class="btn__arrow" aria-hidden="true">→</span></button>
         </form>
 
         <div class="growth-scan-loading" data-growth-scan-loading role="status" aria-live="polite" hidden>
