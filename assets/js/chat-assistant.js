@@ -53,7 +53,15 @@
     return 'general';
   }
 
+  function isGreeting(query) {
+    var greeting = normalize(query).replace(/\s+/g, ' ').trim();
+    return /^(hi|hello|hey|hiya|howdy|yo|what s up|whats up|good morning|good afternoon|good evening)( there)?$/.test(greeting);
+  }
+
   function buildReply(query, context, feed) {
+    if (isGreeting(query)) {
+      return 'Hi! Welcome to Htech Digital Concepts. I can help with website design, WordPress, online stores, improving an existing website, or getting in touch with Ademola. What can I help you with today?';
+    }
     var record = matchAnswer(query, feed);
     if (!record || !record.answer) return FALLBACK_ANSWER;
     var reply = record.answer;
