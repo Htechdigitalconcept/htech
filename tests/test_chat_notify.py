@@ -85,9 +85,23 @@ class ChatNotificationTests(unittest.TestCase):
         ):
             status, response = self.post(payload)
         self.assertEqual(status, 200)
-        self.assertEqual(response, {"ok": True})
+        self.assertEqual(response, {"ok": True, "alert_sent": True, "reply_ready": True})
         self.assertIn("I need a website", send.call_args.args[2]["text"])
         save.assert_called_once_with(77, session_id, "12345")
+
+    def test_telegram_alert_survives_redis_failure(self):
+        payload = {"event": "open", "session_id": "d4a5c6b7-89ab-4cde-a012-3456789abcde", "page": "/"}
+        with (
+            patch.object(chat_notify, "telegram_credentials", return_value=("fake-token", "12345")),
+            patch.object(chat_notify, "telegram_api", return_value={"message_id": 78}) as send,
+            patch.object(chat_notify, "ensure_webhook"),
+            patch.object(chat_notify, "redis_command", side_effect=ChatBackendError("redis_unavailable")),
+        ):
+            status, response = self.post(payload)
+        self.assertEqual(status, 200)
+        self.assertTrue(response["alert_sent"])
+        self.assertFalse(response["reply_ready"])
+        send.assert_called_once()
 
     def test_handler_rejects_cross_origin_and_empty_message(self):
         status, _ = self.post({"event": "open", "session_id": "d4a5c6b7-89ab-4cde-a012-3456789abcde", "page": "/"}, {"Origin": "https://attacker.example"})

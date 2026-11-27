@@ -145,16 +145,12 @@ class handler(BaseHTTPRequestHandler):
             return
         try:
             token, owner_chat_id = telegram_credentials()
-            ensure_webhook(token)
-            redis_command("SET", "htech:chat-session:" + session_id,
-                          json.dumps({"page": _clean_text(page, MAX_PAGE_CHARS), "updated": int(time.time())}),
-                          "EX", str(SESSION_TTL_SECONDS))
+            # Keep the original alert behavior independent of Redis/webhook health.
             telegram_message = telegram_api(token, "sendMessage", {
                 "chat_id": owner_chat_id,
                 "text": notification,
                 "disable_web_page_preview": True,
             })
-            save_telegram_message(telegram_message["message_id"], session_id, owner_chat_id)
         except ChatBackendError as exc:
             status, error = public_error(exc.code)
             self._respond(status, {"error": error})
@@ -162,7 +158,21 @@ class handler(BaseHTTPRequestHandler):
         except Exception:
             self._respond(502, {"error": "The chat event could not be delivered to Telegram."})
             return
-        self._respond(200, {"ok": True})
+
+        reply_ready = True
+        try:
+            ensure_webhook(token)
+            redis_command("SET", "htech:chat-session:" + session_id,
+                          json.dumps({"page": _clean_text(page, MAX_PAGE_CHARS), "updated": int(time.time())}),
+                          "EX", str(SESSION_TTL_SECONDS))
+            save_telegram_message(telegram_message["message_id"], session_id, owner_chat_id)
+        except ChatBackendError as exc:
+            reply_ready = False
+            print("Htech chat reply routing setup failed: " + exc.code)
+        except Exception:
+            reply_ready = False
+            print("Htech chat reply routing setup failed: unexpected error")
+        self._respond(200, {"ok": True, "alert_sent": True, "reply_ready": reply_ready})
 
     def log_message(self, _format: str, *_args) -> None:
         # Avoid logging visitor message content or identifiers.
