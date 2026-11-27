@@ -40,6 +40,15 @@ async function verify() {
     score: 72,
     rating: 'Room to improve',
     summary: { good: 5, attention: 4, priority: 2 },
+    proposal_context: {
+      focus: 'making the customer journey and enquiry path clearer',
+      top_findings: [
+        { title: 'Contact & enquiry path', action: 'Add a clear contact route and enquiry form' },
+        { title: 'Page hierarchy', action: 'Give each page one clear primary heading' }
+      ],
+      strengths: ['Secure connection', 'Mobile viewport setup'],
+      has_opportunities: true
+    },
     scanned_pages: [
       { title: 'Home', url: 'https://example.com/' },
       { title: 'Services', url: 'https://example.com/services/' },
@@ -55,10 +64,15 @@ async function verify() {
     })),
     scope: 'This is a limited public HTML scan, not a complete audit.'
   };
-  const scanDoc = await window.GrowthProposal.createPdf({ type: 'scan', report: scanReport }, 'Example Business', false);
+  const scanDoc = await window.GrowthProposal.createPdf({ type: 'scan', report: scanReport }, 'Example Business', 'Jordan Example', false);
   const scanBytes = Buffer.from(scanDoc.output('arraybuffer'));
   assert(scanBytes.subarray(0, 5).toString() === '%PDF-', 'Scan proposal should be a valid PDF.');
   assert(scanDoc.getNumberOfPages() >= 2, 'Longer scan reports should paginate without clipping findings.');
+  const scanContent = JSON.stringify(scanDoc.internal.pages);
+  assert(scanContent.includes('Dear Jordan Example'), 'Scan proposal should be addressed to the named recipient.');
+  assert(scanContent.includes('Prepared for Jordan Example'), 'The cover should identify the recipient, not the sender.');
+  assert(scanContent.includes('Example Business'), 'Scan proposal should personalize the message to the business.');
+  assert(scanContent.includes('enquiry path clearer'), 'The scan letter should use the Python analyzer\'s contextual focus.');
   const scanPdfText = scanDoc.output();
   assert(scanPdfText.includes('/Annots') && scanPdfText.includes('mailto:htechdigitalconcept@gmail.com'), 'PDF footer should include a clickable email link.');
   assert(scanPdfText.includes('https://www.upwork.com/freelancers/~01b7d7e1d5bc855117'), 'PDF footer should include the Upwork link.');
@@ -76,15 +90,22 @@ async function verify() {
       features: ['Secure payments', 'Order confirmations'],
       why: ['A direct sales channel', 'Better product discovery', 'Clear customer support']
     }
-  }, 'Example Retail Co', false);
+  }, 'Example Retail Co', 'Alex Retail', false);
   const blueprintBytes = Buffer.from(blueprintDoc.output('arraybuffer'));
   assert(blueprintBytes.subarray(0, 5).toString() === '%PDF-', 'Blueprint proposal should be a valid PDF.');
   assert(blueprintDoc.getNumberOfPages() >= 1, 'Blueprint proposal should contain a page.');
+  const blueprintContent = JSON.stringify(blueprintDoc.internal.pages);
+  assert(blueprintContent.includes('Dear Alex Retail'), 'First-site proposal should be addressed to the named recipient.');
+  assert(blueprintContent.includes('Prepared for Alex Retail'), 'The cover should identify the recipient, not the sender.');
+  assert(blueprintContent.includes('Example Retail Co'), 'First-site proposal should personalize the message to the business.');
+  assert(blueprintContent.includes('Sell products online'), 'First-site proposal should reference the selected business goal.');
 
   const source = require('fs').readFileSync(path.join(__dirname, '..', 'assets/js/growth-proposal.js'), 'utf8').toLowerCase();
   assert(requestedPdfLibrary.endsWith('/assets/js/vendor/jspdf.umd.min.js'), 'The PDF library should load locally only when a PDF is requested.');
-  assert(source.includes('input.required = true'), 'The PDF must require a business name.');
-  assert(source.includes('button.disabled = true'), 'The PDF download must not be enabled before the name is entered.');
+  assert(source.includes('input.required = true'), 'The PDF must require identifying names.');
+  assert(source.includes("addnamefield(ownerid, 'recipientname', 'your name'"), 'The PDF should ask who it is addressed to.');
+  assert(source.includes("addnamefield(businessid, 'businessname', 'business name'"), 'The PDF should ask which business the proposal is for.');
+  assert(source.includes('button.disabled = true'), 'The PDF download must not be enabled before the names are entered.');
   assert(!source.includes('share this pdf with ademola to discuss your project'), 'The footer should not repeat a send/share instruction.');
   for (const detail of [
     'websites that turn visitors into customers',

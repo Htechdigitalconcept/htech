@@ -588,6 +588,40 @@ def _analyse_page(fetch_result: dict) -> dict:
     return _parse_page(fetch_result)
 
 
+def _proposal_context(checks: list[dict]) -> dict:
+    """Turn scan checks into concise, evidence-led inputs for the client-side proposal letter."""
+    ordered = sorted(checks, key=lambda check: ({"priority": 0, "attention": 1, "good": 2}.get(check.get("status"), 3), check.get("category", "")))
+    findings = [check for check in ordered if check.get("status") != "good"]
+    strengths = [check for check in ordered if check.get("status") == "good"]
+    focus_signals = {check.get("id", "") for check in findings}
+    focus = []
+    if focus_signals.intersection({"actions", "contact", "forms"}):
+        focus.append("making the customer journey and enquiry path clearer")
+    if focus_signals.intersection({"metadata", "indexing", "security"}):
+        focus.append("strengthening search clarity and visitor confidence")
+    if focus_signals.intersection({"mobile", "images"}):
+        focus.append("improving the mobile and accessible experience")
+    if focus_signals.intersection({"structure", "proof"}):
+        focus.append("making the offer and credibility easier to understand")
+    if not focus:
+        focus.append("building on the foundations identified by the scan")
+    return {
+        "focus": "; ".join(focus),
+        "top_findings": [
+            {
+                "id": check.get("id", ""),
+                "category": check.get("category", ""),
+                "title": check.get("title", ""),
+                "status": check.get("status", "attention"),
+                "action": check.get("recommendation", ""),
+            }
+            for check in findings[:3]
+        ],
+        "strengths": [check.get("title", "") for check in strengths[:3]],
+        "has_opportunities": bool(findings),
+    }
+
+
 def scan_website(raw_url: str) -> dict:
     target, original_host, implicit_https = _normalise_url(raw_url)
     started = time.monotonic()
@@ -635,6 +669,7 @@ def scan_website(raw_url: str) -> dict:
         "rating": rating,
         "scanned_pages": page_summaries,
         "checks": checks,
+        "proposal_context": _proposal_context(checks),
         "summary": {"good": good_count, "attention": len(checks) - good_count - priority_count, "priority": priority_count},
         "scope": "Live HTML review of the homepage and up to two high-priority same-domain links. JavaScript-rendered content, private pages, third-party scripts, images, visitor speed and Core Web Vitals are not fully tested.",
     }

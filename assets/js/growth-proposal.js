@@ -35,30 +35,38 @@
     var heading = make('h4', '', 'Take this plan with you.');
     heading.id = 'growth-proposal-title';
     section.appendChild(heading);
-    section.appendChild(make('p', '', 'Add your business name to prepare a branded PDF proposal. Download it and send it to Ademola by email, Upwork or LinkedIn. Your name is used only in the PDF; it is not submitted or stored.'));
+    section.appendChild(make('p', '', 'Add your name and business name to create a proposal addressed to you, from Ademola. The names are used only in the downloaded PDF; they are not submitted or stored.'));
 
     var form = make('form', 'growth-proposal-export__form');
-    var label = make('label', 'growth-field');
-    var inputId = 'proposal-business-' + Math.random().toString(36).slice(2, 9);
-    var inputLabel = make('span', '', 'Business name');
-    var input = make('input');
-    input.id = inputId;
-    input.name = 'businessName';
-    input.type = 'text';
-    input.autocomplete = 'organization';
-    input.maxLength = 70;
-    input.required = true;
-    input.placeholder = 'Enter your business name';
-    input.setAttribute('aria-describedby', inputId + '-hint');
-    label.appendChild(inputLabel);
-    label.appendChild(input);
-    var hint = make('small', 'growth-field__hint', 'The PDF includes your tailored findings or site plan, Htech branding and clickable email, Upwork and LinkedIn details.');
-    hint.id = inputId + '-hint';
-    label.appendChild(hint);
-    form.appendChild(label);
+    var fields = make('div', 'growth-proposal-export__fields');
+    var ownerId = 'proposal-owner-' + Math.random().toString(36).slice(2, 9);
+    var businessId = 'proposal-business-' + Math.random().toString(36).slice(2, 9);
+    function addNameField(id, name, labelText, placeholder, autocomplete, maxLength) {
+      var label = make('label', 'growth-field');
+      var caption = make('span', '', labelText);
+      var input = make('input');
+      input.id = id;
+      input.name = name;
+      input.type = 'text';
+      input.autocomplete = autocomplete;
+      input.maxLength = maxLength;
+      input.required = true;
+      input.placeholder = placeholder;
+      label.appendChild(caption);
+      label.appendChild(input);
+      fields.appendChild(label);
+      return input;
+    }
+    var ownerInput = addNameField(ownerId, 'recipientName', 'Your name', 'Your name', 'name', 70);
+    var businessInput = addNameField(businessId, 'businessName', 'Business name', 'Your business name', 'organization', 70);
+    var hint = make('small', 'growth-field__hint', 'The PDF is written from Ademola to you, using your scan findings or business goals. It includes Htech branding and clickable email, Upwork and LinkedIn details.');
+    hint.id = businessId + '-hint';
+    businessInput.setAttribute('aria-describedby', businessId + '-hint');
+    fields.appendChild(hint);
+    form.appendChild(fields);
 
     var actions = make('div', 'growth-proposal-export__actions');
-    var button = make('button', 'btn btn--yellow', 'Download personalized PDF');
+    var button = make('button', 'btn btn--yellow', 'Download personalized proposal PDF');
     button.type = 'submit';
     button.disabled = true;
     button.appendChild(make('span', 'btn__arrow', '↓'));
@@ -69,33 +77,43 @@
     actions.appendChild(status);
     form.appendChild(actions);
     var isGenerating = false;
-    form.addEventListener('input', function () {
-      input.setCustomValidity('');
-      button.disabled = isGenerating || !input.value.trim();
+    function cleanName(field) {
+      return field.value.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+    function refreshDownloadState() {
+      ownerInput.setCustomValidity('');
+      businessInput.setCustomValidity('');
+      button.disabled = isGenerating || !cleanName(ownerInput) || !cleanName(businessInput);
       status.textContent = '';
-    });
+    }
+    form.addEventListener('input', refreshDownloadState);
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       if (isGenerating) return;
-      var businessName = input.value.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim();
-      if (!businessName) {
-        input.setCustomValidity('Enter your business name to personalize the PDF.');
-        input.reportValidity();
+      var recipientName = cleanName(ownerInput);
+      var businessName = cleanName(businessInput);
+      if (!recipientName) {
+        ownerInput.setCustomValidity('Enter your name so the proposal can be addressed to you.');
+        ownerInput.reportValidity();
         return;
       }
-      input.setCustomValidity('');
+      if (!businessName) {
+        businessInput.setCustomValidity('Enter your business name to personalize the proposal.');
+        businessInput.reportValidity();
+        return;
+      }
       isGenerating = true;
       button.disabled = true;
       button.textContent = 'Preparing your PDF…';
       status.textContent = '';
-      createPdf(proposal, businessName).then(function () {
+      createPdf(proposal, businessName, recipientName).then(function () {
         status.textContent = 'Your PDF is ready. Share it with Ademola to discuss your project.';
       }).catch(function () {
         status.textContent = 'The PDF could not be prepared. Please try again or contact Ademola directly.';
       }).finally(function () {
         isGenerating = false;
-        button.disabled = !input.value.trim();
-        button.replaceChildren(document.createTextNode('Download personalized PDF '));
+        button.disabled = !cleanName(ownerInput) || !cleanName(businessInput);
+        button.replaceChildren(document.createTextNode('Download personalized proposal PDF '));
         button.appendChild(make('span', 'btn__arrow', '↓'));
       });
     });
@@ -151,7 +169,7 @@
     return (slug.slice(0, 54) || 'business') + '-htech-website-proposal.pdf';
   }
 
-  function createPdf(proposal, businessName, shouldDownload) {
+  function createPdf(proposal, businessName, recipientName, shouldDownload) {
     return ensurePdfLibrary().then(logoAsPng).then(function (logo) {
       var JsPDF = window.jspdf.jsPDF;
       var doc = new JsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4', compress: true });
@@ -321,11 +339,12 @@
         doc.text(kind, margin, 53);
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(9);
-        var preparedForLines = doc.splitTextToSize('Prepared for ' + businessName, pageWidth - margin * 2);
-        doc.text(preparedForLines, margin, 62);
+        doc.text('Prepared for ' + recipientName, margin, 62);
+        doc.setFontSize(8);
+        doc.text('Business: ' + businessName, margin, 68);
         doc.setFontSize(7.4);
         doc.setTextColor(211, 221, 233);
-        doc.text('A personalized, practical direction for your website and next business step', margin, 73);
+        doc.text('A personalized, practical direction for your website and next business step', margin, 74);
         doc.setTextColor.apply(doc, COLORS.muted);
         doc.text('PREPARED ' + date.toUpperCase(), pageWidth - margin, 18, { align: 'right' });
         y = 88;
@@ -355,6 +374,66 @@
         doc.text((report.scanned_pages || []).length + ' public pages reviewed', margin + 54, panelY + 11);
         doc.text((Number(summary.good) || 0) + ' strengths   |   ' + (Number(summary.attention) || 0) + ' opportunities   |   ' + (Number(summary.priority) || 0) + ' priority fixes', margin + 54, panelY + 17);
         y += 31;
+      }
+
+      function addSignature() {
+        paragraph('Kind regards,', { size: 8.5, after: 1 });
+        paragraph('Ademola Habeeb', { size: 9, style: 'bold', color: COLORS.navy, after: 1 });
+        paragraph('Htech Digital Concepts | Website Designer and WordPress Developer', { size: 7.7, color: COLORS.muted, after: 4 });
+      }
+
+      function addScanMessage(report, businessName, recipientName) {
+        var checks = Array.isArray(report.checks) ? report.checks : [];
+        var strengths = checks.filter(function (check) { return check.status === 'good'; });
+        var improvements = checks.filter(function (check) { return check.status !== 'good'; }).sort(function (a, b) {
+          var order = { priority: 0, attention: 1 };
+          return (order[a.status] === undefined ? 2 : order[a.status]) - (order[b.status] === undefined ? 2 : order[b.status]);
+        });
+        var context = report.proposal_context || {};
+        var contextualFindings = Array.isArray(context.top_findings) ? context.top_findings : [];
+        var contextualStrengths = Array.isArray(context.strengths) ? context.strengths : [];
+        var findingsForMessage = contextualFindings.length ? contextualFindings : improvements;
+        var strengthsForMessage = contextualStrengths.length ? contextualStrengths : strengths.map(function (check) { return check.title; });
+        var domain = report.domain || report.final_url || 'the public website';
+        sectionTitle('A personal note from Ademola');
+        paragraph('Dear ' + recipientName + ',', { size: 9.5, style: 'bold', after: 3 });
+        if (findingsForMessage.length) {
+          var observed = findingsForMessage.slice(0, 3).map(function (check) { return String(check.title || '').toLowerCase(); }).filter(Boolean).join(', ');
+          paragraph('I prepared this proposal for ' + businessName + ' after the Growth Check scanned its public pages at ' + domain + '. The clearest opportunities identified are ' + observed + '.', { size: 8.5, after: 3 });
+          if (context.focus) paragraph('Together, these point to ' + context.focus + '.', { size: 8.5, after: 3 });
+          if (strengthsForMessage.length) {
+            var strengthsText = strengthsForMessage.slice(0, 2).map(function (title) { return String(title).toLowerCase(); }).join(' and ');
+            paragraph('It also found positive foundations in ' + strengthsText + ', which we can build on.', { size: 8.5, after: 3 });
+          }
+          var firstFinding = findingsForMessage[0];
+          var secondFinding = findingsForMessage[1];
+          var firstAction = String(firstFinding.action || firstFinding.recommendation || firstFinding.title || '').replace(/[\s.!?]+$/g, '');
+          var secondAction = secondFinding && String(secondFinding.action || secondFinding.recommendation || secondFinding.title || '').replace(/[\s.!?]+$/g, '');
+          paragraph('My recommendation is to begin with this action: ' + firstAction + '.' + (secondAction ? ' A second priority is: ' + secondAction + '.' : '') + ' I would validate these findings with you and agree the most useful scope before setting a timeline or investment.', { size: 8.5, after: 3 });
+        } else {
+          paragraph('I prepared this proposal for ' + businessName + ' after the Growth Check scanned its public pages at ' + domain + '. It found solid foundations across the checks it could perform and did not flag an urgent issue in the sampled HTML.', { size: 8.5, after: 3 });
+          paragraph('A manual review can still check how well the site supports your customers and business priorities. I would confirm that context with you before recommending any work or investment.', { size: 8.5, after: 3 });
+        }
+        paragraph('This is a lightweight public-page scan, not a complete technical audit. I would confirm each finding with you, then design and build a focused improvement plan for ' + businessName + '.', { size: 8, color: COLORS.muted, after: 3 });
+        addSignature();
+      }
+
+      function addBlueprintMessage(proposal, businessName, recipientName) {
+        var plan = proposal.plan || {};
+        var pages = Array.isArray(plan.pages) ? plan.pages : [];
+        var features = Array.isArray(plan.features) ? plan.features : [];
+        var pageNames = pages.slice(0, 3).map(function (item) { return Array.isArray(item) ? item[0] : item.title; }).filter(Boolean);
+        var featureNames = features.slice(0, 2);
+        sectionTitle('A personal note from Ademola');
+        paragraph('Dear ' + recipientName + ',', { size: 9.5, style: 'bold', after: 3 });
+        paragraph('Based on what you shared about ' + businessName + ' and your business type (' + (proposal.industry || 'growing business') + '), I have shaped this first-site proposal around your selected goal: ' + (proposal.goalTitle || 'a useful online presence') + '.', { size: 8.5, after: 3 });
+        if (pageNames.length) {
+          paragraph('A focused first version could begin with ' + pageNames.join(', ') + (pageNames.length === 3 ? ', plus the supporting pages in the plan below.' : '.'), { size: 8.5, after: 3 });
+        }
+        if (featureNames.length) paragraph('To support that outcome, I would prioritize ' + featureNames.join(' and ') + ', then add other functionality only where it serves your customers.', { size: 8.5, after: 3 });
+        paragraph('I can work with you to confirm your audience, offer and content, then design and build the agreed site and test the important journeys before launch. We would confirm the final scope, timeline and investment together before work begins.', { size: 8.5, after: 3 });
+        paragraph('This is a starting proposal shaped around your stated goal, not a promise of a particular business result. The final plan should reflect your requirements and resources.', { size: 8, color: COLORS.muted, after: 3 });
+        addSignature();
       }
 
       function addFooter() {
@@ -387,6 +466,7 @@
       drawCover();
       if (proposal.type === 'scan') {
         var report = proposal.report || {};
+        addScanMessage(report, businessName, recipientName);
         sectionTitle('Website scan snapshot');
         drawScorePanel(report);
         paragraph('Website reviewed: ' + (report.final_url || report.domain || 'Public website') + '. This scan checks public HTML only and is intended as a practical starting point, not a complete technical audit.', { size: 8.2, color: COLORS.muted, after: 5 });
@@ -416,6 +496,7 @@
         paragraph(report.scope || 'This scan is guidance based on a small sample of public HTML. It does not measure Core Web Vitals or guarantee business outcomes.', { size: 7.3, color: COLORS.muted, after: 0 });
       } else {
         var plan = proposal.plan || {};
+        addBlueprintMessage(proposal, businessName, recipientName);
         sectionTitle('Your business direction');
         paragraph('Business: ' + (proposal.industry || 'Growing business'), { size: 9.2, style: 'bold', after: 2 });
         paragraph('Primary goal: ' + (proposal.goalTitle || plan.label || 'Build a stronger website'), { size: 9.2, style: 'bold', color: COLORS.blue, after: 3 });

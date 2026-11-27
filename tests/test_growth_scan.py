@@ -69,6 +69,18 @@ class GrowthScanTests(unittest.TestCase):
         self.assertEqual(checks["actions"]["status"], "priority")
         self.assertIn("no usable destination", checks["actions"]["evidence"])
 
+    def test_python_proposal_context_uses_prioritized_scan_findings(self):
+        context = GROWTH._proposal_context([
+            {"id": "mobile", "category": "Mobile experience", "title": "Mobile viewport setup", "status": "good", "recommendation": ""},
+            {"id": "metadata", "category": "Search & discovery", "title": "Search appearance", "status": "attention", "recommendation": "Improve the page description."},
+            {"id": "contact", "category": "Conversion", "title": "Contact & enquiry path", "status": "priority", "recommendation": "Add a clear enquiry form."},
+        ])
+        self.assertEqual(context["top_findings"][0]["id"], "contact")
+        self.assertIn("clearer", context["focus"])
+        self.assertIn("Search appearance", [item["title"] for item in context["top_findings"]])
+        self.assertIn("Mobile viewport setup", context["strengths"])
+        self.assertTrue(context["has_opportunities"])
+
     def test_priority_pages_stay_on_the_same_site(self):
         home = {
             "links": [
@@ -126,6 +138,9 @@ class GrowthScanTests(unittest.TestCase):
         self.assertEqual(result['domain'], 'example.com')
         self.assertEqual(len(result['checks']), 11)
         self.assertTrue(all(check['status'] in ('good', 'attention', 'priority') for check in result['checks']))
+        self.assertIn('proposal_context', result)
+        self.assertIn('focus', result['proposal_context'])
+        self.assertIsInstance(result['proposal_context']['top_findings'], list)
         self.assertIn('up to two', result['scope'])
 
 
