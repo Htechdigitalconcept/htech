@@ -69,6 +69,17 @@ class GrowthScanTests(unittest.TestCase):
         self.assertEqual(checks["actions"]["status"], "priority")
         self.assertIn("no usable destination", checks["actions"]["evidence"])
 
+    def test_live_homepage_metadata_and_heading_hierarchy_are_clean(self):
+        homepage = Path(__file__).resolve().parents[1] / "index.html"
+        document = homepage.read_text(encoding="utf-8")
+        page = GROWTH._parse_page({
+            "url": "https://htech-two.vercel.app/", "status": 200, "html": document,
+            "bytes": len(document.encode("utf-8")), "truncated": False, "elapsed_ms": 100, "redirects": 0,
+        })
+        checks = {item["id"]: item for item in GROWTH._build_checks([page])}
+        self.assertEqual(checks["indexing"]["status"], "good")
+        self.assertEqual(checks["structure"]["status"], "good")
+
     def test_python_proposal_context_uses_prioritized_scan_findings(self):
         context = GROWTH._proposal_context([
             {"id": "mobile", "category": "Mobile experience", "title": "Mobile viewport setup", "status": "good", "recommendation": ""},
