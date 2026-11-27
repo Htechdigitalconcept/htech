@@ -64,6 +64,15 @@
     return reply;
   }
 
+  function buildWhatsAppUrl(messages) {
+    var request = (messages || []).filter(function (entry) { return entry.who === 'user'; })
+      .map(function (entry) { return String(entry.text || '').trim(); })
+      .filter(Boolean).join(' / ').slice(0, 700);
+    var message = 'Hi Ademola, I came from the Htech website assistant and would like to discuss a website project.';
+    if (request) message += '\n\nHere is what I am looking for: ' + request;
+    return 'https://wa.me/2348137677307?text=' + encodeURIComponent(message);
+  }
+
   function createWidget() {
     if (!root.document || root.document.getElementById('htech-chat')) return;
     var host = root.document.createElement('div');
@@ -75,7 +84,7 @@
         '<div class="htech-chat__messages" role="log" aria-live="polite" aria-relevant="additions text"></div>' +
         '<div class="htech-chat__quick" aria-label="Suggested questions"><button type="button" data-chat-prompt="I need a website for my service business">Service website</button><button type="button" data-chat-prompt="I want to sell products online with a store">Online store</button><button type="button" data-chat-prompt="I need help improving my existing website">Improve my website</button></div>' +
         '<form class="htech-chat__form"><label class="htech-chat__sr-only" for="htech-chat-input">Ask a question or describe your website goal</label><textarea id="htech-chat-input" name="message" rows="1" maxlength="600" placeholder="Ask a question or share your goal…" required></textarea><button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-5 16-3-7zM12 13l8-9"></path></svg></button></form>' +
-        '<div class="htech-chat__contact"><span>Want to speak with Ademola?</span><a class="htech-chat__email" href="mailto:htechdigitalconcept@gmail.com?subject=Website%20project%20question">Email me <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></div>' +
+        '<div class="htech-chat__contact"><span>Want to speak with Ademola?</span><a class="htech-chat__email" href="mailto:htechdigitalconcept@gmail.com?subject=Website%20project%20question">Email me <span aria-hidden="true">↗</span></a><a class="htech-chat__whatsapp" href="https://wa.me/2348137677307" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Ademola at +234 813 767 7307">WhatsApp <span>+234 813 767 7307</span> <i aria-hidden="true">↗</i></a><a href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></div>' +
         '<p class="htech-chat__disclaimer">Answers are based on Htech’s published information. No chat messages are stored.</p>' +
       '</section>';
     root.document.body.appendChild(host);
@@ -87,6 +96,7 @@
     var form = host.querySelector('.htech-chat__form');
     var input = host.querySelector('#htech-chat-input');
     var emailLink = host.querySelector('.htech-chat__email');
+    var whatsappLink = host.querySelector('.htech-chat__whatsapp');
     var feed = null;
     var context = '';
     var transcript = [];
@@ -108,11 +118,12 @@
       else launcher.focus();
     }
 
-    function updateEmailLink() {
+    function updateContactLinks() {
       var body = 'Hi Ademola, I have a website question.\n\n' + transcript.map(function (entry) {
         return (entry.who === 'user' ? 'Me: ' : 'Htech Assistant: ') + entry.text;
       }).join('\n\n');
       emailLink.href = 'mailto:htechdigitalconcept@gmail.com?subject=' + encodeURIComponent('Website question from Htech chat') + '&body=' + encodeURIComponent(body);
+      whatsappLink.href = buildWhatsAppUrl(transcript);
     }
 
     function submitMessage(rawText) {
@@ -121,11 +132,11 @@
       addMessage(text, 'user');
       transcript.push({ who: 'user', text: text });
       context = (context + ' ' + text).trim().slice(-1800);
-      updateEmailLink();
+      updateContactLinks();
       var reply = feed ? buildReply(text, context, feed) : 'I’m loading Htech’s information. Please try again in a moment, or contact Ademola directly below.';
       addMessage(reply, 'assistant');
       transcript.push({ who: 'assistant', text: reply });
-      updateEmailLink();
+      updateContactLinks();
       messages.scrollTop = messages.scrollHeight;
     }
 
@@ -169,7 +180,7 @@
   }
 
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { matchAnswer: matchAnswer, classifyContext: classifyContext, buildReply: buildReply };
+    module.exports = { matchAnswer: matchAnswer, classifyContext: classifyContext, buildReply: buildReply, buildWhatsAppUrl: buildWhatsAppUrl };
   }
   if (root.document) {
     if (root.document.readyState === 'loading') root.document.addEventListener('DOMContentLoaded', createWidget, { once: true });
