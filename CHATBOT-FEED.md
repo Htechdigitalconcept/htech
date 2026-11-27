@@ -25,4 +25,4 @@ The bundled file is served publicly with the website, so editing it and redeploy
 
 ## Direct contact
 
-The widget offers direct WhatsApp chat with Ademola at `+234 813 767 7307`, email to `htechdigitalconcept@gmail.com`, and his LinkedIn profile. If the visitor has written a request in chat, the WhatsApp link opens with a short prefilled summary; the visitor can edit it and choose whether to send it.
+The widget offers icon-only shortcuts to WhatsApp, email and Ademola's LinkedIn profile. The phone number is not displayed in the chat UI. If the visitor has written a request in chat, the WhatsApp link opens with a short prefilled summary; the visitor can edit it and choose whether to send it.
