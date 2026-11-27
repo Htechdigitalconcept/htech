@@ -155,10 +155,15 @@
           body: JSON.stringify(payload),
           keepalive: true
         }).then(function (response) {
-          if (!response.ok) {
+          return response.json().catch(function () { return {}; }).then(function (data) { return { response: response, data: data }; });
+        }).then(function (result) {
+          if (!result.response.ok) {
             if (isOpenEvent) notificationSent.open = false;
-            if (root.console && root.console.warn) root.console.warn('Telegram chat notification was not delivered (HTTP ' + response.status + ').');
+            if (root.console && root.console.warn) root.console.warn('Telegram chat notification was not delivered (HTTP ' + result.response.status + '): ' + (result.data.error || 'unknown error'));
             return;
+          }
+          if (result.data.reply_ready === false && root.console && root.console.warn) {
+            root.console.warn('Telegram alert sent, but live replies are not ready. Check the Vercel logs for the API error code.');
           }
           if (isOpenEvent) {
             try { if (root.sessionStorage) root.sessionStorage.setItem(storageKey, '1'); } catch (_storageError) {}

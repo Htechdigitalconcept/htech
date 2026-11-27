@@ -41,17 +41,20 @@ def redis_command(*command: str) -> object:
     if not endpoint or not token:
         raise ChatBackendError("missing_redis_config")
     request = Request(
-        endpoint.rstrip("/"),
-        data=json.dumps(list(command), ensure_ascii=False).encode("utf-8"),
+        endpoint.rstrip("/") + "/pipeline",
+        data=json.dumps([list(command)], ensure_ascii=False).encode("utf-8"),
         headers={"Authorization": "Bearer " + token, "Content-Type": "application/json"},
         method="POST",
     )
     try:
         with urlopen(request, timeout=4) as response:
             body = json.loads(response.read(16384).decode("utf-8"))
-        if body.get("error"):
+        if not isinstance(body, list) or not body or not isinstance(body[0], dict):
             raise ChatBackendError("redis_command_failed")
-        return body.get("result")
+        result = body[0]
+        if result.get("error"):
+            raise ChatBackendError("redis_command_failed")
+        return result.get("result")
     except ChatBackendError:
         raise
     except (OSError, TimeoutError, URLError, ValueError) as exc:

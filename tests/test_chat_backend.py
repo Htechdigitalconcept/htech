@@ -16,7 +16,7 @@ class FakeResponse:
         return None
 
     def read(self, _limit):
-        return b'{"result":"OK"}'
+        return b'[{"result":"OK"}]'
 
 
 class ChatBackendTests(unittest.TestCase):
@@ -27,7 +27,8 @@ class ChatBackendTests(unittest.TestCase):
         }, clear=True), patch.object(chat_backend, "urlopen", return_value=FakeResponse()) as send:
             self.assertEqual(chat_backend.redis_command("SET", "key", "value", "EX", "60"), "OK")
         request = send.call_args.args[0]
-        self.assertEqual(json.loads(request.data), ["SET", "key", "value", "EX", "60"])
+        self.assertEqual(request.full_url, "https://redis.example/pipeline")
+        self.assertEqual(json.loads(request.data), [["SET", "key", "value", "EX", "60"]])
         self.assertEqual(request.get_header("Authorization"), "Bearer never-return-this")
 
     def test_missing_redis_environment_is_reported_without_network(self):
