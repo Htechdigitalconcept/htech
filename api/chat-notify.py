@@ -1,25 +1,30 @@
-"""Send chat-open and first-message alerts to the site owner's Telegram bot.
-
-Vercel exposes this handler at POST /api/chat-notify. Telegram credentials are
-read only from server-side environment variables; visitor text is not stored.
-"""
+"""Create a live website-chat session and forward visitor activity to Telegram."""
 from __future__ import annotations
 
 import json
-import os
 import re
 import time
+import uuid
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler
-from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
-from urllib.request import Request, urlopen
+
+from lib.chat_backend import (
+    SESSION_TTL_SECONDS,
+    ChatBackendError,
+    ensure_webhook,
+    public_error,
+    redis_command,
+    save_telegram_message,
+    telegram_api,
+    telegram_credentials,
+)
 
 MAX_BODY_BYTES = 4096
 MAX_MESSAGE_CHARS = 600
 MAX_PAGE_CHARS = 180
 RATE_WINDOW_SECONDS = 600
-RATE_MAX_EVENTS = 40
+RATE_MAX_EVENTS = 80
 _RATE_BUCKETS: dict[str, list[float]] = {}
 _CONTROL_CHARS = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
 
@@ -28,16 +33,28 @@ def _clean_text(value: str, limit: int) -> str:
     return _CONTROL_CHARS.sub("", value).strip()[:limit]
 
 
-def _format_notification(event: str, page: str, message: str = "") -> str:
+def _valid_session_id(value: object) -> str | None:
+    if not isinstance(value, str) or len(value) > 40:
+        return None
+    try:
+        return str(uuid.UUID(value))
+    except (ValueError, AttributeError, TypeError):
+        return None
+
+
+def _format_notification(event: str, page: str, message: str, session_id: str) -> str:
+    tag = session_id.split("-", 1)[0].upper()
     page = _clean_text(page, MAX_PAGE_CHARS) or "/"
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     if event == "open":
-        return "Htech website chat opened\nPage: " + page + "\nTime: " + timestamp
-    if event == "first_message":
+        return ("Website chat opened · " + tag + "\nPage: " + page + "\nTime: " + timestamp +
+                "\nReply to this Telegram message to answer this visitor directly.")
+    if event == "message":
         message = _clean_text(message, MAX_MESSAGE_CHARS)
         if not message:
-            raise ValueError("A first message is required for this event.")
-        return "New first message in Htech website chat\nPage: " + page + "\nMessage: " + message + "\nTime: " + timestamp
+            raise ValueError("A visitor message is required.")
+        return ("Website visitor · " + tag + "\nPage: " + page + "\nMessage: " + message +
+                "\n\nReply directly to this Telegram message to send your response to this visitor.")
     raise ValueError("Unsupported chat notification event.")
 
 
@@ -49,7 +66,6 @@ def _rate_limited(client_key: str) -> bool:
         return True
     recent.append(now)
     _RATE_BUCKETS[client_key] = recent
-    # Periodically discard inactive keys so a warm serverless instance stays small.
     if len(_RATE_BUCKETS) > 1000:
         for key in list(_RATE_BUCKETS):
             if not any(now - stamp < RATE_WINDOW_SECONDS for stamp in _RATE_BUCKETS[key]):
@@ -69,39 +85,9 @@ def _same_origin(origin: str | None, request_host: str) -> bool:
     return parsed.scheme in ("http", "https") and bool(origin_host) and origin_host == host
 
 
-def _environment_value(*names: str) -> str:
-    for name in names:
-        value = os.environ.get(name, "").strip()
-        if value:
-            return value
-    return ""
-
-
-def _send_telegram(message: str) -> str | None:
-    token = _environment_value("TELEGRAM_BOT_TOKEN", "CHAT_BOT_TOKEN", "chat_bot_token", "telegram_bot_token")
-    chat_id = _environment_value("TELEGRAM_CHAT_ID", "CHAT_ID", "chat_id", "telegram_chat_id")
-    if not token or not chat_id:
-        return "missing_configuration"
-    endpoint = "https://api.telegram.org/bot" + token + "/sendMessage"
-    request = Request(
-        endpoint,
-        data=json.dumps({"chat_id": chat_id, "text": message}, ensure_ascii=False).encode("utf-8"),
-        headers={"Content-Type": "application/json", "Accept": "application/json"},
-        method="POST",
-    )
-    try:
-        with urlopen(request, timeout=4) as response:
-            result = json.loads(response.read(4096).decode("utf-8"))
-            return None if response.status == 200 and bool(result.get("ok")) else "telegram_rejected"
-    except HTTPError:
-        return "telegram_rejected"
-    except (OSError, TimeoutError, URLError, ValueError):
-        return "telegram_unreachable"
-
-
 class handler(BaseHTTPRequestHandler):
     def _respond(self, status: int, payload: dict) -> None:
-        body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
+        body = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
@@ -112,7 +98,7 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self) -> None:
-        self._respond(405, {"error": "Use POST to send a chat notification."})
+        self._respond(405, {"error": "Use POST to send a chat event."})
 
     def do_POST(self) -> None:
         if not _same_origin(self.headers.get("Origin"), self.headers.get("Host", "")):
@@ -126,42 +112,58 @@ class handler(BaseHTTPRequestHandler):
         except ValueError:
             content_length = 0
         if content_length <= 0 or content_length > MAX_BODY_BYTES:
-            self._respond(413, {"error": "The chat notification request is too large or empty."})
+            self._respond(413, {"error": "The chat request is too large or empty."})
             return
         try:
             payload = json.loads(self.rfile.read(content_length).decode("utf-8"))
         except (UnicodeDecodeError, json.JSONDecodeError):
-            self._respond(400, {"error": "The chat notification request could not be read."})
+            self._respond(400, {"error": "The chat request could not be read."})
             return
-        if not isinstance(payload, dict) or payload.get("event") not in ("open", "first_message"):
-            self._respond(400, {"error": "Unsupported chat notification event."})
+        if not isinstance(payload, dict):
+            self._respond(400, {"error": "A chat event is required."})
             return
-        event = payload["event"]
-        message = payload.get("message", "")
+        session_id = _valid_session_id(payload.get("session_id"))
+        event = payload.get("event")
+        if event == "first_message":
+            event = "message"
+        if not session_id or event not in ("open", "message"):
+            self._respond(400, {"error": "A valid chat session and event are required."})
+            return
         page = payload.get("page", "/")
-        if not isinstance(message, str) or not isinstance(page, str):
-            self._respond(400, {"error": "The chat notification fields must be text."})
+        message = payload.get("message", "")
+        if not isinstance(page, str) or not isinstance(message, str):
+            self._respond(400, {"error": "Chat event fields must be text."})
             return
         try:
-            notification = _format_notification(event, page, message)
+            notification = _format_notification(event, page, message, session_id)
         except ValueError:
-            self._respond(400, {"error": "A first chat message is required."})
+            self._respond(400, {"error": "A non-empty visitor message is required."})
             return
         client_key = (self.headers.get("x-forwarded-for", "anonymous").split(",", 1)[0].strip() or "anonymous")[:80]
         if _rate_limited(client_key):
-            self._respond(429, {"error": "Too many chat notifications. Please try again later."})
+            self._respond(429, {"error": "Too many chat messages. Please wait before trying again."})
             return
-        failure = _send_telegram(notification)
-        if failure:
-            if failure == "missing_configuration":
-                self._respond(503, {"error": "Telegram notification credentials are missing."})
-            elif failure == "telegram_rejected":
-                self._respond(502, {"error": "Telegram rejected this notification. Confirm the bot was started and the chat ID is correct."})
-            else:
-                self._respond(502, {"error": "Telegram could not be reached to send the notification."})
+        try:
+            token, owner_chat_id = telegram_credentials()
+            ensure_webhook(token)
+            redis_command("SET", "htech:chat-session:" + session_id,
+                          json.dumps({"page": _clean_text(page, MAX_PAGE_CHARS), "updated": int(time.time())}),
+                          "EX", str(SESSION_TTL_SECONDS))
+            telegram_message = telegram_api(token, "sendMessage", {
+                "chat_id": owner_chat_id,
+                "text": notification,
+                "disable_web_page_preview": True,
+            })
+            save_telegram_message(telegram_message["message_id"], session_id, owner_chat_id)
+        except ChatBackendError as exc:
+            status, error = public_error(exc.code)
+            self._respond(status, {"error": error})
+            return
+        except Exception:
+            self._respond(502, {"error": "The chat event could not be delivered to Telegram."})
             return
         self._respond(200, {"ok": True})
 
     def log_message(self, _format: str, *_args) -> None:
-        # Do not log visitor messages, IP addresses, or notification contents.
+        # Avoid logging visitor message content or identifiers.
         return

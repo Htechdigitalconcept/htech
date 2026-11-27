@@ -1,6 +1,6 @@
 # Htech floating assistant: updating its information feed
 
-The assistant is a small, feed-backed site widget. It matches visitor questions against published Htech facts and FAQs, then adds practical guidance based on whether the visitor mentions a store, service business, new site or existing site. It does not send chat messages to an AI provider or save them on the website. When a visitor opens the chat, the site sends Ademola a Telegram alert; when they send their first message, that message is also sent to him through Telegram. Email contact links can include the visitor's chat so they can choose to share it with Ademola.
+The assistant is a feed-backed site widget. It matches questions against published Htech facts and FAQs and adds practical guidance based on the visitor's business context. Standalone greetings receive a welcome message. Chat messages are sent to Ademola through Telegram; website chat sessions and owner replies are kept temporarily in Redis for up to 24 hours so Telegram replies can return to the correct visitor.
 
 ## Update the bundled feed
 
@@ -23,16 +23,19 @@ Each `answers` item has:
 
 The bundled file is served publicly with the website, so editing it and redeploying is the simplest option. The feed is not a generative AI model: answers come from the verified entries, with simple keyword matching and context-specific guidance. A generative AI integration would need a secure server-side API and credentials; those must not be placed in browser JavaScript.
 
-## Telegram chat notifications
+## Telegram live chat and replies
 
-The widget sends at most one chat-open alert and one first-message alert per browser tab session. The first message text and the current page path are sent to the Telegram bot; the site does not save a transcript. The notification endpoint is `POST /api/chat-notify` and keeps bot credentials server-side.
+Every tab receives a random chat-session ID. Opening the chat and each visitor message generates a Telegram message tagged with a short session label. To reply to one visitor, use Telegram's native **Reply** action on that visitor's Htech message. The webhook maps Telegram's replied-to message back to that exact browser session. Unthreaded Telegram messages are not sent to a visitor. In the website chat, Ademola's first reply is labelled as a direct response from him. The FAQ assistant still answers greetings and known questions immediately.
 
-Set these environment variables in the Vercel project settings for the deployment environment:
+Redis stores the session mapping and up to 40 owner replies per chat for 24 hours. Messages are forwarded to the owner bot chat; the website does not keep a permanent transcript. The widget tells visitors that chat messages go to Telegram and replies are retained temporarily.
 
-- `TELEGRAM_BOT_TOKEN` (or `CHAT_BOT_TOKEN`): the private token created with Telegram's BotFather.
-- `TELEGRAM_CHAT_ID`: the private chat or group ID where alerts should arrive. Start a conversation with the bot (or add it to the target group) before testing, otherwise Telegram will not let it send a message.
+Set these Vercel Production environment variables:
 
-Never put either value in browser JavaScript or commit them to the repository. After changing environment variables, redeploy the Vercel project so the serverless function can read them.
+- `TELEGRAM_BOT_TOKEN` (or `CHAT_BOT_TOKEN`) and `TELEGRAM_CHAT_ID` for the owner's bot conversation. The owner must send `/start` to the bot first.
+- `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` for the Redis database.
+- Optional `TELEGRAM_WEBHOOK_URL` if the production callback URL is not `https://htech-two.vercel.app/api/telegram-webhook`.
+
+The app registers the Telegram webhook when a visitor first opens the chat. Never put credentials in browser JavaScript or commit them. After changing environment variables, redeploy the Vercel project.
 
 ## Direct contact
 
