@@ -96,7 +96,7 @@
         '<a class="htech-chat__icon-link htech-chat__email" href="mailto:htechdigitalconcept@gmail.com?subject=Website%20project%20question" aria-label="Email Ademola" title="Email Ademola"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg><span class="htech-chat__sr-only">Email Ademola</span></a>' +
         '<a class="htech-chat__icon-link htech-chat__icon-link--whatsapp htech-chat__whatsapp" href="https://wa.me/2348137677307" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Ademola" title="WhatsApp Ademola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.2A8.5 8.5 0 1 1 20 11.5Z"></path><path d="M9 8.5c.4 2.1 2 3.7 4 4.5l1.2-1 2 1c-.2 1.3-1.1 2-2.3 2-3.1-.2-6.3-3.3-6.5-6.3 0-1.2.7-2.1 2-2.3l1 2z"></path></svg><span class="htech-chat__sr-only">WhatsApp Ademola</span></a>' +
         '<a class="htech-chat__icon-link htech-chat__icon-link--linkedin" href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener noreferrer" aria-label="Message Ademola on LinkedIn" title="Message Ademola on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h3v10H5z"></path><circle cx="6.5" cy="5.8" r="1.6"></circle><path d="M11 9h3v1.4c.7-1 1.7-1.7 3.2-1.7 2.6 0 3.8 1.6 3.8 4.7V19h-3v-5c0-1.6-.5-2.5-1.9-2.5-1.5 0-2.1 1-2.1 2.5v5h-3z"></path></svg><span class="htech-chat__sr-only">Message Ademola on LinkedIn</span></a></div>' +
-        '<p class="htech-chat__disclaimer">Answers use Htech’s published information. Opening this chat alerts Ademola, and your first message is sent to him via Telegram. The website does not store chat messages.</p>' +
+        '<p class="htech-chat__disclaimer">Answers use Htech’s published information. Chat messages go to Ademola via Telegram; replies are kept temporarily for up to 24 hours so they can appear here.</p>' +
       '</section>';
     root.document.body.appendChild(host);
 
@@ -111,22 +111,43 @@
     var feed = null;
     var context = '';
     var transcript = [];
-    var firstUserMessage = '';
     var notificationSent = Object.create(null);
+    var ownerReplyIds = new Set();
+    var ownerHasReplied = false;
+    var replyPollTimer = null;
+    var replyPollInProgress = false;
+    var chatSessionId = getChatSessionId();
 
-    function notifyOwner(eventName, firstMessage) {
-      if (typeof root.fetch !== 'function') return;
-      var storageKey = 'htech-chat-notified-v2-' + eventName;
+    function getChatSessionId() {
+      var key = 'htech-live-chat-session-v1';
       try {
-        if (root.sessionStorage && root.sessionStorage.getItem(storageKey) === '1') return;
+        var saved = root.sessionStorage && root.sessionStorage.getItem(key);
+        if (saved) return saved;
       } catch (_storageError) {}
-      if (notificationSent[eventName]) return;
-      notificationSent[eventName] = true;
+      var bytes = new Uint8Array(16);
+      if (root.crypto && root.crypto.getRandomValues) root.crypto.getRandomValues(bytes);
+      else for (var i = 0; i < bytes.length; i += 1) bytes[i] = Math.floor(Math.random() * 256);
+      var id = Array.prototype.map.call(bytes, function (byte) { return byte.toString(16).padStart(2, '0'); }).join('');
+      id = id.slice(0, 8) + '-' + id.slice(8, 12) + '-4' + id.slice(13, 16) + '-a' + id.slice(17, 20) + '-' + id.slice(20);
+      try { if (root.sessionStorage) root.sessionStorage.setItem(key, id); } catch (_storageError) {}
+      return id;
+    }
+
+    function notifyOwner(eventName, messageText) {
+      if (typeof root.fetch !== 'function') return;
+      var isOpenEvent = eventName === 'open';
+      var storageKey = 'htech-chat-notified-v3-open';
+      if (isOpenEvent) {
+        try { if (root.sessionStorage && root.sessionStorage.getItem(storageKey) === '1') return; } catch (_storageError) {}
+        if (notificationSent.open) return;
+        notificationSent.open = true;
+      }
       var payload = {
         event: eventName,
-        page: root.location && root.location.pathname ? root.location.pathname : '/'
+        page: root.location && root.location.pathname ? root.location.pathname : '/',
+        session_id: chatSessionId
       };
-      if (eventName === 'first_message') payload.message = String(firstMessage || '').trim().slice(0, 600);
+      if (eventName === 'message') payload.message = String(messageText || '').trim().slice(0, 600);
       try {
         root.fetch('/api/chat-notify', {
           method: 'POST',
@@ -135,20 +156,19 @@
           keepalive: true
         }).then(function (response) {
           if (!response.ok) {
-            notificationSent[eventName] = false;
+            if (isOpenEvent) notificationSent.open = false;
             if (root.console && root.console.warn) root.console.warn('Telegram chat notification was not delivered (HTTP ' + response.status + ').');
             return;
           }
-          try {
-            if (root.sessionStorage) root.sessionStorage.setItem(storageKey, '1');
-          } catch (_storageError) {}
+          if (isOpenEvent) {
+            try { if (root.sessionStorage) root.sessionStorage.setItem(storageKey, '1'); } catch (_storageError) {}
+          }
         }).catch(function () {
-          notificationSent[eventName] = false;
+          if (isOpenEvent) notificationSent.open = false;
           if (root.console && root.console.warn) root.console.warn('Telegram chat notification could not reach the notification endpoint.');
         });
       } catch (_requestError) {
-        notificationSent[eventName] = false;
-        // Notification delivery should never interrupt a visitor's chat.
+        if (isOpenEvent) notificationSent.open = false;
       }
     }
 
@@ -160,6 +180,40 @@
       messages.scrollTop = messages.scrollHeight;
     }
 
+    function pollOwnerReplies() {
+      if (replyPollInProgress || typeof root.fetch !== 'function') return;
+      replyPollInProgress = true;
+      root.fetch('/api/chat-poll?session_id=' + encodeURIComponent(chatSessionId), { cache: 'no-store' })
+        .then(function (response) { if (!response.ok) throw new Error('Poll failed: ' + response.status); return response.json(); })
+        .then(function (data) {
+          (data.messages || []).forEach(function (reply) {
+            if (!reply || !reply.id || typeof reply.text !== 'string' || ownerReplyIds.has(reply.id)) return;
+            ownerReplyIds.add(reply.id);
+            if (!ownerHasReplied) {
+              addMessage('Ademola has joined the chat and is replying to you directly.', 'owner');
+              ownerHasReplied = true;
+            }
+            addMessage(reply.text, 'owner');
+            transcript.push({ who: 'owner', text: reply.text });
+          });
+          if (data.messages && data.messages.length) updateContactLinks();
+        })
+        .catch(function () {})
+        .then(function () { replyPollInProgress = false; });
+    }
+
+    function startReplyPolling() {
+      if (replyPollTimer) return;
+      pollOwnerReplies();
+      replyPollTimer = root.setInterval(pollOwnerReplies, 10000);
+    }
+
+    function stopReplyPolling() {
+      if (!replyPollTimer) return;
+      root.clearInterval(replyPollTimer);
+      replyPollTimer = null;
+    }
+
     function setOpen(open) {
       launcher.setAttribute('aria-expanded', open ? 'true' : 'false');
       launcher.setAttribute('aria-label', open ? 'Close Htech assistant' : 'Open Htech assistant');
@@ -167,13 +221,17 @@
       panel.hidden = !open;
       if (open) {
         notifyOwner('open');
+        startReplyPolling();
         input.focus();
-      } else launcher.focus();
+      } else {
+        stopReplyPolling();
+        launcher.focus();
+      }
     }
 
     function updateContactLinks() {
       var body = 'Hi Ademola, I have a website question.\n\n' + transcript.map(function (entry) {
-        return (entry.who === 'user' ? 'Me: ' : 'Htech Assistant: ') + entry.text;
+        return (entry.who === 'user' ? 'Me: ' : entry.who === 'owner' ? 'Ademola: ' : 'Htech Assistant: ') + entry.text;
       }).join('\n\n');
       emailLink.href = 'mailto:htechdigitalconcept@gmail.com?subject=' + encodeURIComponent('Website question from Htech chat') + '&body=' + encodeURIComponent(body);
       whatsappLink.href = buildWhatsAppUrl(transcript);
@@ -182,8 +240,7 @@
     function submitMessage(rawText) {
       var text = String(rawText || '').trim().slice(0, 600);
       if (!text) return;
-      if (!firstUserMessage) firstUserMessage = text;
-      if (!notificationSent.first_message) notifyOwner('first_message', firstUserMessage);
+      notifyOwner('message', text);
       addMessage(text, 'user');
       transcript.push({ who: 'user', text: text });
       context = (context + ' ' + text).trim().slice(-1800);
