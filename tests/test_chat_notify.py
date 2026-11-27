@@ -85,7 +85,7 @@ class ChatNotificationTests(unittest.TestCase):
         ):
             status, response = self.post(payload)
         self.assertEqual(status, 200)
-        self.assertEqual(response, {"ok": True, "alert_sent": True, "reply_ready": True})
+        self.assertEqual(response, {"ok": True, "alert_sent": True, "reply_ready": True, "reply_routing_error": None})
         self.assertIn("I need a website", send.call_args.args[2]["text"])
         save.assert_called_once_with(77, session_id, "12345")
 

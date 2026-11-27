@@ -52,7 +52,7 @@ class handler(BaseHTTPRequestHandler):
             messages.reverse()
         except ChatBackendError as exc:
             status, error = public_error(exc.code)
-            self._respond(status, {"error": error})
+            self._respond(status, {"error": error, "code": exc.code})
             return
         self._respond(200, {"messages": messages})
 

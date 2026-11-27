@@ -163,7 +163,7 @@
             return;
           }
           if (result.data.reply_ready === false && root.console && root.console.warn) {
-            root.console.warn('Telegram alert sent, but live replies are not ready. Check the Vercel logs for the API error code.');
+            root.console.warn('Telegram alert sent, but live replies are not ready (' + (result.data.reply_routing_error || 'unknown error') + ').');
           }
           if (isOpenEvent) {
             try { if (root.sessionStorage) root.sessionStorage.setItem(storageKey, '1'); } catch (_storageError) {}
