@@ -247,6 +247,7 @@
     footer.appendChild(contact);
     wrapper.appendChild(footer);
     wrapper.appendChild(make('p', 'growth-scan-report__scope', data.scope || 'This scan reviews public HTML only. It is not a complete security, accessibility, or performance audit.'));
+    if (window.GrowthProposal) window.GrowthProposal.attach(wrapper, { type: 'scan', report: data });
     var again = make('button', 'growth-scan-again', 'Scan another website');
     again.type = 'button';
     again.addEventListener('click', function () {
@@ -504,6 +505,13 @@
     contact.appendChild(make('span', 'btn__arrow', '→'));
     footer.appendChild(contact);
     blueprintResults.appendChild(footer);
+    if (window.GrowthProposal) window.GrowthProposal.attach(blueprintResults, {
+      type: 'blueprint',
+      industry: industry,
+      goalTitle: goalTitle,
+      goalDescription: selectedGoal ? selectedGoal.description : plan.promise,
+      plan: plan
+    });
     blueprintResults.hidden = false;
     scrollToResult(blueprintResults);
   }
