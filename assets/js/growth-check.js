@@ -4,9 +4,18 @@
   var app = document.querySelector('[data-growth-app]');
   if (!app) return;
 
-  var modeInputs = Array.prototype.slice.call(app.querySelectorAll('input[name="growth-mode"]'));
+  var entryPanel = app.querySelector('[data-growth-entry]');
+  var pathChoices = Array.prototype.slice.call(app.querySelectorAll('[data-growth-path-choice]'));
+  var pathNav = app.querySelector('[data-growth-path-nav]');
+  var pathLabel = app.querySelector('[data-growth-path-label]');
+  var changePathButton = app.querySelector('[data-growth-change-path]');
   var scanForm = app.querySelector('[data-growth-scan-form]');
   var blueprintForm = app.querySelector('[data-growth-blueprint-form]');
+  var industrySelect = app.querySelector('#blueprint-industry');
+  var goalFieldset = app.querySelector('[data-growth-goal-fieldset]');
+  var goalGrid = app.querySelector('[data-growth-goals]');
+  var goalHint = app.querySelector('[data-growth-goal-hint]');
+  var blueprintSubmit = app.querySelector('[data-growth-blueprint-submit]');
   var scanUrl = app.querySelector('[data-growth-scan-url]');
   var scanButton = app.querySelector('[data-growth-scan-submit]');
   var loading = app.querySelector('[data-growth-scan-loading]');
@@ -62,19 +71,49 @@
     if (scanButton) scanButton.disabled = false;
   }
 
-  function setMode(mode) {
+  function cancelPendingWork() {
     if (activeController) {
       activeController.abort();
       activeController = null;
     }
     stopLoading();
     clearResults();
-    app.querySelectorAll('.growth-mode__option').forEach(function (option) {
-      var input = option.querySelector('input[name="growth-mode"]');
-      option.classList.toggle('is-selected', !!input && input.value === mode);
+  }
+
+  function focusFormHeading(form) {
+    var heading = form && form.querySelector('.growth-path-heading h3');
+    if (!heading) return;
+    window.requestAnimationFrame(function () {
+      heading.focus({ preventScroll: true });
+      heading.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
     });
+  }
+
+  function showPath(mode) {
+    if (mode !== 'scan' && mode !== 'blueprint') return;
+    cancelPendingWork();
+    if (entryPanel) entryPanel.hidden = true;
+    if (pathNav) pathNav.hidden = false;
     if (scanForm) scanForm.hidden = mode !== 'scan';
     if (blueprintForm) blueprintForm.hidden = mode !== 'blueprint';
+    if (pathLabel) pathLabel.textContent = mode === 'scan' ? 'LIVE WEBSITE SCAN' : 'FIRST-WEBSITE BLUEPRINT';
+    focusFormHeading(mode === 'scan' ? scanForm : blueprintForm);
+  }
+
+  function returnToPathPicker() {
+    cancelPendingWork();
+    if (entryPanel) entryPanel.hidden = false;
+    if (pathNav) pathNav.hidden = true;
+    if (scanForm) scanForm.hidden = true;
+    if (blueprintForm) blueprintForm.hidden = true;
+    if (entryPanel) scrollToResult(entryPanel);
+  }
+
+  function updateBlueprintSubmit() {
+    if (!blueprintSubmit) return;
+    var hasIndustry = !!(industrySelect && industrySelect.value);
+    var hasGoal = !!(goalGrid && goalGrid.querySelector('input[name="goal"]:checked'));
+    blueprintSubmit.disabled = !(hasIndustry && hasGoal);
   }
 
   function normaliseWebsiteUrl(raw) {
@@ -234,6 +273,112 @@
     'local-business': 'local business or trade',
     other: 'growing business'
   };
+  var industryGoalOptions = {
+    'professional-service': {
+      hint: 'Service businesses usually need a clear route from understanding the offer to making an enquiry or consultation.',
+      goals: [
+        { key: 'enquiries', title: 'Get more qualified enquiries', description: 'Explain your services and make it easy for the right clients to get in touch.' },
+        { key: 'bookings', title: 'Book more consultations', description: 'Let prospective clients choose a consultation or discovery-call time.' },
+        { key: 'trust', title: 'Build confidence before contact', description: 'Show your expertise, process and proof of work clearly.' }
+      ]
+    },
+    consultant: {
+      hint: 'For a specialist practice, the website should turn expertise into a clear, confident next step.',
+      goals: [
+        { key: 'enquiries', title: 'Attract better-fit clients', description: 'Explain who you help, the outcome and how to start a conversation.' },
+        { key: 'bookings', title: 'Book discovery sessions', description: 'Give potential clients a clear way to schedule an introductory session.' },
+        { key: 'trust', title: 'Demonstrate your expertise', description: 'Present your approach, credentials and useful client outcomes.' }
+      ]
+    },
+    'health-practice': {
+      hint: 'Appointment and care journeys work best when services, practitioner credentials and booking steps are easy to understand.',
+      goals: [
+        { key: 'bookings', title: 'Increase appointment bookings', description: 'Help people choose a service and request or book an appointment.' },
+        { key: 'enquiries', title: 'Answer questions and enquiries', description: 'Explain suitability, preparation and how to ask a private question.' },
+        { key: 'trust', title: 'Build patient confidence', description: 'Make practitioner credentials, care approach and essential information clear.' }
+      ]
+    },
+    retail: {
+      hint: 'For a product business, the priorities are product discovery, a confident purchase and easy access to store information.',
+      goals: [
+        { key: 'sales', title: 'Sell products online', description: 'Show products, accept secure orders and explain delivery and returns.' },
+        { key: 'local', title: 'Bring more people to my shop', description: 'Help nearby customers find your location, opening hours and product range.' },
+        { key: 'trust', title: 'Make shoppers feel confident', description: 'Show product details, policies, reviews and support before purchase.' }
+      ]
+    },
+    hospitality: {
+      hint: 'Hospitality websites should make it simple to discover the experience, check practical details and reserve or order.',
+      goals: [
+        { key: 'bookings', title: 'Get more reservations', description: 'Show availability, key details and a straightforward reservation route.' },
+        { key: 'sales', title: 'Take online food or product orders', description: 'Present the menu or range and make ordering clear on mobile.' },
+        { key: 'local', title: 'Help nearby guests find us', description: 'Make location, hours, directions and the experience easy to discover.' }
+      ]
+    },
+    creative: {
+      hint: 'A creative business needs to show its point of view, make the work easy to explore and turn interest into an opportunity.',
+      goals: [
+        { key: 'enquiries', title: 'Win more project enquiries', description: 'Show what you create and make it easy to discuss a new project.' },
+        { key: 'trust', title: 'Showcase my work and credibility', description: 'Present selected projects, your process and client feedback.' },
+        { key: 'sales', title: 'Sell creative products online', description: 'Offer prints, products or digital work through a simple shop.' }
+      ]
+    },
+    'local-business': {
+      hint: 'Local customers need to know what you do, where you work and how quickly they can reach or book you.',
+      goals: [
+        { key: 'local', title: 'Be easier to find nearby', description: 'Make your services, locations, hours and contact details visible.' },
+        { key: 'enquiries', title: 'Get more service requests', description: 'Collect useful details about the job and respond to potential customers.' },
+        { key: 'bookings', title: 'Book more local jobs', description: 'Let customers request a visit or select an available service time.' }
+      ]
+    },
+    other: {
+      hint: 'Choose the result that matters most right now. Your recommendations will be shaped around it.',
+      goals: [
+        { key: 'enquiries', title: 'Get more enquiries', description: 'Attract and qualify potential clients.' },
+        { key: 'bookings', title: 'Get more bookings', description: 'Let customers choose a time or service.' },
+        { key: 'sales', title: 'Sell online', description: 'Show products and accept orders.' },
+        { key: 'trust', title: 'Build credibility', description: 'Explain your value and earn trust.' },
+        { key: 'local', title: 'Grow locally', description: 'Help nearby customers find and reach you.' }
+      ]
+    }
+  };
+
+  function updateGoalsForIndustry() {
+    if (!industrySelect || !goalGrid || !goalFieldset) return;
+    var industryKey = industrySelect.value;
+    var configuration = industryGoalOptions[industryKey];
+    goalGrid.replaceChildren();
+    if (!configuration) {
+      goalFieldset.hidden = true;
+      if (goalHint) goalHint.textContent = '';
+      updateBlueprintSubmit();
+      return;
+    }
+    if (goalHint) goalHint.textContent = configuration.hint;
+    configuration.goals.forEach(function (goal, index) {
+      var label = make('label', 'growth-goal-card');
+      var input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'goal';
+      input.value = goal.key;
+      input.required = true;
+      input.addEventListener('change', function () {
+        goalGrid.querySelectorAll('.growth-goal-card').forEach(function (card) {
+          card.classList.toggle('is-selected', !!card.querySelector('input:checked'));
+        });
+        updateBlueprintSubmit();
+      });
+      label.appendChild(input);
+      var copy = make('span', 'growth-goal-card__copy');
+      copy.appendChild(make('b', '', goal.title));
+      copy.appendChild(make('small', '', goal.description));
+      if (index === 0) copy.appendChild(make('i', 'growth-goal-card__tag', 'Suggested starting point'));
+      label.appendChild(copy);
+      goalGrid.appendChild(label);
+    });
+    goalFieldset.hidden = false;
+    updateBlueprintSubmit();
+  }
+
   var goalPlans = {
     enquiries: {
       label: 'generate more qualified enquiries',
@@ -249,17 +394,17 @@
       why: ['A consistent home for your offer', 'A clear path from interest to enquiry', 'Space to demonstrate credibility before the first conversation']
     },
     bookings: {
-      label: 'book more appointments',
-      promise: 'Help customers understand your services, choose the right appointment and book without waiting for a back-and-forth message.',
+      label: 'make it easier for customers to reserve or book',
+      promise: 'Help customers understand the experience or service, check practical details and reserve a suitable time without unnecessary back-and-forth.',
       pages: [
-        ['Appointment-led homepage', 'Explain who you serve, what you offer and how to make a first booking.'],
-        ['Service and treatment pages', 'Describe options, suitability, duration and preparation in plain language.'],
-        ['People and credentials', 'Introduce practitioners or team members and explain relevant qualifications.'],
-        ['Online booking', 'Show live availability, service choice, clear policies and a reliable confirmation.'],
-        ['FAQs and contact', 'Answer common booking questions and make urgent contact details easy to find.']
+        ['Booking-led homepage', 'Explain what customers can book, who it is for and how to get started.'],
+        ['Service, menu or experience details', 'Describe the options, availability, pricing approach and useful preparation details.'],
+        ['People, place or credentials', 'Introduce the team, venue or practitioners and set clear expectations.'],
+        ['Reservations and booking', 'Make it easy to choose a service, date or time and receive a clear confirmation.'],
+        ['FAQs and contact', 'Answer common questions and make an alternate contact route easy to find.']
       ],
-      features: ['Appointment calendar with clear availability and time-zone handling where needed', 'Booking confirmation and reminder workflow', 'Short intake form that gathers only relevant information', 'Cancellation, payment and privacy information before booking'],
-      why: ['A dependable booking route outside social messages', 'Clear service information before a customer chooses', 'Fewer avoidable questions about availability and preparation']
+      features: ['Mobile-friendly booking or reservation flow with clear availability', 'Confirmation and reminder messages with useful next steps', 'Short booking form that collects only necessary information', 'Clear cancellation, payment and privacy information before confirmation'],
+      why: ['A dependable booking route outside social messages', 'Clear service or experience details before a customer chooses', 'Fewer avoidable questions about availability and preparation']
     },
     sales: {
       label: 'sell products online',
@@ -308,12 +453,15 @@
     var goalValue = String(formData.get('goal') || 'enquiries');
     var industry = businessTypes[industryValue] || businessTypes.other;
     var plan = goalPlans[goalValue] || goalPlans.enquiries;
+    var industryConfiguration = industryGoalOptions[industryValue] || industryGoalOptions.other;
+    var selectedGoal = industryConfiguration.goals.find(function (goal) { return goal.key === goalValue; }) || industryConfiguration.goals[0];
+    var goalTitle = selectedGoal ? selectedGoal.title : plan.label;
     blueprintResults.replaceChildren();
 
     var header = make('div', 'growth-blueprint__header');
-    header.appendChild(make('span', '', 'FIRST-WEBSITE BLUEPRINT · ' + industry.toUpperCase()));
-    header.appendChild(make('h3', '', 'Build a website around what you want to achieve.'));
-    header.appendChild(make('p', '', 'For a ' + industry + ' looking to ' + plan.label + ': ' + plan.promise));
+    header.appendChild(make('span', '', 'FIRST-WEBSITE BLUEPRINT · ' + industry.toUpperCase() + ' · ' + goalTitle.toUpperCase()));
+    header.appendChild(make('h3', '', 'Your first-site plan for ' + goalTitle.toLowerCase() + '.'));
+    header.appendChild(make('p', '', 'Tailored for a ' + industry + '. ' + (selectedGoal ? selectedGoal.description : '') + ' ' + plan.promise));
     blueprintResults.appendChild(header);
 
     var columns = make('div', 'growth-blueprint__columns');
@@ -360,9 +508,11 @@
     scrollToResult(blueprintResults);
   }
 
-  modeInputs.forEach(function (input) {
-    input.addEventListener('change', function () { if (input.checked) setMode(input.value); });
+  pathChoices.forEach(function (button) {
+    button.addEventListener('click', function () { showPath(button.getAttribute('data-growth-path-choice')); });
   });
+  if (changePathButton) changePathButton.addEventListener('click', returnToPathPicker);
+  if (industrySelect) industrySelect.addEventListener('change', updateGoalsForIndustry);
 
   if (scanForm) {
     scanForm.addEventListener('submit', function (event) {
@@ -403,13 +553,6 @@
   }
 
   if (blueprintForm) {
-    blueprintForm.querySelectorAll('input[name="goal"]').forEach(function (input) {
-      input.addEventListener('change', function () {
-        blueprintForm.querySelectorAll('.growth-goal-grid label').forEach(function (label) {
-          label.classList.toggle('is-selected', !!label.querySelector('input:checked'));
-        });
-      });
-    });
     blueprintForm.addEventListener('submit', function (event) {
       event.preventDefault();
       if (!blueprintForm.reportValidity()) return;
@@ -418,5 +561,5 @@
     });
   }
 
-  setMode('scan');
+  updateBlueprintSubmit();
 })();
