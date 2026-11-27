@@ -85,9 +85,12 @@ async function verify() {
   assert(requestedPdfLibrary.endsWith('/assets/js/vendor/jspdf.umd.min.js'), 'The PDF library should load locally only when a PDF is requested.');
   assert(source.includes('input.required = true'), 'The PDF must require a business name.');
   assert(source.includes('button.disabled = true'), 'The PDF download must not be enabled before the name is entered.');
+  assert(!source.includes('share this pdf with ademola to discuss your project'), 'The footer should not repeat a send/share instruction.');
   for (const detail of [
     'websites that turn visitors into customers',
-    'images/htech-logo-transparent.webp',
+    'images/htech-logo.webp',
+    'message me on upwork',
+    'message me on linkedin',
     'htechdigitalconcept@gmail.com',
     'https://www.upwork.com/freelancers/~01b7d7e1d5bc855117',
     'https://www.linkedin.com/in/ademolahabeeb/'
