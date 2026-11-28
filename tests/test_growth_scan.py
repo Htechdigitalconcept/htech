@@ -137,7 +137,7 @@ class GrowthScanTests(unittest.TestCase):
             return real_create_connection(('127.0.0.1', server.server_port), timeout, source_address)
 
         try:
-            with patch.object(GROWTH, '_public_addresses', return_value=['93.184.216.34']), \
+            with patch.object(GROWTH._GROWTH_CORE, '_public_addresses', return_value=['93.184.216.34']), \
                  patch.object(GROWTH.socket, 'create_connection', side_effect=route_to_fixture):
                 result = GROWTH.scan_website('http://example.com')
         finally:
