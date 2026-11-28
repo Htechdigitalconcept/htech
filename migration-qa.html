@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Website Migration & Redirect QA Lab | Htech Digital Concepts</title>
+<meta name="description" content="Compare old and new URL inventories, find missing redirects, chains and loops, and export reviewed redirect rules for Vercel, Apache or Nginx.">
+<link rel="canonical" href="https://htechdc.vercel.app/migration-qa.html">
+<meta property="og:title" content="Website Migration & Redirect QA Lab | Htech Digital Concepts">
+<meta property="og:description" content="A private, Python-powered URL migration comparison and redirect quality checker.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/migration-qa.css">
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/chat-assistant-config.js" defer></script>
+<script src="assets/js/chat-assistant.js" defer></script>
+<script src="assets/js/migration-qa.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header site-header--solid">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html" aria-label="Htech Digital Concepts — home"><span class="brand__logo"><img src="images/htech-logo.webp" alt="Htech Digital Concepts" width="2048" height="682"></span></a>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="nav__link" href="index.html">Home</a><a class="nav__link" href="portfolio.html">Portfolio</a><a class="nav__link nav__link--tool" href="growth-check.html">Growth Check <span class="nav__badge">FREE</span></a><a class="nav__link" href="index.html#services">Services</a><a class="nav__link" href="about.html">About</a><a class="btn btn--yellow nav__cta" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="nav-panel" id="nav-panel" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="portfolio.html">Portfolio</a><a class="nav-panel__growth" href="growth-check.html">Growth Check <span class="nav__badge">FREE</span></a><a href="index.html#services">Services</a><a href="about.html">About</a><a class="btn btn--yellow" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a></nav>
+
+<main id="main" data-migration-app>
+  <section class="page-hero migration-hero"><div class="wrap"><span class="eyebrow eyebrow--light">Free Python-powered tool</span><h1>Move your website without losing the <em>right routes.</em></h1><p class="lede">Compare old and new URL lists, catch redirect gaps and loops, then prepare a ruleset for review before launch.</p><div class="migration-facts"><span>UP TO 5,000 URLS PER LIST</span><i aria-hidden="true"></i><span>NO SITE CRAWLING</span><i aria-hidden="true"></i><span>NO FILES STORED</span></div></div></section>
+
+  <section class="section section--soft migration-section" aria-labelledby="migration-title"><div class="wrap">
+    <div class="migration-intro"><div><span class="eyebrow">Website migration & redirect QA</span><h2 class="section-title" id="migration-title">Compare your URL inventories.</h2></div><p class="lede">Paste one URL per line or load a text/CSV list. A unique matching path is offered as a suggestion; explicit mappings take precedence. Every export needs a human review before deployment.</p></div>
+    <noscript><p class="migration-noscript">This migration comparison needs JavaScript. Your URL lists stay in this page until you run the comparison.</p></noscript>
+    <div class="migration-workbench">
+      <form class="migration-form" data-migration-form novalidate>
+        <div class="migration-input-grid">
+          <label class="migration-field"><span><b>01</b> Old-site URLs</span><textarea data-old-urls rows="9" spellcheck="false" placeholder="https://old.example.com/\nhttps://old.example.com/services/" required></textarea><small>One absolute http(s) URL per line. Maximum 5,000 entries.</small><span class="migration-upload"><input type="file" data-old-file accept=".txt,.csv,text/plain,text/csv"><span>Load a .txt or .csv URL list</span></span></label>
+          <label class="migration-field"><span><b>02</b> New-site URLs</span><textarea data-new-urls rows="9" spellcheck="false" placeholder="https://new.example.com/\nhttps://new.example.com/services/" required></textarea><small>Include the final public URL for each page you intend to keep.</small><span class="migration-upload"><input type="file" data-new-file accept=".txt,.csv,text/plain,text/csv"><span>Load a .txt or .csv URL list</span></span></label>
+        </div>
+        <label class="migration-field migration-field--mapping"><span><b>03</b> Explicit redirects <em>optional</em></span><textarea data-redirects rows="6" spellcheck="false" placeholder="source,destination\nhttps://old.example.com/old-page,https://new.example.com/new-page"></textarea><small>CSV rows with source,destination. These mappings override automatic same-path suggestions. Include existing rules to check chains and loops.</small><span class="migration-upload"><input type="file" data-redirect-file accept=".csv,text/csv"><span>Load a redirect-mapping .csv file</span></span></label>
+        <div class="migration-actions"><button class="btn btn--yellow" type="submit" data-run-migration>Compare URL lists <span class="btn__arrow" aria-hidden="true">→</span></button><p>Files and list contents are sent only to run this comparison; they are not saved or used to crawl your sites.</p></div>
+      </form>
+      <aside class="migration-safety"><strong>Safe, bounded comparison</strong><p>This tool never visits the supplied URLs. It validates the URL text, compares routes, and processes up to 5,000 URLs in each list and 5,000 mapping rows, subject to a combined 750 KB request limit. Do not include private or session URLs.</p></aside>
+    </div>
+    <p class="migration-status" data-migration-status role="status" aria-live="polite" tabindex="-1"></p>
+
+    <section class="migration-report" data-migration-report hidden aria-labelledby="migration-report-title" tabindex="-1">
+      <div class="migration-report__header"><div><span class="eyebrow">Comparison complete</span><h2 class="section-title" id="migration-report-title">Migration QA report</h2><p data-report-scope></p></div></div>
+      <div class="migration-summary" data-report-summary></div>
+      <div class="migration-report__section"><div class="migration-section-heading"><div><span class="migration-kicker">REVIEW BEFORE LAUNCH</span><h3>Findings</h3></div><span data-report-issue-count></span></div><div class="migration-issues" data-report-issues></div><p class="migration-truncation" data-issue-truncation hidden></p></div>
+      <div class="migration-report__section"><div class="migration-section-heading"><div><span class="migration-kicker">CLEAN, FINAL-DESTINATION RULES</span><h3>Redirect rules ready for review</h3></div><span data-report-rule-count></span></div><div class="migration-rules" data-report-rules></div></div>
+      <div class="migration-downloads"><div><h3>Export a ruleset</h3><p>Preview and test the generated rules on staging before deploying. Vercel rules use path patterns; host routing must already direct requests to the correct project.</p></div><div class="migration-downloads__buttons"><button class="btn btn--blue" type="button" data-download-vercel disabled>Vercel JSON</button><button class="btn btn--outline" type="button" data-download-apache disabled>Apache .htaccess</button><button class="btn btn--outline" type="button" data-download-nginx disabled>Nginx config</button><button class="btn btn--outline" type="button" data-download-csv disabled>Rules CSV</button><button class="btn btn--outline" type="button" data-download-findings disabled>Findings CSV</button></div></div>
+    </section>
+  </div></section>
+
+  <section class="section section--blue migration-cta"><div class="wrap"><span class="eyebrow eyebrow--light">Planning a move?</span><h2>Turn your migration plan into a safer launch.</h2><p>Bring the QA report to a conversation about URL structure, staging, redirects, and launch checks.</p><a class="btn btn--yellow" href="contact.html?source=migration-qa">Discuss my migration <span class="btn__arrow" aria-hidden="true">→</span></a></div></section>
+</main>
+
+<footer class="footer"><div class="wrap"><div class="footer__grid">
+  <div><a class="brand" href="index.html" aria-label="Htech Digital Concepts — home"><span class="brand__logo"><img src="images/htech-logo.webp" alt="Htech Digital Concepts" width="2048" height="682" loading="lazy"></span></a><p class="footer__about">Website design and WordPress development for businesses that want a professional site built around clear goals, strong usability and a better path to enquiry.</p></div>
+  <div><h3>Explore</h3><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div><h3>Free Tools</h3><ul><li><a href="growth-check.html">Growth Check</a></li><li><a href="schema-builder.html">Schema Builder</a></li><li><a href="site-audit.html">Advanced Site Auditor</a></li><li><a href="migration-qa.html" aria-current="page">Migration & Redirect QA Lab</a></li></ul></div>
+  <div><h3>Work with me</h3><ul><li><a href="https://www.upwork.com/freelancers/~01b7d7e1d5bc855117" target="_blank" rel="noopener noreferrer">Upwork profile &nearr;</a></li><li><a href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener noreferrer">LinkedIn &nearr;</a></li><li><a href="contact.html">Project enquiries</a></li></ul></div>
+</div><div class="footer__bottom"><span>&copy; <span id="year">2026</span> Htech Digital Concepts. All rights reserved.</span><span>Website Designer &amp; Full-Stack Developer</span></div></div></footer>
+</body>
+</html>
