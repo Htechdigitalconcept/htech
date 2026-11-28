@@ -138,7 +138,7 @@
           </a>
         </article>
         <article class="portfolio-card reveal d-80" data-cat="design">
-          <a class="portfolio-card__link" href="projects/lunaya.html" aria-label="Open overview: Lunaya" data-project-open data-project-title="Lunaya" data-project-category="Yoga apparel · WooCommerce store" data-project-summary="A calm, movement-led WooCommerce storefront for yoga apparel and accessories, with a considered product journey and connected community sign-up." data-project-services="WooCommerce|Elementor|SEO plugin setup|GDPR compliance|sales-funnel structure" data-project-image="images/lunaya/lunaya-homepage-hero.webp" data-project-page="projects/lunaya.html">
+          <a class="portfolio-card__link" href="projects/lunaya.html" aria-label="Open overview: Lunaya" data-project-open data-project-title="Lunaya" data-project-category="Yoga apparel · WooCommerce store" data-project-summary="A calm, movement-led WooCommerce storefront for yoga apparel and accessories, with a considered product journey and connected community sign-up." data-project-services="WooCommerce|Elementor|SEO plugin setup|GDPR compliance|sales-funnel structure" data-project-image="images/lunaya/lunaya-homepage-hero.webp" data-project-page="projects/lunaya.html" data-live-preview="https://www.lunaya.info/">
             <div class="portfolio-card__media portfolio-card__media--lunaya"><span class="portfolio-card__tag portfolio-card__tag--design">Website design</span>
               <img class="portfolio-card__img portfolio-card__img--first" src="images/lunaya/lunaya-homepage-hero.webp" alt="Lunaya homepage showing the yoga apparel brand hero" width="1254" height="634" loading="lazy" decoding="async">
               <img class="portfolio-card__img portfolio-card__img--second" src="images/lunaya/lunaya-full-page.webp" alt="" aria-hidden="true" width="1366" height="3234" loading="lazy" decoding="async">
@@ -211,11 +211,24 @@
       <p class="project-dialog__summary" data-dialog-summary></p>
       <ul class="meta-list" data-dialog-services></ul>
       <div class="project-dialog__actions">
+        <button class="btn btn--yellow" type="button" data-dialog-live-preview hidden>Preview live website <span class="btn__arrow" aria-hidden="true">↗</span></button>
         <a class="btn btn--blue" href="portfolio.html" data-dialog-page>View full project page <span class="btn__arrow" aria-hidden="true">→</span></a>
         <a class="text-link" href="contact.html">Start a similar project <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
+  <section class="project-dialog__live" data-dialog-live hidden aria-label="Live website preview">
+    <div class="project-dialog__live-head">
+      <div><span class="eyebrow">Live website preview</span><h2 data-live-title></h2></div>
+      <div class="project-dialog__live-controls">
+        <button class="text-link" type="button" data-live-back><span aria-hidden="true">←</span> Project overview</button>
+        <a class="btn btn--yellow" href="#" target="_blank" rel="noopener noreferrer" data-live-open>Open live site <span class="btn__arrow" aria-hidden="true">↗</span></a>
+        <button class="project-dialog__close" type="button" data-dialog-close aria-label="Close live preview">&times;</button>
+      </div>
+    </div>
+    <p class="project-dialog__live-note" role="status">Loading preview. If the site stays blank or blocks embedding, use “Open live site” to view it in a new tab.</p>
+    <div class="project-dialog__frame"><iframe title="Live website preview" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" data-live-frame></iframe></div>
+  </section>
 </dialog>
 
 

@@ -12,6 +12,8 @@ assert(project.includes('../images/lunaya/lunaya-full-page.webp'), 'Project page
 assert(project.includes('<details class="lunaya-fullpage">'), 'Full-page screenshot should be available in an accessible disclosure.');
 assert(!project.includes('Screenshots for this project have not been supplied'), 'Remove the old placeholder once screenshots are available.');
 assert(portfolio.includes('projects/lunaya.html') && portfolio.includes('images/lunaya/lunaya-homepage-hero.webp'), 'Lunaya should appear as a screenshot-backed portfolio card.');
+assert(portfolio.includes('data-live-preview="https://www.lunaya.info/"'), 'Portfolio card should expose the live store for an on-page preview.');
+assert(portfolio.includes('data-live-frame') && portfolio.includes('data-live-open'), 'Live preview dialog should offer an embedded view and new-tab fallback.');
 const listStart = portfolio.indexOf('<div class="project-list');
 const listEnd = portfolio.indexOf('<div class="work-foot', listStart);
 assert(!portfolio.slice(listStart, listEnd).includes('Lunaya'), 'Lunaya should not be duplicated in the text-only project list.');
