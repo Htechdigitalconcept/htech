@@ -73,7 +73,7 @@ class GrowthScanTests(unittest.TestCase):
         homepage = Path(__file__).resolve().parents[1] / "index.html"
         document = homepage.read_text(encoding="utf-8")
         page = GROWTH._parse_page({
-            "url": "https://htech-two.vercel.app/", "status": 200, "html": document,
+            "url": "https://htechdc.vercel.app/", "status": 200, "html": document,
             "bytes": len(document.encode("utf-8")), "truncated": False, "elapsed_ms": 100, "redirects": 0,
         })
         checks = {item["id"]: item for item in GROWTH._build_checks([page])}
