@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "business": "Htech Digital Concepts",
+  "updated": "2026-11-26",
+  "profile": "Ademola Habeeb is a website designer and WordPress developer focused on clear, conversion-minded websites for businesses.",
+  "answers": [
+    {
+      "id": "services",
+      "title": "Services",
+      "keywords": ["services", "what do you do", "what do you offer", "website design", "web design", "wordpress", "elementor", "woocommerce", "online store", "landing page", "redesign", "developer"],
+      "answer": "Htech designs and builds WordPress business websites, Elementor pages, landing pages and WooCommerce stores. Ademola also works on redesigns and improvements to existing websites, with attention to clear messaging, mobile usability and the next step for visitors."
+    },
+    {
+      "id": "fit",
+      "title": "Project fit",
+      "keywords": ["can you build", "can you help", "my business", "business website", "new website", "need a website", "website for", "project fit", "hire", "work with", "my project"],
+      "answer": "The best starting point is your business goal and what you want visitors to do—make an enquiry, explore your services, book or buy. Share your business type and the key action you want customers to take, and Ademola can suggest a practical direction."
+    },
+    {
+      "id": "pricing",
+      "title": "Pricing and quotes",
+      "keywords": ["price", "pricing", "cost", "how much", "budget", "rate", "quote", "estimate", "fee", "charges"],
+      "answer": "Project cost depends on the scope, pages, content, functionality and platform requirements. Htech does not publish a one-size-fits-all price here. Share what you need and your target budget, and Ademola can discuss a suitable scope and quote."
+    },
+    {
+      "id": "process",
+      "title": "How projects work",
+      "keywords": ["process", "how do we start", "how to start", "what happens", "steps", "workflow", "discovery", "design stages", "launch"],
+      "answer": "The project process is: discovery, planning, design, WordPress development, testing and launch. You review progress at clear milestones, and the project begins by clarifying your business, audience, goals and required pages."
+    },
+    {
+      "id": "timeline",
+      "title": "Project timelines",
+      "keywords": ["timeline", "how long", "deadline", "delivery date", "launch date", "turnaround", "when can", "urgent"],
+      "answer": "Timing depends on the project scope, how quickly content and feedback are ready, and any special functionality. Share your target launch date and a short brief so Ademola can confirm what is realistic for your project."
+    },
+    {
+      "id": "existing-site",
+      "title": "Existing websites and redesigns",
+      "keywords": ["existing website", "current website", "my website", "redesign", "improve my site", "slow website", "broken", "mobile issues", "website audit", "fix my site", "update my website"],
+      "answer": "Yes—Htech can discuss improvements to an existing website, including its layout, mobile experience, content structure, performance or WordPress setup. Share the public website URL and the main issue you want to solve for a more useful first response."
+    },
+    {
+      "id": "portfolio",
+      "title": "Portfolio and examples",
+      "keywords": ["portfolio", "examples", "previous work", "past projects", "show me work", "case studies", "clients", "experience"],
+      "answer": "You can explore projects in the portfolio, including e-commerce, automotive, legal coaching, wellness and photography websites. The examples show the kind of page structures and WordPress work Htech can discuss for your own project."
+    },
+    {
+      "id": "clients",
+      "title": "Working together",
+      "keywords": ["location", "where are you", "Nigeria", "Lagos", "international", "remote", "outside Nigeria", "overseas", "country"],
+      "answer": "Ademola is based in Lagos, Nigeria, and works with local and international clients remotely. Project conversations can be handled through WhatsApp, email, Upwork or LinkedIn."
+    },
+    {
+      "id": "contact",
+      "title": "Speak with Ademola",
+      "keywords": ["speak to you", "talk to you", "talk to Ademola", "speak with Ademola", "human", "person", "contact", "email", "message you", "directly", "book a call"],
+      "answer": "Absolutely. You can message Ademola directly on WhatsApp, email him, or use LinkedIn. The WhatsApp link can include a short summary of what you shared here, and the email link can include the chat transcript."
+    },
+    {
+      "id": "growth-check",
+      "title": "Free Growth Check",
+      "keywords": ["growth check", "scan my website", "free scan", "website scan", "website checker", "business blueprint", "free tool"],
+      "answer": "Growth Check is Htech’s free guided tool. If you already have a public website, it can scan the site and highlight practical opportunities. If you do not have a website yet, it helps shape a business-specific starting blueprint."
+    }
+  ],
+  "personalizedGuidance": {
+    "online-store": "For an online store, the brief should cover your products, checkout, shipping and how customers will find the right items.",
+    "service-business": "For a service business, focus the brief on your services, proof and trust, and the enquiry or booking action you want visitors to take.",
+    "existing-site": "For an existing site, include its URL and the main issue you want to address—such as mobile usability, content, speed or functionality.",
+    "new-site": "For a new website, start with your audience, offer, main goal, essential pages and the content you already have.",
+    "general": "Tell me what your business does and what you want customers to do on the website, and I can make the next suggestion more relevant."
+  }
+}
