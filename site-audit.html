@@ -18,6 +18,7 @@
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/chat-assistant-config.js" defer></script>
 <script src="assets/js/chat-assistant.js" defer></script>
+<script src="assets/js/site-audit-pdf.js" defer></script>
 <script src="assets/js/site-audit.js" defer></script>
 </head>
 <body>
@@ -73,7 +74,7 @@
       <section class="audit-report" data-audit-report aria-labelledby="audit-report-title" hidden tabindex="-1">
         <div class="audit-report__header">
           <div><span class="eyebrow">Completed scan</span><h2 class="section-title" id="audit-report-title">Audit findings</h2><p data-audit-domain></p></div>
-          <div class="audit-report__actions"><button type="button" class="btn btn--outline" data-export-csv>Download issues CSV</button><button type="button" class="btn btn--blue" data-export-json>Download full JSON</button></div>
+          <div class="audit-report__actions"><button type="button" class="btn btn--yellow" data-export-pdf>Download branded PDF</button><button type="button" class="btn btn--outline" data-export-csv>Download issues CSV</button><button type="button" class="btn btn--blue" data-export-json>Download full JSON</button></div>
         </div>
         <div class="audit-summary" data-audit-summary></div>
         <p class="audit-limited" data-audit-limited hidden></p>
