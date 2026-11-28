@@ -630,3 +630,38 @@
     cards.forEach(function (c) { c.hidden = !(f === 'all' || c.getAttribute('data-cat') === f); });
   });
 })();
+
+/* Home: pinned horizontal project scroll (native sticky + scroll progress) */
+(function () {
+  var root = document.querySelector('[data-hscroll]');
+  if (!root) return;
+  var track = root.querySelector('.hscroll__track'), bar = root.querySelector('.hscroll__bar i'),
+      cnt = root.querySelector('[data-hs-count]'), cards = track.querySelectorAll('.portfolio-card');
+  var mq = window.matchMedia('(min-width: 901px) and (prefers-reduced-motion: no-preference)');
+  var cur = 0, target = 0, dist = 0, raf = 0, on = false;
+  function measure() {
+    if (!mq.matches) { on = false; root.style.height = ''; track.style.transform = ''; return; }
+    on = true; dist = Math.max(0, track.scrollWidth - window.innerWidth);
+    root.style.height = (dist + window.innerHeight) + 'px'; update();
+  }
+  function update() {
+    if (!on) return;
+    var r = root.getBoundingClientRect(), span = (root.offsetHeight - window.innerHeight) || 1;
+    target = Math.min(1, Math.max(0, -r.top / span)) * dist;
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+  function tick() {
+    cur += (target - cur) * 0.14;
+    if (Math.abs(target - cur) < 0.4) cur = target;
+    track.style.transform = 'translate3d(' + (-cur) + 'px,0,0)';
+    var p = dist ? cur / dist : 0, i = Math.min(cards.length, Math.round(p * (cards.length - 1)) + 1);
+    bar.style.transform = 'scaleX(' + p + ')';
+    cnt.textContent = ('0' + i).slice(-2) + ' / ' + ('0' + cards.length).slice(-2);
+    raf = (cur === target) ? 0 : requestAnimationFrame(tick);
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  if (mq.addEventListener) mq.addEventListener('change', measure);
+  measure();
+})();

@@ -985,3 +985,22 @@ body.gallery-open{overflow:hidden}
 .work-filter{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 30px}
 .work-filter button{padding:10px 20px;border:1px solid var(--line);border-radius:999px;background:var(--white);color:var(--ink);font:600 13px var(--head);cursor:pointer;transition:background-color .25s,color .25s,border-color .25s}
 .work-filter button:hover{border-color:var(--blue)}.work-filter button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
+
+/* Home: pinned horizontal project scroll */
+.hscroll{position:relative}
+.hscroll__pin{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.hscroll__ui{display:flex;justify-content:space-between;align-items:center;padding:0 var(--pad) 20px;font:600 13px var(--head);color:var(--muted)}
+.hscroll__track{display:flex;gap:28px;align-items:stretch;padding:0 var(--pad);width:max-content;will-change:transform}
+.hscroll__track .portfolio-card{flex:none;width:min(420px,78vw);display:flex}
+.hscroll__track .portfolio-card__link{display:flex;flex-direction:column;width:100%}
+.hscroll__track .portfolio-card__media{aspect-ratio:auto;height:clamp(300px,44vh,380px)}
+.hscroll__track .portfolio-card__media--bot,.hscroll__track .portfolio-card__media--tool{min-height:0;padding:36px 10px 10px}
+.hscroll__track .botchat,.hscroll__track .tcov{transform:scale(.78);transform-origin:center}
+.hscroll__track .portfolio-card__body{flex:1;min-height:130px}
+.hscroll__end{flex:none;width:min(340px,70vw);display:grid;align-content:center;gap:14px;padding:32px;border:1px dashed var(--line);border-radius:16px;background:var(--soft);font:600 clamp(24px,2.6vw,34px)/1.1 var(--head);letter-spacing:-.03em;transition:border-color .3s,color .3s}
+.hscroll__end:hover{border-color:var(--blue);color:var(--blue)}
+.hscroll__bar{height:3px;margin:26px var(--pad) 0;border-radius:2px;background:var(--line);overflow:hidden}
+.hscroll__bar i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--yellow));transform-origin:0 50%;transform:scaleX(0)}
+.hscroll~.wrap .work-foot{display:none}
+@media(max-width:900px){.hscroll__pin{position:static;height:auto;overflow:visible}.hscroll__track{width:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));padding:0 var(--pad)}.hscroll__track .portfolio-card{width:auto}.hscroll__ui,.hscroll__bar,.hscroll__end{display:none}.hscroll~.wrap .work-foot{display:block}.hscroll__track .botchat,.hscroll__track .tcov{transform:none}.hscroll__track .portfolio-card__media--bot,.hscroll__track .portfolio-card__media--tool{padding:40px 16px 20px}.hscroll__track .portfolio-card__media{height:auto;min-height:300px}}
+@media(prefers-reduced-motion:reduce){.hscroll{height:auto!important}.hscroll__pin{position:static;height:auto;overflow:visible}.hscroll__track{width:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}.hscroll__track .portfolio-card{width:auto}.hscroll__ui,.hscroll__bar,.hscroll__end{display:none}.hscroll~.wrap .work-foot{display:block}.hscroll__track .botchat,.hscroll__track .tcov{transform:none}}
