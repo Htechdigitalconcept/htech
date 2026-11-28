@@ -866,3 +866,38 @@ body.gallery-open{overflow:hidden}
 .showcase__progress{height:2px;margin:-4px 0 14px;overflow:hidden;border-radius:2px;background:rgba(255,255,255,.16)}
 .showcase__progress i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--yellow));transform-origin:0 50%;transform:scaleX(0)}
 @media(prefers-reduced-motion:reduce){.showcase__progress{display:none}}
+
+/* Hero: mini bot conversation demo */
+.botchat{position:absolute;left:-5%;bottom:11%;z-index:6;width:min(270px,64%);border:1px solid var(--dark-line);border-radius:16px;background:rgba(7,27,51,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 30px 60px -20px rgba(0,0,0,.8),0 0 28px rgba(23,105,224,.3);transform:translateZ(80px);pointer-events:none;color:var(--white);font:500 12px/1.35 var(--body)}
+.botchat__head{display:flex;align-items:center;gap:10px;padding:11px 13px;border-bottom:1px solid var(--dark-line)}
+.botchat__head>i{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--yellow))}
+.botchat__head span{display:grid;line-height:1.2}.botchat__head b{font:600 12px var(--head)}
+.botchat__head em{font-style:normal;font-size:10px;color:#6DE3A3}
+.botchat__head small{margin-left:auto;padding:3px 8px;border:1px solid var(--dark-line);border-radius:999px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.botchat__body{display:grid;gap:8px;padding:12px 13px 14px;min-height:150px;align-content:start}
+.bc{margin:0;padding:8px 11px;border-radius:12px;max-width:88%;opacity:0}
+.m-user{justify-self:end;background:var(--blue);border-bottom-right-radius:3px}
+.m-bot,.m-typing{justify-self:start;background:rgba(255,255,255,.11);border-bottom-left-radius:3px}
+.bc__slot{display:grid}.bc__slot>.bc{grid-area:1/1}
+.m-typing{display:flex;gap:4px;align-items:center;height:30px}
+.m-typing i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.7);animation:bc-dot 1s ease-in-out infinite}
+.m-typing i:nth-child(2){animation-delay:.15s}.m-typing i:nth-child(3){animation-delay:.3s}
+@keyframes bc-dot{50%{transform:translateY(-4px);opacity:.4}}
+.botchat__alert{position:absolute;top:-22px;right:-18px;z-index:2;display:flex;align-items:center;gap:9px;padding:9px 13px;border-radius:12px;background:var(--yellow);color:var(--navy);box-shadow:0 16px 30px -10px rgba(0,0,0,.7);opacity:0;animation:bc-alert 14s cubic-bezier(.2,.8,.2,1) infinite}
+.botchat__alert svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.botchat__alert span{display:grid;line-height:1.2}.botchat__alert b{font:700 11px var(--head)}.botchat__alert em{font-style:normal;font-size:9px;opacity:.7}
+.bc1{animation:bc-bc1 14s cubic-bezier(.2,.8,.2,1) infinite}
+.bc2{animation:bc-bc2 14s cubic-bezier(.2,.8,.2,1) infinite}
+.bc3{animation:bc-bc3 14s cubic-bezier(.2,.8,.2,1) infinite}
+.bc4{animation:bc-bc4 14s cubic-bezier(.2,.8,.2,1) infinite}
+.bc5{animation:bc-bc5 14s cubic-bezier(.2,.8,.2,1) infinite}
+.bc6{animation:bc-bc6 14s cubic-bezier(.2,.8,.2,1) infinite}
+@keyframes bc-bc1{0%,3%{opacity:0;transform:translateY(10px) scale(.95)}5%,95%{opacity:1;transform:none}97.5%,100%{opacity:0;transform:none}}
+@keyframes bc-bc2{0%,10%{opacity:0;transform:translateY(10px) scale(.95)}12%,21.5%{opacity:1;transform:none}24.0%,100%{opacity:0;transform:none}}
+@keyframes bc-bc3{0%,22%{opacity:0;transform:translateY(10px) scale(.95)}24%,95%{opacity:1;transform:none}97.5%,100%{opacity:0;transform:none}}
+@keyframes bc-bc4{0%,36%{opacity:0;transform:translateY(10px) scale(.95)}38%,95%{opacity:1;transform:none}97.5%,100%{opacity:0;transform:none}}
+@keyframes bc-bc5{0%,44%{opacity:0;transform:translateY(10px) scale(.95)}46%,53.5%{opacity:1;transform:none}56.0%,100%{opacity:0;transform:none}}
+@keyframes bc-bc6{0%,54%{opacity:0;transform:translateY(10px) scale(.95)}56%,95%{opacity:1;transform:none}97.5%,100%{opacity:0;transform:none}}
+@keyframes bc-alert{0%,66%{opacity:0;transform:translateY(-8px) scale(.9)}68%,95%{opacity:1;transform:none}97.5%,100%{opacity:0;transform:none}}
+@media(max-width:900px){.botchat{display:none}}
+@media(prefers-reduced-motion:reduce){.bc,.botchat__alert{animation:none!important;opacity:1}.m-typing{display:none}}
