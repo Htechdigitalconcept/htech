@@ -221,6 +221,22 @@
     downloadBlob(JSON.stringify(currentReport, null, 2) + '\n', 'application/json;charset=utf-8', safeFileSlug(currentReport.domain) + '-site-audit.json');
   }
 
+  function exportPdf(event) {
+    if (!currentReport || !window.SiteAuditPdf) return;
+    var button = event.currentTarget;
+    button.disabled = true;
+    var originalLabel = button.textContent;
+    button.textContent = 'Preparing branded PDF…';
+    window.SiteAuditPdf.download(currentReport).then(function () {
+      setStatus('Your branded PDF report has been downloaded.', 'success');
+    }).catch(function () {
+      setStatus('The PDF could not be prepared. Please try again. Your CSV and JSON downloads are still available.', 'error');
+    }).finally(function () {
+      button.disabled = false;
+      button.textContent = originalLabel;
+    });
+  }
+
   form.addEventListener('submit', async function (event) {
     event.preventDefault();
     clearReport();
@@ -273,4 +289,5 @@
   });
   app.querySelector('[data-export-csv]').addEventListener('click', exportCsv);
   app.querySelector('[data-export-json]').addEventListener('click', exportJson);
+  app.querySelector('[data-export-pdf]').addEventListener('click', exportPdf);
 })();
