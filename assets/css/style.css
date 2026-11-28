@@ -861,3 +861,8 @@ body.gallery-open{overflow:hidden}
 @keyframes role-blink{50%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.role__caret{animation:none}}
 
+
+/* Hero showcase: auto-rotate progress bar */
+.showcase__progress{height:2px;margin:-4px 0 14px;overflow:hidden;border-radius:2px;background:rgba(255,255,255,.16)}
+.showcase__progress i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--yellow));transform-origin:0 50%;transform:scaleX(0)}
+@media(prefers-reduced-motion:reduce){.showcase__progress{display:none}}

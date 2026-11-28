@@ -585,3 +585,34 @@
   setTimeout(tick, 1800);
 })();
 
+
+/* Hero: auto-rotate the featured project every few seconds */
+(function () {
+  var box = document.querySelector('[data-hero-showcase]');
+  if (!box) return;
+  var tabs = Array.prototype.slice.call(box.querySelectorAll('[data-hero-project]')), bar = box.querySelector('[data-hero-progress]');
+  if (tabs.length < 2 || !bar) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var DUR = 6000, t = 0, last = null, hold = false, visible = true;
+  function next() {
+    var i = tabs.findIndex(function (b) { return b.classList.contains('is-active'); });
+    tabs[(i + 1) % tabs.length].click();
+  }
+  function frame(ts) {
+    if (last === null) last = ts;
+    var dt = ts - last; last = ts;
+    if (!hold && visible && !document.hidden) {
+      t += Math.min(dt, 100);
+      bar.style.transform = 'scaleX(' + Math.min(t / DUR, 1) + ')';
+      if (t >= DUR) { t = 0; bar.style.transform = 'scaleX(0)'; next(); }
+    }
+    requestAnimationFrame(frame);
+  }
+  tabs.forEach(function (b) { b.addEventListener('click', function () { t = 0; bar.style.transform = 'scaleX(0)'; }); });
+  box.addEventListener('pointerenter', function () { hold = true; });
+  box.addEventListener('pointerleave', function () { hold = false; });
+  box.addEventListener('focusin', function () { hold = true; });
+  box.addEventListener('focusout', function () { hold = false; });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }, { threshold: .25 }).observe(box);
+  requestAnimationFrame(frame);
+})();
