@@ -834,3 +834,22 @@ body.gallery-open{overflow:hidden}
 }
 @media(max-width:380px){.growth-goal-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.htech-chat__launcher{transition:none}}
+
+/* Technology marquee: infinite loop */
+.tech{position:relative;overflow:hidden;background:var(--navy);color:var(--white);border-bottom:1px solid var(--dark-line);padding:clamp(34px,5vw,58px) 0}
+.tech::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 120% at 50% 0%,rgba(23,105,224,.28),transparent 70%);pointer-events:none}
+.tech__head{position:relative;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px 24px;max-width:var(--max);margin:0 auto 26px;padding:0 var(--pad)}
+.tech__head p{margin:0;font:600 13px/1.4 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#9FB6D4}
+.tech__head strong{margin-right:12px;font:700 clamp(30px,3.4vw,44px)/1 var(--head);letter-spacing:-.02em;text-transform:none;color:var(--white)}
+.tech__row{position:relative;display:flex;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.tech__row+.tech__row{margin-top:14px}
+.tech__track{display:flex;flex:none;gap:14px;margin:0;padding:0 14px 0 0;list-style:none;animation:tech-left 40s linear infinite}
+.tech__row--r .tech__track{animation-name:tech-right;animation-duration:46s}
+.tech__row:hover .tech__track{animation-play-state:paused}
+.tech__chip{display:inline-flex;align-items:center;gap:12px;white-space:nowrap;padding:14px 26px;border:1px solid var(--dark-line);border-radius:999px;background:rgba(255,255,255,.045);font:600 clamp(16px,1.6vw,20px)/1 var(--head);transition:border-color .3s,background-color .3s,transform .3s}
+.tech__chip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 10px rgba(255,212,59,.7)}
+.tech__row--r .tech__chip::before{background:#7DB4FF;box-shadow:0 0 10px rgba(125,180,255,.7)}
+.tech__chip:hover{border-color:var(--yellow);background:rgba(255,212,59,.08);transform:translateY(-2px)}
+@keyframes tech-left{to{transform:translateX(-100%)}}
+@keyframes tech-right{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.tech__track{animation:none}.tech__track[aria-hidden="true"]{display:none}.tech__row{overflow-x:auto;-webkit-mask-image:none;mask-image:none}}
