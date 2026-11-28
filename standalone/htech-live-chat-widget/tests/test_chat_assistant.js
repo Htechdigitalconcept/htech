@@ -1,0 +1,39 @@
+const assert = require('node:assert/strict');
+const path = require('node:path');
+const fs = require('node:fs');
+const assistant = require('../assets/js/chat-assistant.js');
+const feed = JSON.parse(fs.readFileSync(path.join(__dirname, '../assets/data/chat-assistant-feed.json'), 'utf8'));
+
+assert.equal(assistant.matchAnswer('How much does a WooCommerce store cost?', feed).id, 'pricing');
+assert.equal(assistant.matchAnswer('Can you improve my existing website?', feed).id, 'existing-site');
+assert.equal(assistant.classifyContext('I want to sell my products online'), 'online-store');
+assert.equal(assistant.classifyContext('I run a consulting business and need more bookings'), 'service-business');
+assert.equal(assistant.classifyContext('My current site is slow'), 'existing-site');
+const personalized = assistant.buildReply('I want a website', 'I want to sell products with an online store', feed);
+assert.match(personalized, /online store/i);
+assert.match(personalized, /checkout, shipping/i);
+assert.match(assistant.buildReply('Is Htech open on Sunday?', '', feed), /could not find a reliable answer/i);
+for (const greeting of ['hello', 'Hey!', "What's up?", 'Good morning']) {
+  assert.match(assistant.buildReply(greeting, '', feed), /Welcome to Htech Digital Concepts/i);
+  assert.doesNotMatch(assistant.buildReply(greeting, '', feed), /could not find a reliable answer/i);
+}
+assert.ok(feed.answers.length >= 8);
+assert.ok(feed.answers.every((item) => item.id && item.keywords?.length && item.answer));
+const waUrl = assistant.buildWhatsAppUrl([{ who: 'user', text: 'I need an online store' }, { who: 'assistant', text: 'How can I help?' }]);
+assert.match(waUrl, /^https:\/\/wa\.me\/2348137677307\?text=/);
+assert.match(decodeURIComponent(waUrl), /I need an online store/);
+assert.equal(assistant.buildWhatsAppUrl([]).split('?')[0], 'https://wa.me/2348137677307');
+assert.match(feed.answers.find((item) => item.id === 'contact').answer, /WhatsApp/i);
+const widgetSource = fs.readFileSync(path.join(__dirname, '../assets/js/chat-assistant.js'), 'utf8');
+assert.match(widgetSource, /aria-label="Email Ademola"/);
+assert.match(widgetSource, /aria-label="WhatsApp Ademola"/);
+assert.match(widgetSource, /aria-label="Message Ademola on LinkedIn"/);
+assert.doesNotMatch(widgetSource, /\+234 813 767 7307/);
+assert.match(widgetSource, /notifyOwner\('open'\)/);
+assert.match(widgetSource, /notifyOwner\('message', text\)/);
+assert.match(widgetSource, /\/api\/chat-notify/);
+assert.match(widgetSource, /\/api\/chat-poll/);
+assert.match(widgetSource, /Ademola has joined the chat and is replying to you directly/i);
+assert.match(widgetSource, /chat messages go to Ademola via Telegram/i);
+assert.doesNotMatch(widgetSource, /TELEGRAM_BOT_TOKEN|TELEGRAM_CHAT_ID/);
+console.log('Chat assistant feed, personalization, Telegram notifications, contact icons and WhatsApp handoff tests passed.');
