@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free WooCommerce Catalog Quality Analyzer | Htech Digital Concepts</title>
+<meta name="description" content="Check a WooCommerce product CSV for duplicate SKUs, missing catalog fields, invalid prices, and image URL format issues. Private, bounded, and free.">
+<link rel="canonical" href="https://htechdc.vercel.app/woocommerce-catalog.html">
+<meta property="og:title" content="WooCommerce Catalog Quality Analyzer | Htech Digital Concepts">
+<meta property="og:description" content="Review WooCommerce product export quality with a bounded, Python-powered CSV analysis.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/woocommerce-catalog.css">
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/chat-assistant-config.js" defer></script>
+<script src="assets/js/chat-assistant.js" defer></script>
+<script src="assets/js/woocommerce-catalog.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header site-header--solid"><div class="wrap site-header__inner">
+  <a class="brand" href="index.html" aria-label="Htech Digital Concepts — home"><span class="brand__logo"><img src="images/htech-logo.webp" alt="Htech Digital Concepts" width="2048" height="682"></span></a>
+  <nav class="nav" aria-label="Main navigation"><a class="nav__link" href="index.html">Home</a><a class="nav__link" href="portfolio.html">Portfolio</a><a class="nav__link nav__link--tool" href="growth-check.html">Growth Check <span class="nav__badge">FREE</span></a><a class="nav__link" href="index.html#services">Services</a><a class="nav__link" href="about.html">About</a><a class="btn btn--yellow nav__cta" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a></nav>
+  <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel"><span></span><span></span><span></span></button>
+</div></header>
+<nav class="nav-panel" id="nav-panel" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="portfolio.html">Portfolio</a><a class="nav-panel__growth" href="growth-check.html">Growth Check <span class="nav__badge">FREE</span></a><a href="index.html#services">Services</a><a href="about.html">About</a><a class="btn btn--yellow" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a></nav>
+
+<main id="main" data-catalog-app>
+  <section class="page-hero catalog-hero"><div class="wrap"><span class="eyebrow eyebrow--light">Free Python-powered catalog check</span><h1>Find the gaps in your product <em>catalog.</em></h1><p class="lede">Check a WooCommerce CSV export for duplicate SKUs, incomplete product details, invalid prices, and image URL formatting before the next catalog update.</p><div class="catalog-facts"><span>UP TO 5,000 PRODUCTS</span><i aria-hidden="true"></i><span>CSV ONLY · 3 MB MAX</span><i aria-hidden="true"></i><span>NO STORE LOGIN</span></div></div></section>
+
+  <section class="section section--soft catalog-section" aria-labelledby="catalog-title"><div class="wrap">
+    <div class="catalog-intro"><div><span class="eyebrow">WooCommerce Catalog Quality Analyzer</span><h2 class="section-title" id="catalog-title">Choose a product export.</h2></div><p class="lede">Export products from WooCommerce, then review the CSV findings. The analyzer never connects to your store or fetches image URLs.</p></div>
+    <noscript><p class="catalog-noscript">This catalog analysis requires JavaScript. Your file will only be sent for analysis after you choose it and run the check.</p></noscript>
+    <div class="catalog-workbench">
+      <form class="catalog-form" data-catalog-form>
+        <div class="catalog-upload-card"><span class="catalog-step">01 / SELECT FILE</span><label class="catalog-file" for="catalog-file"><span class="catalog-file__icon" aria-hidden="true">↑</span><span class="catalog-file__text"><strong data-file-label>Choose a WooCommerce product CSV</strong><small data-file-meta>UTF-8 or Windows-1252 · maximum 3 MB</small></span><input id="catalog-file" type="file" accept=".csv,text/csv,application/csv" data-catalog-file required></label>
+          <p class="catalog-help">A standard WooCommerce Products export is supported. Common columns include SKU, Name, Type, Regular price, Sale price, Categories, Images, Description, and Published. Generic CSV headers such as product_name, stock_keeping_unit, and image_urls are also recognized.</p>
+          <button class="catalog-template" type="button" data-download-template>Download a sample CSV template</button>
+        </div>
+        <div class="catalog-privacy"><span class="catalog-privacy__dot" aria-hidden="true"></span><div><strong>Private, temporary processing</strong><p>The selected CSV is sent to run this comparison, processed in memory, and not saved. Analysis is capped at 5,000 rows; it does not change products or connect to your store.</p></div></div>
+        <div class="catalog-form__actions"><button class="btn btn--yellow" type="submit" data-run-catalog disabled>Analyze catalog <span class="btn__arrow" aria-hidden="true">→</span></button><p>Review suggestions in your own store context before editing products or importing changes.</p></div>
+      </form>
+    </div>
+    <p class="catalog-status" data-catalog-status role="status" aria-live="polite" tabindex="-1"></p>
+
+    <section class="catalog-report" data-catalog-report hidden aria-labelledby="catalog-report-title" tabindex="-1">
+      <div class="catalog-report__header"><div><span class="eyebrow">Analysis complete</span><h2 class="section-title" id="catalog-report-title">Catalog review</h2><p data-catalog-scope></p></div><button type="button" class="btn btn--blue" data-download-findings disabled>Download findings CSV</button></div>
+      <div class="catalog-summary" data-catalog-summary></div>
+      <p class="catalog-limited" data-catalog-limited hidden></p>
+      <div class="catalog-findings-head"><div><span class="catalog-kicker">PRIORITIZED REVIEW</span><h3>What to check</h3></div><div class="catalog-filters" role="group" aria-label="Filter findings by priority"><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="high" aria-pressed="false">High</button><button type="button" data-filter="medium" aria-pressed="false">Medium</button><button type="button" data-filter="low" aria-pressed="false">Low</button></div></div>
+      <div class="catalog-issues" data-catalog-issues></div>
+      <p class="catalog-findings-truncated" data-findings-truncated hidden></p>
+      <p class="catalog-columns" data-catalog-columns></p>
+    </section>
+  </div></section>
+
+  <section class="section section--blue catalog-cta"><div class="wrap"><span class="eyebrow eyebrow--light">Want help with your store?</span><h2>Make your catalog easier to manage and shop.</h2><p>Bring your CSV review to a conversation about WooCommerce structure, product data, and a clearer shopping experience.</p><a class="btn btn--yellow" href="contact.html?source=woocommerce-catalog">Discuss my store <span class="btn__arrow" aria-hidden="true">→</span></a></div></section>
+</main>
+
+<footer class="footer"><div class="wrap"><div class="footer__grid">
+  <div><a class="brand" href="index.html" aria-label="Htech Digital Concepts — home"><span class="brand__logo"><img src="images/htech-logo.webp" alt="Htech Digital Concepts" width="2048" height="682" loading="lazy"></span></a><p class="footer__about">Website design and WordPress development for businesses that want a professional site built around clear goals, strong usability and a better path to enquiry.</p></div>
+  <div><h3>Explore</h3><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div><h3>Free Tools</h3><ul><li><a href="growth-check.html">Growth Check</a></li><li><a href="schema-builder.html">Schema Builder</a></li><li><a href="site-audit.html">Advanced Site Auditor</a></li><li><a href="migration-qa.html">Migration &amp; Redirect QA Lab</a></li><li><a href="woocommerce-catalog.html" aria-current="page">WooCommerce Catalog Analyzer</a></li></ul></div>
+  <div><h3>Work with me</h3><ul><li><a href="https://www.upwork.com/freelancers/~01b7d7e1d5bc855117" target="_blank" rel="noopener noreferrer">Upwork profile &nearr;</a></li><li><a href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener noreferrer">LinkedIn &nearr;</a></li><li><a href="contact.html">Project enquiries</a></li></ul></div>
+</div><div class="footer__bottom"><span>&copy; <span id="year">2026</span> Htech Digital Concepts. All rights reserved.</span><span>Website Designer &amp; Full-Stack Developer</span></div></div></footer>
+</body>
+</html>
