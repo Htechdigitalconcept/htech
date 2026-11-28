@@ -126,13 +126,14 @@
           <span class="eyebrow">Selected work</span>
           <h2 class="section-title">The work speaks before you do.</h2>
         </div>
-        <p class="lede reveal d-100">A look at websites designed to communicate clearly, load quickly and make the next step obvious.</p>
+        <p class="lede reveal d-100">Websites designed to communicate clearly, plus chatbots and tools built to do more. Every project is tagged by type.</p>
       </div>
 
+      <div class="work-filter" data-work-filter role="group" aria-label="Filter projects"><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="design" aria-pressed="false">Website design</button><button type="button" data-filter="development" aria-pressed="false">Development</button></div>
       <div class="portfolio-grid">
-        <article class="portfolio-card reveal d-80">
+        <article class="portfolio-card reveal d-80" data-cat="design">
           <a class="portfolio-card__link" href="projects/esko-wheels.html" aria-label="Open overview: ESKO Wheels" data-project-open data-project-title="ESKO Wheels" data-project-category="Automotive · E-commerce website" data-project-summary="A product-led website for a custom wheel brand, designed to make the range easy to explore and the quote request impossible to miss." data-project-services="WordPress|e-commerce UI/UX|responsive design" data-project-image="images/esko-wheels-showcase.webp" data-project-page="projects/esko-wheels.html">
-            <div class="portfolio-card__media">
+            <div class="portfolio-card__media"><span class="portfolio-card__tag portfolio-card__tag--design">Website design</span>
               <img class="portfolio-card__img portfolio-card__img--first" src="images/esko-wheels-showcase.webp" alt="ESKO Wheels website shown on a laptop and phone" width="1500" height="1000" loading="lazy" decoding="async">
               <img class="portfolio-card__img portfolio-card__img--second" src="images/esko/esko-built-by-the-cult.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
               <span class="portfolio-card__hint" aria-hidden="true">Another screen</span>
@@ -144,9 +145,10 @@
             </div>
           </a>
         </article>
-        <article class="portfolio-card reveal d-160">
+        <article class="portfolio-card reveal d-100" data-cat="development"><a class="portfolio-card__link" href="projects/chatbot.html" aria-label="Open project: Website Chatbot"><div class="portfolio-card__media portfolio-card__media--bot"><span class="portfolio-card__tag portfolio-card__tag--dev">Development</span><div class="botchat botchat--cover" aria-hidden="true"><div class="botchat__alert"><svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg><span><b>New message received</b><em>Telegram alert</em></span></div><div class="botchat__head"><i></i><span><b>Htech Assistant</b><em>online</em></span><small>Demo</small></div><div class="botchat__body"><p class="bc m-bot bc1">Hello! I&rsquo;m the Htech assistant. How can I help you today?</p><p class="bc m-user bc2">I&rsquo;d like to get a website for my business.</p><div class="bc__slot"><p class="bc m-typing bc3"><i></i><i></i><i></i></p><p class="bc m-bot bc4">Happy to help. Is this a new site or a redesign?</p></div><p class="bc m-user bc5">A new site.</p><div class="bc__slot"><p class="bc m-typing bc6"><i></i><i></i><i></i></p><p class="bc m-bot bc7">Start with the free Growth Check. It shows what your site needs, no email required.</p></div></div></div></div><div class="portfolio-card__body"><span class="portfolio-card__cat">Chatbot &middot; Telegram integration</span><h2>Website Chatbot</h2><span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span></div></a></article>
+        <article class="portfolio-card reveal d-160" data-cat="design">
           <a class="portfolio-card__link" href="projects/wedding-photography.html" aria-label="Open overview: Perfect Moment wedding photography" data-project-open data-project-title="Perfect Moment — Wedding Photography &amp; Film" data-project-category="Wedding photography · WordPress website" data-project-summary="A responsive wedding photography and film website recreated in WordPress and Elementor, with an editorial home page, approach story, wedding gallery and clear enquiry paths." data-project-services="WordPress|Elementor Pro|Responsive design|Photography portfolio" data-project-image="images/perfect-moment-home.webp" data-project-page="projects/wedding-photography.html">
-            <div class="portfolio-card__media portfolio-card__media--wedding">
+            <div class="portfolio-card__media portfolio-card__media--wedding"><span class="portfolio-card__tag portfolio-card__tag--design">Website design</span>
               <img class="portfolio-card__img portfolio-card__img--first" src="images/perfect-moment-home.webp" alt="Perfect Moment wedding photography website shown on a laptop" width="1500" height="862" loading="lazy" decoding="async">
               <img class="portfolio-card__img portfolio-card__img--second" src="images/perfect-moment-mobile.webp" alt="" aria-hidden="true" width="698" height="1514" loading="lazy" decoding="async">
               <span class="portfolio-card__hint" aria-hidden="true">Desktop + mobile</span>
@@ -158,9 +160,10 @@
             </div>
           </a>
         </article>
-        <article class="portfolio-card reveal d-160">
+        <article class="portfolio-card reveal d-160" data-cat="development"><a class="portfolio-card__link" href="projects/growth-check.html" aria-label="Open project: Growth Check"><div class="portfolio-card__media portfolio-card__media--tool"><span class="portfolio-card__tag portfolio-card__tag--dev">Development</span><div class="tcov tcov--gc" aria-hidden="true"><div class="tcov__head"><b>Growth Check</b><small>Demo</small></div><div class="tcov__body"><span class="tcov__lab">Step 01 / Starting point</span><p class="tcov__q">First, where are you with your website?</p><p class="gc-opt gc-a">I already have a website</p><p class="gc-opt">I don&rsquo;t have a website yet</p><div class="gc-url"><i>https://</i><span class="gc-type">yourwebsite.com</span></div><p class="gc-btn">Scan my website</p><div class="gc-steps"><span class="gs1">Connect</span><span class="gs2">Inspect</span><span class="gs3">Prioritize</span></div></div></div></div><div class="portfolio-card__body"><span class="portfolio-card__cat">Free tool &middot; Python + JavaScript</span><h2>Growth Check</h2><span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span></div></a></article>
+        <article class="portfolio-card reveal d-160" data-cat="design">
           <a class="portfolio-card__link" href="projects/therapy-legal.html" aria-label="Open overview: The Lawyer Reset" data-project-open data-project-title="The Lawyer Reset" data-project-category="Legal coaching · WordPress website" data-project-summary="WordPress website design for The Lawyer Reset, a legal coaching and consulting brand, with elegant typography, structured service sections, consultation calls to action and responsive layouts." data-project-services="WordPress|WordPress Development|WordPress Consultation|Website &amp; CMS Bug Fix|SEO Audit" data-project-image="images/legal/legal-hero-cta.webp" data-project-page="projects/therapy-legal.html">
-            <div class="portfolio-card__media">
+            <div class="portfolio-card__media"><span class="portfolio-card__tag portfolio-card__tag--design">Website design</span>
               <img class="portfolio-card__img portfolio-card__img--first" src="images/legal/legal-hero-cta.webp" alt="The Lawyer Reset legal coaching website with a clear Book a Lawyer Reset call to action" width="1500" height="1000" loading="lazy" decoding="async">
               <img class="portfolio-card__img portfolio-card__img--second" src="images/legal/legal-before-after.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
               <span class="portfolio-card__hint" aria-hidden="true">Another screen</span>
@@ -172,9 +175,10 @@
             </div>
           </a>
         </article>
-        <article class="portfolio-card reveal d-240">
+        <article class="portfolio-card reveal d-220" data-cat="development"><a class="portfolio-card__link" href="projects/schema-builder.html" aria-label="Open project: Schema Builder"><div class="portfolio-card__media portfolio-card__media--tool"><span class="portfolio-card__tag portfolio-card__tag--dev">Development</span><div class="tcov tcov--sb" aria-hidden="true"><div class="tcov__head"><b>Schema Builder</b><small>Demo</small></div><div class="tcov__body"><span class="tcov__lab">01 / Configure</span><div class="sb-field"><em>Organization name</em><b>Your Business</b></div><span class="tcov__lab">02 / Your output</span><div class="sb-code"><code class="sl1">{</code><code class="sl2">&nbsp;&nbsp;"@context": "https://schema.org",</code><code class="sl3">&nbsp;&nbsp;"@type": "Organization",</code><code class="sl4">&nbsp;&nbsp;"name": "Your Business",</code><code class="sl5">&nbsp;&nbsp;"url": "https://yourwebsite.com"</code><code class="sl6">}</code></div><div class="sb-copy"><span class="sc1">Copy code</span><span class="sc2">Copied</span></div></div></div></div><div class="portfolio-card__body"><span class="portfolio-card__cat">Free tool &middot; Structured data</span><h2>Schema Builder</h2><span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span></div></a></article>
+        <article class="portfolio-card reveal d-240" data-cat="design">
           <a class="portfolio-card__link" href="projects/daphne-lab.html" aria-label="Open overview: DAPHNE.LAB" data-project-open data-project-title="DAPHNE.LAB" data-project-category="Fashion · WooCommerce store" data-project-summary="A fashion-focused eCommerce website showcasing footwear, apparel, accessories and curated collections through editorial imagery and clean product grids." data-project-services="WooCommerce|WordPress e-Commerce|store management|responsive design" data-project-image="images/daphne/daphne-showcase.webp" data-project-page="projects/daphne-lab.html">
-            <div class="portfolio-card__media">
+            <div class="portfolio-card__media"><span class="portfolio-card__tag portfolio-card__tag--design">Website design</span>
               <img class="portfolio-card__img portfolio-card__img--first" src="images/daphne/daphne-showcase.webp" alt="DAPHNE.LAB fashion store shown across desktop, tablet and mobile" width="1500" height="1000" loading="lazy" decoding="async">
               <img class="portfolio-card__img portfolio-card__img--second" src="images/daphne/daphne-bags-category.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
               <span class="portfolio-card__hint" aria-hidden="true">Another screen</span>
@@ -186,9 +190,10 @@
             </div>
           </a>
         </article>
-        <article class="portfolio-card reveal d-300">
+        <article class="portfolio-card reveal d-280" data-cat="development"><a class="portfolio-card__link" href="projects/site-audit.html" aria-label="Open project: Advanced Site Auditor"><div class="portfolio-card__media portfolio-card__media--tool"><span class="portfolio-card__tag portfolio-card__tag--dev">Development</span><div class="tcov tcov--sa" aria-hidden="true"><div class="tcov__head"><b>Site Auditor</b><small>Demo</small></div><div class="tcov__body"><div class="gc-url"><i>https://</i><span>yourwebsite.com</span></div><div class="sa-run"><span>Pages inspected</span><b class="sa-n"></b></div><div class="sa-bar"><i></i></div><p class="sa-row sr1"><span>Missing meta description</span><em>Medium</em></p><p class="sa-row sr2"><span>Duplicate page title</span><em class="hi">High</em></p><p class="sa-row sr3"><span>Broken internal link</span><em>Medium</em></p><div class="sa-exp"><span>PDF</span><span>CSV</span><span>JSON</span></div></div></div></div><div class="portfolio-card__body"><span class="portfolio-card__cat">Free tool &middot; Python-powered audit</span><h2>Advanced Site Auditor</h2><span class="portfolio-card__cta">View project detail <span aria-hidden="true">→</span></span></div></a></article>
+        <article class="portfolio-card reveal d-300" data-cat="design">
           <a class="portfolio-card__link" href="projects/therapy-practice.html" aria-label="Open overview: Jonathan Storr Psychotherapy" data-project-open data-project-title="Jonathan Storr Psychotherapy" data-project-category="Therapy &amp; counseling · WordPress website" data-project-summary="Designed and developed a modern, professional WordPress website for a therapy and counseling practice, with calm responsive design, clear service sections and consultation calls to action." data-project-services="WordPress|Website Copy|WordPress Development|WordPress Consultation" data-project-image="images/therapy/therapy-hero.webp" data-project-page="projects/therapy-practice.html">
-            <div class="portfolio-card__media">
+            <div class="portfolio-card__media"><span class="portfolio-card__tag portfolio-card__tag--design">Website design</span>
               <img class="portfolio-card__img portfolio-card__img--first" src="images/therapy/therapy-hero.webp" alt="Jonathan Storr Psychotherapy homepage hero with the Real Talk. Real Change. headline and a booking action" width="1600" height="919" loading="lazy" decoding="async">
               <img class="portfolio-card__img portfolio-card__img--second" src="images/therapy/therapy-work-with.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
               <span class="portfolio-card__hint" aria-hidden="true">Another screen</span>

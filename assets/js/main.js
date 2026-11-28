@@ -616,3 +616,17 @@
   if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }, { threshold: .25 }).observe(box);
   requestAnimationFrame(frame);
 })();
+
+/* Home: filter projects by category */
+(function () {
+  var bar = document.querySelector('[data-work-filter]');
+  if (!bar) return;
+  var cards = document.querySelectorAll('#work .portfolio-card[data-cat]');
+  bar.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-filter]');
+    if (!b) return;
+    var f = b.getAttribute('data-filter');
+    bar.querySelectorAll('[data-filter]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    cards.forEach(function (c) { c.hidden = !(f === 'all' || c.getAttribute('data-cat') === f); });
+  });
+})();
