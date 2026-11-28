@@ -584,3 +584,16 @@
   }
   setTimeout(tick, 1800);
 })();
+
+/* Hero: parallax for the floating chips (pointer + scroll) */
+(function () {
+  var box = document.querySelector('.showcase');
+  if (!box || !box.querySelector('.float-chips')) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var fine = window.matchMedia && matchMedia('(pointer: fine)').matches, raf = 0, px = 0, py = 0;
+  function apply() { raf = 0; box.style.setProperty('--mx', (px * 18).toFixed(1)); box.style.setProperty('--my', (py * 14).toFixed(1)); box.style.setProperty('--sy', Math.min(window.scrollY, 900)); }
+  function queue() { if (!raf) raf = requestAnimationFrame(apply); }
+  if (fine) addEventListener('pointermove', function (e) { px = e.clientX / innerWidth - .5; py = e.clientY / innerHeight - .5; queue(); }, { passive: true });
+  addEventListener('scroll', queue, { passive: true });
+  apply();
+})();
