@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Structured Data Schema Builder | Htech Digital Concepts</title>
+<meta name="description" content="Create copy-ready JSON-LD structured data for your business, services, website, FAQs or breadcrumbs. Free, browser-based and private.">
+<link rel="canonical" href="https://htechdc.vercel.app/schema-builder.html">
+<meta property="og:title" content="Free Structured Data Schema Builder | Htech Digital Concepts">
+<meta property="og:description" content="Create and download copy-ready JSON-LD structured data for your business website. Free, browser-based and private.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/schema-builder.css">
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/chat-assistant-config.js" defer></script>
+<script src="assets/js/chat-assistant.js" defer></script>
+<script src="assets/js/schema-builder.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header site-header--solid">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html" aria-label="Htech Digital Concepts — home"><span class="brand__logo"><img src="images/htech-logo.webp" alt="Htech Digital Concepts" width="2048" height="682"></span></a>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="nav__link" href="index.html">Home</a>
+      <a class="nav__link" href="portfolio.html">Portfolio</a>
+      <a class="nav__link nav__link--tool" href="growth-check.html">Growth Check <span class="nav__badge">FREE</span></a>
+      <a class="nav__link" href="index.html#services">Services</a>
+      <a class="nav__link" href="about.html">About</a>
+      <a class="btn btn--yellow nav__cta" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="nav-panel" id="nav-panel" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a class="nav-panel__growth" href="growth-check.html">Growth Check <span class="nav__badge">FREE</span></a>
+  <a href="index.html#services">Services</a>
+  <a href="about.html">About</a>
+  <a class="btn btn--yellow" href="contact.html">Start a project <span class="btn__arrow" aria-hidden="true">→</span></a>
+</nav>
+
+<main id="main">
+  <section class="page-hero schema-hero">
+    <div class="wrap">
+      <span class="eyebrow eyebrow--light">Free browser-based tool</span>
+      <h1>Make your business easier to <em>understand.</em></h1>
+      <p class="lede">Build a clean JSON-LD structured-data draft for your website. Choose a schema type, add what you know, then copy or download the result.</p>
+      <div class="schema-hero__notes"><span>NO ACCOUNT</span><i aria-hidden="true"></i><span>NO PAID API</span><i aria-hidden="true"></i><span>YOUR INPUT STAYS IN THIS BROWSER</span></div>
+    </div>
+  </section>
+
+  <section class="schema-section section section--soft" aria-labelledby="schema-tool-title">
+    <div class="wrap">
+      <div class="schema-section__intro">
+        <div><span class="eyebrow">Structured data builder</span><h2 class="section-title" id="schema-tool-title">Create your JSON-LD draft.</h2></div>
+        <p class="lede">Select the description that best fits the page you’re marking up. The fields change to match your choice.</p>
+      </div>
+
+      <noscript><p class="schema-noscript">This builder needs JavaScript enabled. It runs locally in your browser; your entries are not sent to Htech.</p></noscript>
+      <div class="schema-workbench" data-schema-app>
+        <form class="schema-form" data-schema-form novalidate>
+          <div class="schema-form__top"><span class="schema-kicker">01 / CONFIGURE</span><span class="schema-private"><i aria-hidden="true"></i> PRIVATE BY DESIGN</span></div>
+          <label class="schema-field" for="schema-type"><span>What are you describing?</span>
+            <select id="schema-type" name="type" data-schema-type>
+              <option value="Organization">Organization</option>
+              <option value="LocalBusiness">Local business</option>
+              <option value="ProfessionalService">Professional service</option>
+              <option value="Service">Service</option>
+              <option value="WebSite">Website</option>
+              <option value="FAQPage">FAQ page</option>
+              <option value="BreadcrumbList">Breadcrumb trail</option>
+            </select>
+            <small>Choose the type that accurately describes the page or entity. Don’t add details you can’t verify.</small>
+          </label>
+
+          <div class="schema-field-grid">
+            <label class="schema-field" for="schema-name" data-schema-name-field><span data-schema-name-label>Organization name</span><input id="schema-name" name="name" type="text" maxlength="160" autocomplete="organization" placeholder="Your organization name"></label>
+            <label class="schema-field" for="schema-url" data-schema-url-field><span>Website or page URL</span><input id="schema-url" name="url" type="url" inputmode="url" maxlength="2048" placeholder="https://example.com"><small>Use the canonical URL of the page this markup describes.</small></label>
+          </div>
+          <label class="schema-field" for="schema-description" data-schema-description-field><span>Description <em>optional</em></span><textarea id="schema-description" name="description" rows="3" maxlength="500" placeholder="A clear, factual description."></textarea></label>
+
+          <div class="schema-fields" data-schema-fields="Organization,LocalBusiness,ProfessionalService">
+            <label class="schema-field" for="schema-logo"><span>Logo URL <em>optional</em></span><input id="schema-logo" name="logo" type="url" inputmode="url" maxlength="2048" placeholder="https://example.com/logo.png"></label>
+            <label class="schema-field" for="schema-sameas"><span>Official profile URLs <em>optional</em></span><textarea id="schema-sameas" name="sameAs" rows="3" placeholder="One public profile URL per line"></textarea><small>Add only official profiles that represent this business or organization.</small></label>
+          </div>
+
+          <div class="schema-fields" data-schema-fields="LocalBusiness,ProfessionalService">
+            <div class="schema-subheading"><h3>Business details</h3><p>For a physical or service-area business. Only enter a real public business address.</p></div>
+            <div class="schema-field-grid schema-field-grid--address">
+              <label class="schema-field" for="schema-phone"><span>Telephone <em>optional</em></span><input id="schema-phone" name="telephone" type="tel" autocomplete="tel" maxlength="60" placeholder="+234 …"></label>
+              <label class="schema-field" for="schema-email"><span>Email <em>optional</em></span><input id="schema-email" name="email" type="email" autocomplete="email" maxlength="160" placeholder="hello@example.com"></label>
+              <label class="schema-field schema-field--wide" for="schema-street"><span>Street address <em>optional</em></span><input id="schema-street" name="streetAddress" type="text" autocomplete="street-address" maxlength="180" placeholder="Street and number"></label>
+              <label class="schema-field" for="schema-city"><span>City / locality <em>optional</em></span><input id="schema-city" name="addressLocality" type="text" autocomplete="address-level2" maxlength="100"></label>
+              <label class="schema-field" for="schema-region"><span>State / region <em>optional</em></span><input id="schema-region" name="addressRegion" type="text" autocomplete="address-level1" maxlength="100"></label>
+              <label class="schema-field" for="schema-postal"><span>Postal code <em>optional</em></span><input id="schema-postal" name="postalCode" type="text" autocomplete="postal-code" maxlength="30"></label>
+              <label class="schema-field" for="schema-country"><span>Country <em>optional</em></span><input id="schema-country" name="addressCountry" type="text" autocomplete="country-name" maxlength="80" placeholder="Nigeria"></label>
+              <label class="schema-field" for="schema-price"><span>Price range <em>optional</em></span><input id="schema-price" name="priceRange" type="text" maxlength="80" placeholder="Use a truthful range"></label>
+            </div>
+          </div>
+
+          <div class="schema-fields" data-schema-fields="Service">
+            <div class="schema-subheading"><h3>Service provider</h3><p>Describe who provides this service and where it is available.</p></div>
+            <div class="schema-field-grid">
+              <label class="schema-field" for="schema-service-type"><span>Service category <em>optional</em></span><input id="schema-service-type" name="serviceType" type="text" maxlength="120" placeholder="Website design"></label>
+              <label class="schema-field" for="schema-area-served"><span>Area served <em>optional</em></span><input id="schema-area-served" name="areaServed" type="text" maxlength="120" placeholder="Lagos, Nigeria"></label>
+              <label class="schema-field" for="schema-provider-type"><span>Provider type</span><select id="schema-provider-type" name="providerType"><option value="Organization">Organization</option><option value="LocalBusiness">Local business</option><option value="ProfessionalService">Professional service</option></select></label>
+              <label class="schema-field" for="schema-provider-name"><span>Provider name</span><input id="schema-provider-name" name="providerName" type="text" maxlength="160" placeholder="Business or organization name"></label>
+              <label class="schema-field schema-field--wide" for="schema-provider-url"><span>Provider website <em>optional</em></span><input id="schema-provider-url" name="providerUrl" type="url" inputmode="url" maxlength="2048" placeholder="https://example.com"></label>
+            </div>
+          </div>
+
+          <div class="schema-fields" data-schema-fields="FAQPage">
+            <div class="schema-subheading"><h3>Questions and answers</h3><p>Use real questions and answers visible on the page. You can add up to 10 pairs.</p></div>
+            <div class="schema-repeater" data-faq-list>
+              <div class="schema-repeat-item" data-faq-item>
+                <label class="schema-field" for="faq-question-1"><span>Question</span><input id="faq-question-1" data-faq-question type="text" maxlength="300" placeholder="Type a question that appears on the page"></label>
+                <label class="schema-field" for="faq-answer-1"><span>Answer</span><textarea id="faq-answer-1" data-faq-answer rows="3" maxlength="1200" placeholder="Enter the complete, visible answer"></textarea></label>
+                <button class="schema-remove" type="button" data-remove-faq aria-label="Remove this question and answer">Remove pair</button>
+              </div>
+            </div>
+            <template id="faq-row-template"><div class="schema-repeat-item" data-faq-item><label class="schema-field" for="faq-question-template"><span>Question</span><input id="faq-question-template" data-faq-question type="text" maxlength="300" placeholder="Type a question that appears on the page"></label><label class="schema-field" for="faq-answer-template"><span>Answer</span><textarea id="faq-answer-template" data-faq-answer rows="3" maxlength="1200" placeholder="Enter the complete, visible answer"></textarea></label><button class="schema-remove" type="button" data-remove-faq aria-label="Remove this question and answer">Remove pair</button></div></template>
+            <button class="schema-add" type="button" data-add-faq>＋ Add another Q&amp;A</button>
+            <p class="schema-note">Search engines may limit FAQ rich-result displays. Valid markup does not guarantee a rich result.</p>
+          </div>
+
+          <div class="schema-fields" data-schema-fields="BreadcrumbList">
+            <div class="schema-subheading"><h3>Page trail</h3><p>Add at least two page labels and their canonical URLs, from the homepage to this page.</p></div>
+            <div class="schema-repeater" data-breadcrumb-list>
+              <div class="schema-repeat-item schema-repeat-item--breadcrumb" data-breadcrumb-item>
+                <label class="schema-field" for="breadcrumb-name-1"><span>Page label</span><input id="breadcrumb-name-1" data-breadcrumb-name type="text" maxlength="120" placeholder="Home"></label>
+                <label class="schema-field" for="breadcrumb-url-1"><span>Page URL</span><input id="breadcrumb-url-1" data-breadcrumb-url type="url" inputmode="url" maxlength="2048" placeholder="https://example.com/"></label>
+                <button class="schema-remove" type="button" data-remove-breadcrumb aria-label="Remove this breadcrumb">Remove</button>
+              </div>
+            </div>
+            <template id="breadcrumb-row-template"><div class="schema-repeat-item schema-repeat-item--breadcrumb" data-breadcrumb-item><label class="schema-field" for="breadcrumb-name-template"><span>Page label</span><input id="breadcrumb-name-template" data-breadcrumb-name type="text" maxlength="120" placeholder="Services"></label><label class="schema-field" for="breadcrumb-url-template"><span>Page URL</span><input id="breadcrumb-url-template" data-breadcrumb-url type="url" inputmode="url" maxlength="2048" placeholder="https://example.com/services/"></label><button class="schema-remove" type="button" data-remove-breadcrumb aria-label="Remove this breadcrumb">Remove</button></div></template>
+            <button class="schema-add" type="button" data-add-breadcrumb>＋ Add breadcrumb</button>
+          </div>
+
+          <div class="schema-form__actions"><button class="btn btn--yellow" type="submit">Generate JSON-LD <span class="btn__arrow" aria-hidden="true">→</span></button><button class="schema-reset" type="reset">Clear form</button></div>
+          <p class="schema-status" data-schema-status role="status" aria-live="polite" tabindex="-1"></p>
+        </form>
+
+        <section class="schema-output" aria-labelledby="schema-output-title">
+          <div class="schema-output__head"><div><span class="schema-kicker">02 / YOUR OUTPUT</span><h2 id="schema-output-title">JSON-LD markup</h2></div><span class="schema-output__format">application/ld+json</span></div>
+          <p class="schema-output__intro">Your generated markup will appear here. Review every detail before adding it to the matching page.</p>
+          <label class="schema-output__label" for="schema-output">Generated JSON-LD</label>
+          <textarea id="schema-output" class="schema-output__code" data-schema-output readonly spellcheck="false" placeholder="Choose a schema type and complete the relevant fields, then generate your markup." rows="22"></textarea>
+          <div class="schema-output__actions"><button class="btn btn--blue" type="button" data-copy-schema disabled>Copy code</button><button class="btn btn--outline" type="button" data-download-schema disabled>Download .jsonld</button></div>
+          <p class="schema-output__install">To add the code manually, wrap it in <code>&lt;script type="application/ld+json"&gt;...&lt;/script&gt;</code>. In WordPress, use your schema or custom-code feature and check for duplicate markup.</p>
+          <div class="schema-output__disclaimer"><strong>Before you publish</strong><p>This tool creates a draft from the information you provide; it does not verify your claims or guarantee search enhancements. Check the markup against the page content with <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener noreferrer">Google’s Rich Results Test</a> or the <a href="https://validator.schema.org/" target="_blank" rel="noopener noreferrer">Schema.org Validator</a>.</p></div>
+          <a class="text-link schema-output__contact" href="contact.html">Need help adding structured data? <span aria-hidden="true">→</span></a>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div><a class="brand" href="index.html" aria-label="Htech Digital Concepts — home"><span class="brand__logo"><img src="images/htech-logo.webp" alt="Htech Digital Concepts" width="2048" height="682" loading="lazy"></span></a><p class="footer__about">Website design and WordPress development for businesses that want a professional site built around clear goals, strong usability and a better path to enquiry.</p></div>
+      <div><h3>Explore</h3><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h3>Services</h3><ul><li><a href="index.html#services">WordPress design</a></li><li><a href="index.html#services">Elementor development</a></li><li><a href="index.html#services">WooCommerce stores</a></li><li><a href="index.html#services">Website redesign</a></li></ul></div>
+      <div><h3>Free Tools</h3><ul><li><a href="growth-check.html">Growth Check</a></li><li><a href="schema-builder.html" aria-current="page">Schema Builder</a></li></ul></div>
+      <div><h3>Work with me</h3><ul><li><a href="https://www.upwork.com/freelancers/~01b7d7e1d5bc855117" target="_blank" rel="noopener noreferrer">Upwork profile &nearr;</a></li><li><a href="https://www.linkedin.com/in/ademolahabeeb/" target="_blank" rel="noopener noreferrer">LinkedIn &nearr;</a></li><li><a href="contact.html">Project enquiries</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>&copy; <span id="year">2026</span> Htech Digital Concepts. All rights reserved.</span><span>Website Designer &amp; WordPress Developer</span></div>
+  </div>
+</footer>
+</body>
+</html>
