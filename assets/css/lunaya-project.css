@@ -1,0 +1,21 @@
+/* Lunaya storefront showcase */
+.lunaya-gallery{margin-top:clamp(42px,7vw,78px);padding-top:clamp(30px,5vw,50px);border-top:1px solid rgba(23,35,51,.1)}
+.lunaya-gallery__heading{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:20px}
+.lunaya-gallery__heading .eyebrow{margin-bottom:12px}
+.lunaya-gallery__heading h2{color:var(--navy);font:600 clamp(27px,3.7vw,42px)/1.15 var(--head);letter-spacing:-.04em}
+.lunaya-gallery__heading p{max-width:38em;margin-top:9px;color:var(--muted);font-size:12px;line-height:1.7}
+.lunaya-gallery__heading .text-link{flex:none;margin-bottom:5px}
+.lunaya-gallery__hero{display:block;overflow:hidden;border:1px solid rgba(23,35,51,.12);background:#f7eeee;box-shadow:0 22px 60px -42px rgba(7,27,51,.45)}
+.lunaya-gallery__hero img{display:block;width:100%;height:auto;transition:transform .45s ease}
+.lunaya-gallery__hero:hover img,.lunaya-gallery__hero:focus-visible img{transform:scale(1.012)}
+.lunaya-fullpage{margin-top:16px;border:1px solid rgba(23,35,51,.12);background:#fff}
+.lunaya-fullpage summary{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 19px;color:var(--navy);font:600 12px/1.5 var(--head);cursor:pointer;list-style:none}
+.lunaya-fullpage summary::-webkit-details-marker{display:none}
+.lunaya-fullpage summary:after{content:"+";display:grid;place-items:center;width:25px;height:25px;border:1px solid rgba(23,35,51,.18);border-radius:50%;color:var(--blue);font:500 17px/1 var(--body);flex:none}
+.lunaya-fullpage[open] summary:after{content:"−"}
+.lunaya-fullpage summary:focus-visible{outline:2px solid var(--blue);outline-offset:-3px}
+.lunaya-fullpage figure{max-width:900px;margin:0 auto;padding:0 20px 22px}
+.lunaya-fullpage img{display:block;width:100%;height:auto;border:1px solid rgba(23,35,51,.1);background:#fff}
+.lunaya-fullpage figcaption{margin-top:9px;color:var(--muted);font-size:10px;line-height:1.6}
+@media(max-width:620px){.lunaya-gallery__heading{align-items:flex-start;flex-direction:column;gap:12px}.lunaya-gallery__heading .text-link{margin:0}.lunaya-fullpage figure{padding:0 12px 14px}.lunaya-fullpage summary{padding:13px}}
+@media(prefers-reduced-motion:reduce){.lunaya-gallery__hero img{transition:none}}

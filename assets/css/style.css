@@ -515,6 +515,7 @@ body.gallery-open{overflow:hidden}
 /* Wedding portfolio imagery */
 .portfolio-card__media--wedding{background:#06070a}
 .portfolio-card__media--wedding .portfolio-card__img--first,.portfolio-card__media--wedding .portfolio-card__img--second{object-fit:contain;padding:5px}
+.portfolio-card__media--lunaya .portfolio-card__img--second{object-position:top center}
 .wedding-gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;margin-top:clamp(28px,5vw,56px)}
 .wedding-gallery__shot{min-width:0;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 12px 28px rgba(7,27,51,.06)}
 .wedding-gallery__shot--hero{grid-column:1/-1}
