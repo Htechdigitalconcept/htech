@@ -346,7 +346,34 @@
     var dialogMedia = dialog.querySelector('[data-dialog-media]');
     var dialogImage = dialog.querySelector('[data-dialog-image]');
     var dialogPage = dialog.querySelector('[data-dialog-page]');
+    var liveButton = dialog.querySelector('[data-dialog-live-preview]');
+    var livePane = dialog.querySelector('[data-dialog-live]');
+    var liveTitle = dialog.querySelector('[data-live-title]');
+    var liveOpen = dialog.querySelector('[data-live-open]');
+    var liveFrame = dialog.querySelector('[data-live-frame]');
+    var dialogOverview = dialog.querySelector('.project-dialog__inner');
     var lastTrigger = null;
+    var liveUrl = '';
+
+    function showOverview() {
+      liveFrame.removeAttribute('src');
+      livePane.hidden = true;
+      dialogOverview.hidden = false;
+      dialog.classList.remove('project-dialog--live-preview');
+      dialog.setAttribute('aria-label', 'Quick overview — ' + (dialogTitle.textContent || 'project'));
+    }
+
+    function showLivePreview() {
+      if (!liveUrl) return;
+      liveTitle.textContent = dialogTitle.textContent;
+      liveOpen.href = liveUrl;
+      livePane.hidden = false;
+      dialogOverview.hidden = true;
+      dialog.classList.add('project-dialog--live-preview');
+      dialog.setAttribute('aria-label', 'Live website preview — ' + dialogTitle.textContent);
+      liveFrame.src = liveUrl;
+      dialog.querySelector('[data-live-back]').focus();
+    }
 
     function closeDialog() {
       if (dialog.open) dialog.close();
@@ -364,6 +391,9 @@
         var services = trigger.getAttribute('data-project-services') || '';
         var image = trigger.getAttribute('data-project-image') || '';
         var page = trigger.getAttribute('data-project-page') || 'portfolio.html';
+        liveUrl = trigger.getAttribute('data-live-preview') || '';
+        showOverview();
+        liveButton.hidden = !liveUrl;
 
         dialogTitle.textContent = title;
         dialogCategory.textContent = category;
@@ -398,6 +428,12 @@
       });
     });
 
+    liveButton.addEventListener('click', showLivePreview);
+    dialog.querySelector('[data-live-back]').addEventListener('click', function () {
+      showOverview();
+      liveButton.focus();
+    });
+
     dialog.querySelectorAll('[data-dialog-close]').forEach(function (button) {
       button.addEventListener('click', closeDialog);
     });
@@ -408,6 +444,9 @@
 
     dialog.addEventListener('close', function () {
       document.body.classList.remove('dialog-open');
+      showOverview();
+      liveButton.hidden = true;
+      liveUrl = '';
       if (lastTrigger) lastTrigger.focus();
     });
   }

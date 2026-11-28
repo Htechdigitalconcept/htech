@@ -195,6 +195,19 @@ ol,ul{padding:0;list-style:none}
 .project-dialog .meta-list{margin:22px 0 26px}
 .project-dialog__actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 26px}
 .project-dialog__actions .btn{min-height:48px;padding:12px 20px}
+#project-dialog [hidden]{display:none!important}
+.project-dialog--live-preview{width:min(1240px,calc(100% - 32px));max-height:calc(100% - 32px);overflow:auto}
+.project-dialog__live{padding:clamp(18px,3vw,30px)}
+.project-dialog__live-head{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 52px 16px 0;border-bottom:1px solid var(--line)}
+.project-dialog__live-head .eyebrow{color:var(--blue)}
+.project-dialog__live-head h2{margin:7px 0 0;font:600 clamp(22px,2.5vw,32px)/1.2 var(--head);letter-spacing:-.04em}
+.project-dialog__live-controls{display:flex;align-items:center;gap:14px}
+.project-dialog__live-controls .text-link{white-space:nowrap}
+.project-dialog__live-controls .btn{min-height:42px;padding:10px 14px;white-space:nowrap}
+.project-dialog__live-note{margin:12px 0;color:var(--muted);font-size:11px;line-height:1.6}
+.project-dialog__frame{height:min(68vh,760px);min-height:320px;border:1px solid var(--line);background:#eef2f7}
+.project-dialog__frame iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+.project-dialog--live-preview .project-dialog__close{top:12px;right:12px}
 .note-box{margin-top:clamp(36px,5vw,64px);padding:clamp(24px,3vw,36px);border:1px solid var(--line);border-left:4px solid var(--yellow);background:var(--soft)}
 .note-box p{margin-top:12px;color:var(--muted);max-width:52em;font-size:14px}
 @media(max-width:700px){
@@ -202,6 +215,13 @@ ol,ul{padding:0;list-style:none}
   .project-dialog__media{min-height:190px}
   .project-dialog__body{padding:26px 22px 30px}
   .project-dialog__actions .btn,.project-dialog__actions .text-link{width:100%;justify-content:center}
+  .project-dialog__live{padding:16px 12px 12px}
+  .project-dialog__live-head{align-items:stretch;flex-direction:column;gap:14px;padding-right:40px}
+  .project-dialog__live-controls{align-items:stretch;flex-direction:column;gap:10px}
+  .project-dialog__live-controls .text-link,.project-dialog__live-controls .btn{width:100%;justify-content:center}
+  .project-dialog__live-controls .text-link{padding:10px}
+  .project-dialog__frame{height:58vh;min-height:260px}
+  .project-dialog--live-preview .project-dialog__close{top:8px;right:8px;width:34px;height:34px}
 }
 /* Selected work */
 .feature{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(36px,6vw,90px);align-items:center}

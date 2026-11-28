@@ -90,6 +90,7 @@
   .schema-form__actions .btn{width:100%}
   .schema-reset{align-self:center}
   .schema-output__head{display:block}
+  .schema-output__code{min-height:260px}
   .schema-output__format{display:inline-block;margin-top:12px}
   .schema-output__actions{flex-direction:column}
   .schema-output__actions .btn{width:100%}
