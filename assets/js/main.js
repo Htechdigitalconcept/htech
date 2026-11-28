@@ -351,9 +351,15 @@
     var liveTitle = dialog.querySelector('[data-live-title]');
     var liveOpen = dialog.querySelector('[data-live-open]');
     var liveFrame = dialog.querySelector('[data-live-frame]');
+    var previewActionLabel = dialog.querySelector('[data-preview-action-label]');
+    var previewEyebrow = dialog.querySelector('[data-preview-eyebrow]');
+    var previewOpenLabel = dialog.querySelector('[data-preview-open-label]');
+    var previewNote = dialog.querySelector('[data-preview-note]');
     var dialogOverview = dialog.querySelector('.project-dialog__inner');
     var lastTrigger = null;
     var liveUrl = '';
+    var previewUrl = '';
+    var previewIsLive = false;
 
     function showOverview() {
       liveFrame.removeAttribute('src');
@@ -364,14 +370,21 @@
     }
 
     function showLivePreview() {
-      if (!liveUrl) return;
-      liveTitle.textContent = dialogTitle.textContent;
-      liveOpen.href = liveUrl;
+      if (!previewUrl) return;
+      var title = dialogTitle.textContent;
+      liveTitle.textContent = title;
+      liveOpen.href = previewUrl;
+      previewEyebrow.textContent = previewIsLive ? 'Live website preview' : 'Project page preview';
+      previewOpenLabel.textContent = previewIsLive ? 'Open live site' : 'Open project page';
+      previewNote.textContent = previewIsLive
+        ? 'Loading the live site. If it stays blank or blocks embedding, use “Open live site” to view it in a new tab.'
+        : 'No live website URL is linked for this project yet. This preview shows its Htech project page; add a data-live-preview URL to its portfolio link to embed the live website here.';
+      liveFrame.title = (previewIsLive ? 'Live website preview: ' : 'Project page preview: ') + title;
       livePane.hidden = false;
       dialogOverview.hidden = true;
       dialog.classList.add('project-dialog--live-preview');
-      dialog.setAttribute('aria-label', 'Live website preview — ' + dialogTitle.textContent);
-      liveFrame.src = liveUrl;
+      dialog.setAttribute('aria-label', (previewIsLive ? 'Live website preview — ' : 'Project page preview — ') + title);
+      liveFrame.src = previewUrl;
       dialog.querySelector('[data-live-back]').focus();
     }
 
@@ -390,10 +403,13 @@
         var summary = trigger.getAttribute('data-project-summary') || '';
         var services = trigger.getAttribute('data-project-services') || '';
         var image = trigger.getAttribute('data-project-image') || '';
-        var page = trigger.getAttribute('data-project-page') || 'portfolio.html';
+        var page = trigger.getAttribute('data-project-page') || trigger.getAttribute('href') || 'portfolio.html';
         liveUrl = trigger.getAttribute('data-live-preview') || '';
+        previewIsLive = Boolean(liveUrl);
+        previewUrl = liveUrl || new URL(page, window.location.href).href;
         showOverview();
-        liveButton.hidden = !liveUrl;
+        liveButton.hidden = !previewUrl;
+        previewActionLabel.textContent = previewIsLive ? 'Preview live website' : 'Preview project page';
 
         dialogTitle.textContent = title;
         dialogCategory.textContent = category;
@@ -447,6 +463,8 @@
       showOverview();
       liveButton.hidden = true;
       liveUrl = '';
+      previewUrl = '';
+      previewIsLive = false;
       if (lastTrigger) lastTrigger.focus();
     });
   }

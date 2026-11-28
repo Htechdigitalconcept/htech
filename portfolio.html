@@ -211,22 +211,22 @@
       <p class="project-dialog__summary" data-dialog-summary></p>
       <ul class="meta-list" data-dialog-services></ul>
       <div class="project-dialog__actions">
-        <button class="btn btn--yellow" type="button" data-dialog-live-preview hidden>Preview live website <span class="btn__arrow" aria-hidden="true">↗</span></button>
+        <button class="btn btn--yellow" type="button" data-dialog-live-preview><span data-preview-action-label>Preview project</span> <span class="btn__arrow" aria-hidden="true">↗</span></button>
         <a class="btn btn--blue" href="portfolio.html" data-dialog-page>View full project page <span class="btn__arrow" aria-hidden="true">→</span></a>
         <a class="text-link" href="contact.html">Start a similar project <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
-  <section class="project-dialog__live" data-dialog-live hidden aria-label="Live website preview">
+  <section class="project-dialog__live" data-dialog-live hidden aria-label="Project preview">
     <div class="project-dialog__live-head">
-      <div><span class="eyebrow">Live website preview</span><h2 data-live-title></h2></div>
+      <div><span class="eyebrow" data-preview-eyebrow>Project preview</span><h2 data-live-title></h2></div>
       <div class="project-dialog__live-controls">
         <button class="text-link" type="button" data-live-back><span aria-hidden="true">←</span> Project overview</button>
-        <a class="btn btn--yellow" href="#" target="_blank" rel="noopener noreferrer" data-live-open>Open live site <span class="btn__arrow" aria-hidden="true">↗</span></a>
+        <a class="btn btn--yellow" href="#" target="_blank" rel="noopener noreferrer" data-live-open><span data-preview-open-label>Open project page</span> <span class="btn__arrow" aria-hidden="true">↗</span></a>
         <button class="project-dialog__close" type="button" data-dialog-close aria-label="Close live preview">&times;</button>
       </div>
     </div>
-    <p class="project-dialog__live-note" role="status">Loading preview. If the site stays blank or blocks embedding, use “Open live site” to view it in a new tab.</p>
+    <p class="project-dialog__live-note" role="status" data-preview-note></p>
     <div class="project-dialog__frame"><iframe title="Live website preview" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" data-live-frame></iframe></div>
   </section>
 </dialog>
