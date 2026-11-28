@@ -1004,3 +1004,17 @@ body.gallery-open{overflow:hidden}
 .hscroll~.wrap .work-foot{display:none}
 @media(max-width:900px){.hscroll__pin{position:static;height:auto;overflow:visible}.hscroll__track{width:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));padding:0 var(--pad)}.hscroll__track .portfolio-card{width:auto}.hscroll__ui,.hscroll__bar,.hscroll__end{display:none}.hscroll~.wrap .work-foot{display:block}.hscroll__track .botchat,.hscroll__track .tcov{transform:none}.hscroll__track .portfolio-card__media--bot,.hscroll__track .portfolio-card__media--tool{padding:40px 16px 20px}.hscroll__track .portfolio-card__media{height:auto;min-height:300px}}
 @media(prefers-reduced-motion:reduce){.hscroll{height:auto!important}.hscroll__pin{position:static;height:auto;overflow:visible}.hscroll__track{width:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}.hscroll__track .portfolio-card{width:auto}.hscroll__ui,.hscroll__bar,.hscroll__end{display:none}.hscroll~.wrap .work-foot{display:block}.hscroll__track .botchat,.hscroll__track .tcov{transform:none}}
+
+.mq-row{margin:0;display:grid;grid-template-columns:1fr auto 1fr auto;gap:8px;align-items:center;padding:8px 10px;border-radius:9px;background:rgba(255,255,255,.07);opacity:0}
+.mq-row code{font:500 10.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#9BD0FF;white-space:nowrap}.mq-row i{font-style:normal;color:rgba(255,255,255,.5)}
+.mq-row em{font-style:normal;font-weight:700;font-size:9.5px;padding:2px 8px;border-radius:999px}.mq-row em.ok{background:rgba(109,227,163,.2);color:#6DE3A3}.mq-row em.bad{background:rgba(255,107,107,.22);color:#FF9A9A}
+.mq-find{display:flex;flex-wrap:wrap;gap:6px}.mq-find span{padding:5px 10px;border-radius:999px;background:rgba(255,212,59,.16);color:var(--yellow);font:600 10.5px var(--head);opacity:0}
+.mq-exp{opacity:0}
+.mq1{animation:mqa 14s infinite}.mq2{animation:mqb 14s infinite}.mq3{animation:mqc 14s infinite}.mf1{animation:mqd 14s infinite}.mf2{animation:mqe 14s infinite}.mq-exp{animation:mqf 14s infinite}
+@keyframes mqa{0%,12%{opacity:0;transform:translateY(8px)}14%,92%{opacity:1;transform:none}94.5%,100%{opacity:0;transform:none}}
+@keyframes mqb{0%,22%{opacity:0;transform:translateY(8px)}24%,92%{opacity:1;transform:none}94.5%,100%{opacity:0;transform:none}}
+@keyframes mqc{0%,32%{opacity:0;transform:translateY(8px)}34%,92%{opacity:1;transform:none}94.5%,100%{opacity:0;transform:none}}
+@keyframes mqd{0%,46%{opacity:0;transform:translateY(8px)}48%,92%{opacity:1;transform:none}94.5%,100%{opacity:0;transform:none}}
+@keyframes mqe{0%,54%{opacity:0;transform:translateY(8px)}56%,92%{opacity:1;transform:none}94.5%,100%{opacity:0;transform:none}}
+@keyframes mqf{0%,66%{opacity:0;transform:translateY(8px)}68%,92%{opacity:1;transform:none}94.5%,100%{opacity:0;transform:none}}
+@media(prefers-reduced-motion:reduce){.mq-row,.mq-find span,.mq-exp{animation:none!important;opacity:1}}
