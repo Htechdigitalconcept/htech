@@ -561,3 +561,26 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 })();
+
+/* Hero: rotating role line (typewriter) */
+(function () {
+  var role = document.querySelector('.role[data-roles]');
+  if (!role) return;
+  var out = role.querySelector('.role__text'), list;
+  try { list = JSON.parse(role.getAttribute('data-roles')); } catch (e) { return; }
+  list = list.map(function (t) { var d = document.createElement('div'); d.innerHTML = t; return d.textContent; });
+  if (!list.length || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  var i = 0, n = 0, deleting = false;
+  function tick() {
+    var word = list[i], delay;
+    if (!deleting) {
+      n++; out.textContent = word.slice(0, n);
+      if (n === word.length) { deleting = true; delay = 1700; } else { delay = 60; }
+    } else {
+      n--; out.textContent = word.slice(0, n);
+      if (n === 0) { deleting = false; i = (i + 1) % list.length; delay = 350; } else { delay = 30; }
+    }
+    setTimeout(tick, delay);
+  }
+  setTimeout(tick, 1800);
+})();
