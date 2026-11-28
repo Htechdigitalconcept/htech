@@ -862,7 +862,7 @@ body.gallery-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){.role__caret{animation:none}}
 
 /* Floating tech chips around the hero showcase */
-.float-chips{position:absolute;inset:0;z-index:3;pointer-events:none}
+.float-chips{position:absolute;inset:0;z-index:5;pointer-events:none;transform:translateZ(80px)}
 .fchip{position:absolute;transform:translate3d(calc(var(--mx,0)*var(--depth)*1px),calc(var(--my,0)*var(--depth)*1px + var(--sy,0)*var(--depth)*-.05px),0);transition:transform .3s ease-out;will-change:transform}
 .fchip__in{display:inline-flex;align-items:center;gap:9px;white-space:nowrap;padding:9px 15px;border:1px solid rgba(255,212,59,.45);border-radius:999px;background:rgba(7,27,51,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--white);font:600 12px/1 var(--head);letter-spacing:.02em;box-shadow:0 14px 30px -12px rgba(0,0,0,.7),0 0 18px rgba(23,105,224,.25);animation:fchip-float var(--dur,6s) ease-in-out infinite alternate}
 .fchip__in::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--yellow);box-shadow:0 0 9px rgba(255,212,59,.9)}
